@@ -1,0 +1,785 @@
+<br />
+<br />
+<div class="row" style="margin-top: 1rem; height: 40px">
+  <div class="col-sm-1 align-self-start"></div>
+  <div class="col-sm-10 align-self-center">
+    <div *ngFor="let alert of alerts">
+      <ngb-alert [type]="alert.type" (close)="alertClose(alert)">{{ alert.message }} - you will redirect to the list in
+        {{ counter }}</ngb-alert>
+    </div>
+  </div>
+  <div class="col-sm-1 align-self-end"></div>
+</div>
+
+<div class="row" style="margin:0; padding:0;">
+
+
+  <div class="col-md-12" style="padding: 10px; background-color: #f5f5f5">
+    # <span style="font-weight: bold"> {{ productTitle }} </span>
+    <a class="btn btn-dark pull-right" [routerLink]="['../../']"> x</a>
+  </div>
+
+
+</div>
+
+<div class="row" style="margin:0; padding:0;">
+
+  <div class="col-sm-12" style="border: 1px solid #eee; padding-bottom: 15px; background-color:#f5f5f5;">
+    <div class="form-group row" style="padding-top: 10px; background-color:white; border-bottom: 1px solid #eee">
+      <div class="col-md-4 col-sm-4" style="padding-bottom: 10px">
+        <h4 [hidden]="productHeaderHidden">Ürün Bilgisi</h4>
+        <h4 [hidden]="priceHeaderHidden">Fiyat Bilgisi</h4>
+        <h4 [hidden]="colorHeaderHidden">Renk Fiyat</h4>
+        <h4 [hidden]="imageHeaderHidden">Ürün Görselleri</h4>
+        <!-- <h4 [hidden]="priceHeaderHidden"> Fiyat Bilgisi</h4> -->
+        <h4 [hidden]="stockLogHeaderHidden">Stok Geçmişi</h4>
+        <h4 [hidden]="shipmentLogHeaderHidden">Gönderi Geçmişi</h4>
+      </div>
+
+      <div class="col-md-8 col-sm-8" style="padding-bottom: 10px">
+        <!-- <button class="btn btn-secondary pull-right" [disabled]="pricePageBtnHidden" (click)="pricePage()">
+          Fiyat Bilgisi
+        </button> -->
+        <button class="btn btn-secondary pull-right" [disabled]="imagePageBtnHidden" (click)="imagePage()"
+          style="margin-right: 10px">
+          Görseller
+        </button>
+
+        <button class="btn btn-secondary pull-right" style="margin-right: 10px" [disabled]="productPageBtnHidden"
+          (click)="productPage()">
+          Ürün
+        </button>
+
+        <button class="btn btn-secondary pull-right" style="margin-right: 10px" [disabled]="pricePageBtnHidden"
+          (click)="pricePage()">
+          Hacim Fiyat
+        </button>
+        <button class="btn btn-secondary pull-right" style="margin-right: 10px" [disabled]="colorPageBtnHidden"
+          (click)="colorPage()">
+          Renk Fiyat
+        </button>
+
+        <button class="btn btn-secondary pull-right" style="margin-right: 10px" (click)="productStockLogPage()">
+          Stoklar
+        </button>
+
+        <button class="btn btn-secondary pull-right" style="margin-right: 10px" (click)="productShipmentLogPage()">
+          Gönderiler
+
+        </button>
+      </div>
+    </div>
+
+    <div [hidden]="productPageHidden">
+      <form class="col s12" #productForm="ngForm" (ngSubmit)="OnSubmit(productForm)">
+        <br />
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Kategori </label>
+          <div class="col-sm-9">
+            <select class="custom-select" [(ngModel)]="selectedCategory" (ngModelChange)="selectCategory($event)"
+              [disabled]="disable" [ngModelOptions]="{ standalone: true }">
+              <option *ngFor="let category of categories" [ngValue]="category._id">
+                {{ category.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Alt Kategori </label>
+          <div class="col-sm-9">
+            <select class="custom-select" [(ngModel)]="selectedSubCategory" (ngModelChange)="selectSubCategory($event)"
+              [disabled]="disable" [ngModelOptions]="{ standalone: true }">
+              <option *ngFor="let subCategory of subCategories" [ngValue]="subCategory._id">
+                {{ subCategory.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <!-- <div class="form-group row" [hidden]="stockFieldHide">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Stok
+          </label>
+          <div class="col-sm-9">
+            <input type="text" name="stock" #stock="ngModel" [(ngModel)]="product.stock" class="form-control"
+              [disabled]="disable" />
+          </div>
+        </div> -->
+        <!-- <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Hacim </label>
+          <div class="col-sm-6">
+            <input type="text" name="volume" #volume="ngModel" [(ngModel)]="product.volume" class="form-control"
+              [disabled]="disable" />
+          </div>
+          <div class="col-sm-3">
+            <select class="custom-select" [(ngModel)]="selectedVolume" (ngModelChange)="selectVolume($event)"
+              [disabled]="disable" [ngModelOptions]="{ standalone: true }">
+              <option *ngFor="let volume of volumeEntities" [value]="volume.entity">
+                {{ volume.entity }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Berber Satış </label>
+          <div class="col-sm-6">
+            <input type="text" name="unitPrice" #unitPrice="ngModel" [(ngModel)]="product.unitPrice"
+              class="form-control" [disabled]="disable" />
+          </div>
+          <div class="col-sm-3">
+            <select class="custom-select" [(ngModel)]="selectedCurrency" (ngModelChange)="selectCurrency($event)"
+              [disabled]="disable" [ngModelOptions]="{ standalone: true }">
+              <option *ngFor="let currency of currencies" [value]="currency.currency">
+                {{ currency.currency }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Liste Fiyatı </label>
+          <div class="col-sm-6">
+            <input type="text" name="listPrice" #listPrice="ngModel" [(ngModel)]="product.listPrice"
+              class="form-control" [disabled]="disable" />
+          </div>
+          <div class="col-sm-3">
+            <div
+              style="border:1px solid #ced4da; color:gray; padding:5px; padding-left:10px; border-radius:5px; background-color:#e9ecef; ">
+              {{ product.currency}}
+            </div>
+
+
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Satış Fiyatı </label>
+          <div class="col-sm-6">
+            <input type="text" name="salePrice" #salePrice="ngModel" [(ngModel)]="product.salePrice"
+              class="form-control" [disabled]="disable" />
+          </div>
+          <div class="col-sm-3">
+
+            <div
+              style="border:1px solid #ced4da; color:gray; padding:5px; padding-left:10px; border-radius:5px; background-color:#e9ecef; ">
+              {{ product.currency}}
+            </div>
+
+          </div>
+        </div> -->
+
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Gösterim Sırası </label>
+          <div class="col-sm-9">
+            <input type="number" name="order" #order="ngModel" [(ngModel)]="product.order" class="form-control"
+              [disabled]="disable" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Yayında</label>
+          <div class="col-sm-2">
+            <input type="checkbox" style="margin-top: 10px; height: 20px; width: 20px" name="publish" #publish="ngModel"
+              [(ngModel)]="product.publish" class="form-control" [disabled]="disable" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Anasayfa</label>
+          <div class="col-sm-2">
+            <input type="checkbox" style="margin-top: 10px; height: 20px; width: 20px" name="mainPage"
+              #mainPage="ngModel" [(ngModel)]="product.mainPage" class="form-control" [disabled]="disable" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Barcode
+          </label>
+          <div class="col-sm-9">
+            <input type="text" name="barcode" #barcode="ngModel" [(ngModel)]="product.barcode" class="form-control"
+              [disabled]="disable" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Ürün Adı
+          </label>
+          <div class="col-sm-9">
+            <input type="text" name="title" #title="ngModel" [(ngModel)]="product.title" class="form-control"
+              [disabled]="disable" />
+          </div>
+        </div>
+   
+        <!-- 
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-3 col-form-label"
+            >Turkish Title
+          </label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              name="turkishTitle"
+              #turkishTitle="ngModel"
+              [(ngModel)]="product.turkishTitle"
+              class="form-control"
+              [disabled]="disable"
+            />
+          </div>
+        </div> -->
+        <!-- <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Meta Description (SEO)
+          </label>
+          <div class="col-sm-9">
+            <input type="text" name="metaDescription" #metaDescription="ngModel" [(ngModel)]="product.metaDescription"
+              class="form-control" [disabled]="disable" />
+          </div>
+        </div> -->
+        <!-- <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-3 col-form-label"
+            >Description
+          </label>
+          <div class="col-sm-9">
+            <angular-editor
+              name="description"
+              #description="ngModel"
+              [(ngModel)]="product.description"
+              [config]="editorConfig"
+              [disabled]="disable"
+            >
+            </angular-editor>
+          </div>
+        </div> -->
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Açıklama
+          </label>
+          <div class="col-sm-9">
+            <angular-editor name="description" #description="ngModel"
+              [(ngModel)]="product.description" [config]="editorConfig" [disabled]="disable">
+            </angular-editor>
+          </div>
+        </div>
+
+        <div class="row" style="
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: #eee;
+          ">
+          <div class="col-md-1">
+            <button type="button" class="btn btn-danger" [disabled]="!disable" (click)="confirmToDelete()">
+              <i class="fa fa-eraser"> Sil</i>
+            </button>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-2">
+            <!-- <button type="button" class="btn btn-secondary pull-right" type="submit" >Fiyat Bilgisi</button> -->
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-secondary pull-right" (click)="imagePage()">
+              Ürün Görselleri
+            </button>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4">
+            <button type="button" class="btn btn-success pull-right" type="submit" [disabled]="disable">
+              <i class="fa fa-save"> Kaydet</i>
+            </button>
+
+            <button type="button" class="btn btn-info pull-right" style="margin-right: 5px" (click)="edit()"
+              [disabled]="!disable">
+              <i class="fa fa-edit"> Düzenle</i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div [hidden]="imagePageHidden">
+      <div class="form-group row" style="padding-top: 10px">
+        <div class="col-md-12">
+          <input class="validate form-control input-underline input-sm" style="background-color: #eee" type="file"
+            name="image" (change)="handleImageFile($event)" />
+        </div>
+      </div>
+      <br />
+      <div class="form-group row">
+        <div class="col-md-4" *ngFor="let image of product.image; let i = index">
+          <div class="col-md-12" style="
+              border: 1px solid lightgray;
+              margin-bottom: 10px;
+              padding: 10px;
+              padding-top: 4px;
+            ">
+            <div class="pull-right closeBtn" (click)="deleteProductImage(productId, i)">
+              <i class="fa fa-times-circle" style="cursor: pointer; color: red"></i>
+            </div>
+
+            <img src="{{ imageApi }}/{{ image }}" class="card-img-top" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [hidden]="pricePageHidden">
+
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Hacim</label>
+        <div class="col-sm-6">
+          <input type="text" name="volume" #volume="ngModel" [(ngModel)]="size.volume" class="form-control"
+            [disabled]="pricePageDisabled" />
+        </div>
+
+        <div class="col-sm-3">
+          <select class="custom-select" [(ngModel)]="selectedVolume" (ngModelChange)="selectVolume($event)"
+            [disabled]="pricePageDisabled" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let volume of volumeEntities" [value]="volume.entity">
+              {{ volume.entity }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Berber Satış </label>
+        <div class="col-sm-6">
+          <input type="text" name="unitPrice" #unitPrice="ngModel" [(ngModel)]="size.barberSellingPrice"
+            class="form-control" [disabled]="pricePageDisabled" />
+        </div>
+        <div class="col-sm-3">
+          <select class="custom-select" [(ngModel)]="selectedCurrency" (ngModelChange)="selectCurrency($event)"
+            [disabled]="pricePageDisabled" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let currency of currencies" [value]="currency.currency">
+              {{ currency.currency }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Liste Fiyatı </label>
+        <div class="col-sm-6">
+          <input type="text" name="listPrice" #listPrice="ngModel" [(ngModel)]="size.listPrice" class="form-control"
+            [disabled]="pricePageDisabled" />
+        </div>
+        <div class="col-sm-3">
+          <div
+            style="border:1px solid #ced4da; color:gray; padding:5px; padding-left:10px; border-radius:5px; background-color:#e9ecef; ">
+            {{ size.barberSellingPriceCurrency}}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Satış Fiyatı </label>
+        <div class="col-sm-6">
+          <input type="text" name="salePrice" #salePrice="ngModel" [(ngModel)]="size.salePrice" class="form-control"
+            [disabled]="pricePageDisabled" />
+        </div>
+        <div class="col-sm-3">
+
+          <div
+            style="border:1px solid #ced4da; color:gray; padding:5px; padding-left:10px; border-radius:5px; background-color:#e9ecef; ">
+            {{ size.barberSellingPriceCurrency}}
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Stok </label>
+        <div class="col-sm-6">
+          <input type="text" name="stock" #stock="ngModel" [(ngModel)]="size.stock" class="form-control"
+            [disabled]="pricePageDisabled" />
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Stok Kodu </label>
+        <div class="col-sm-6">
+          <input type="text" name="stockCode" #stockCode="ngModel" [(ngModel)]="size.stockCode" class="form-control"
+            [disabled]="pricePageDisabled" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-8">
+
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-success pull-right" type="button" (click)="updateSize()">Güncelle
+          </button>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-success pull-right" type="button" (click)="savePrice()">Fiyat Ekle
+          </button>
+        </div>
+
+      </div>
+
+
+
+
+
+      <div class="form-group row" style="background-color: #555; padding-top:10px; padding-bottom:10px; color:white;">
+        <div class="col-md-2">
+          Hacim
+        </div>
+        <div class="col-md-2">
+          Stok
+        </div>
+        <div class="col-md-1">
+          Stok Kodu
+        </div>
+        <div class="col-md-2">
+          Berber Satış
+        </div>
+        <div class="col-md-2">
+          Liste Fiyatı
+        </div>
+        <div class="col-md-1">
+          Satış Fiyatı
+        </div>
+        <div class="col-md-2">
+
+        </div>
+
+      </div>
+
+      <div class="form-group row" *ngFor="let size of sizes; let i = index" style="border-bottom:1px solid gray;">
+        <div class="col-md-2">
+          {{size.volume}} {{size.volumeEntity}}
+        </div>
+        <div class="col-md-2">
+          {{size.stock}}
+        </div>
+        <div class="col-md-1">
+          {{size.stockCode}}
+        </div>
+        <div class="col-md-2">
+          {{size.barberSellingPrice}} {{size.barberSellingPriceCurrency}}
+        </div>
+        <div class="col-md-2">
+          {{size.listPrice}} {{size.listPriceCurrency}}
+        </div>
+        <div class="col-md-1">
+          {{size.salePrice}} {{size.salePriceCurrency}}
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-light pull-right" type="button"
+            (click)="confirmDeleteSize(size,i)">Sil
+          </button>
+          <button type="button" class="btn btn-light pull-right" type="button" (click)="getSize(size)">Seç
+          </button>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div [hidden]="colorPageHidden">
+
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Renk</label>
+        <div class="col-sm-9">
+          <input type="text" name="color" #color="ngModel" [(ngModel)]="renk.color" class="form-control"
+           />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Hacim</label>
+        <div class="col-sm-6">
+          <input type="text" name="volume" #volume="ngModel" [(ngModel)]="renk.volume" class="form-control"
+            [disabled]="pricePageDisabled" />
+        </div>
+
+        <div class="col-sm-3">
+          <select class="custom-select" [(ngModel)]="selectedColorVolume" (ngModelChange)="selectColorVolume($event)"
+            [disabled]="pricePageDisabled" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let volume of volumeEntities" [value]="volume.entity">
+              {{ volume.entity }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Berber Satış </label>
+        <div class="col-sm-6">
+          <input type="text" name="barberSellingPrice" #barberSellingPrice="ngModel"
+            [(ngModel)]="renk.barberSellingPrice" class="form-control"  />
+        </div>
+        <div class="col-sm-3">
+          <select class="custom-select" [(ngModel)]="selectedColorCurrency" (ngModelChange)="selectCurrency($event)"
+             [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let currency of currencies" [value]="currency.currency">
+              {{ currency.currency }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Liste Fiyatı </label>
+        <div class="col-sm-6">
+          <input type="text" name="listPrice" #listPrice="ngModel" [(ngModel)]="renk.listPrice" class="form-control"
+            />
+        </div>
+        <div class="col-sm-3">
+          <div
+            style="border:1px solid #ced4da; color:gray; padding:5px; padding-left:10px; border-radius:5px; background-color:#e9ecef; ">
+            {{ renk.barberSellingPriceCurrency}}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Satış Fiyatı </label>
+        <div class="col-sm-6">
+          <input type="text" name="salePrice" #salePrice="ngModel" [(ngModel)]="renk.salePrice" class="form-control"
+             />
+        </div>
+        <div class="col-sm-3">
+
+          <div
+            style="border:1px solid #ced4da; color:gray; padding:5px; padding-left:10px; border-radius:5px; background-color:#e9ecef; ">
+            {{ renk.barberSellingPriceCurrency}}
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Stok </label>
+        <div class="col-sm-6">
+          <input type="text" name="stock" #stock="ngModel" [(ngModel)]="renk.stock" class="form-control"
+            />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Stok Kodu </label>
+        <div class="col-sm-6">
+          <input type="text" name="stockCode" #stockCode="ngModel" [(ngModel)]="renk.stockCode" class="form-control"
+            />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-8">
+
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-success pull-right" type="button" (click)="updateColor()">Güncelle
+          </button>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-success pull-right" type="button" (click)="saveNewColor()">Renk Ekle
+          </button>
+        </div>
+
+      </div>
+
+
+
+
+
+      <div class="form-group row" style="background-color: #555; padding-top:10px; padding-bottom:10px; color:white;">
+        <div class="col-md-2">
+          Renk
+        </div>
+        <div class="col-md-1">
+          Hacim
+        </div>
+        <div class="col-md-1">
+          Stok
+        </div>
+        <div class="col-md-1">
+          Stok Kodu
+        </div>
+        <div class="col-md-2">
+          Berber Satış
+        </div>
+        <div class="col-md-2">
+          Liste Fiyatı
+        </div>
+        <div class="col-md-1">
+          Satış Fiyatı
+        </div>
+        <div class="col-md-2">
+
+        </div>
+
+      </div>
+
+      <div class="form-group row" *ngFor="let color of colors; let i = index" style="border-bottom: 1px solid gray;">
+        <div class="col-md-2">
+          {{color.color}}
+        </div>
+        <div class="col-md-1">
+          {{color.volume}} {{color.volumeEntity}}
+        </div>
+        <div class="col-md-1">
+          {{color.stock}}
+        </div>
+        <div class="col-md-1">
+          {{color.stockCode}}
+        </div>
+        <div class="col-md-2">
+          {{color.barberSellingPrice}} {{color.barberSellingPriceCurrency}}
+        </div>
+        <div class="col-md-2">
+          {{color.listPrice}} {{color.listPriceCurrency}}
+        </div>
+        <div class="col-md-1">
+          {{color.salePrice}} {{color.salePriceCurrency}}
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-light pull-right" type="button" (click)="confirmDeleteColor(color,i)">Sil
+          </button>
+          <button type="button" class="btn btn-light pull-right" type="button" (click)="getColor(color)">Seç
+          </button>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div [hidden]="productStockLogHidden">
+
+      <div class="col-md-12">
+        <div class="row" style="background-color: #555; color:white; padding-top:10px; padding-bottom:10px;">
+
+          <div class="col-md-2" style="font-size:12px;">
+            Önceki Stok
+          </div>
+          <div class="col-md-2" style="font-size:12px;">
+            İşlem
+          </div>
+          <div class="col-md-1" style="font-size:12px;">
+            Adet
+          </div>
+          <div class="col-md-1" style="font-size:12px;">
+            Stok
+          </div>
+          <div class="col-md-2" style="font-size:12px;">
+            Tarih
+          </div>
+          <div class="col-md-1" style="font-size:12px;">
+            Çeşit
+          </div>
+          <div class="col-md-1" style="font-size:12px;">
+            Hacim
+          </div>
+          <div class="col-md-2" style="font-size:12px;">
+            Kullanıcı
+          </div>
+        </div>
+
+
+        <div class="col-md-12" *ngFor="let history of productHistory">
+          <div class="row" style="padding-top:10px; padding-bottom:10px; border-bottom:1px solid gray;">
+
+            <div class="col-md-2" style="font-size:12px;">
+              {{ history.previousStock }}
+            </div>
+            <div class="col-md-2" style="font-size:12px;">
+              {{ history.operation }}
+            </div>
+            <div class="col-md-1" style="font-size:12px;">
+              {{ history.number }}
+            </div>
+            <div class="col-md-1" style="font-size:12px;">
+              {{history.lastStock }}
+            </div>
+            <div class="col-md-2" style="font-size:12px;">
+              {{ history.createdAt | date: "short" }}
+            </div>
+            <div class="col-md-1" style="font-size:12px;">
+              {{ history.variable }}
+            </div>
+            <div class="col-md-1" style="font-size:12px;">
+              {{ history.volume }}
+            </div>
+            <div class="col-md-2" style="font-size:12px;">
+              {{ history.userName }}
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+    <div [hidden]="productShipmentLogHidden">
+      <table class="table table-striped">
+        <!-- <tfoot>
+          <tr>
+
+
+            
+            <th> 
+           
+           Toplam Shipment
+            
+            </th>
+
+            <th></th>
+           
+            <th>Order</th>
+            <th>Shipment </th>
+            <th>Shipment D. </th>
+            <th>UserName</th>
+          </tr>
+        </tfoot> -->
+        <thead class="thead-dark">
+          <tr>
+            <!-- <th scope="col-3">Product</th> -->
+            <th>Ülke</th>
+
+            <th>Müşteri</th>
+            <th>Durum</th>
+            <th>Sipariş Adedi</th>
+            <th>Gönderilen Adet</th>
+            <th>Gönderildiği Tarih</th>
+            <th>Kullanıcı</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let history of productShipmentHistory">
+            <!-- <td>{{ history.title }}</td> -->
+            <td>
+              <a class="pull-right" style="color: black" [routerLink]="['../../../orders', history.orderId]">
+                {{ history.country }}
+              </a>
+            </td>
+            <td>
+              <a class="pull-right" style="color: black" [routerLink]="['../../../customers', history.customerId]">
+                {{ history.customer }}
+              </a>
+            </td>
+            <td>{{ history.status }}</td>
+            <td>{{ history.orderNumber }}</td>
+            <td>{{ history.shipmentNumber }}</td>
+            <td>{{ history.createdAt | date: "short" }}</td>
+            <td>{{ history.userName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <br />
+  <br />
+  <br />
+  <br />

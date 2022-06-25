@@ -1,0 +1,102 @@
+<div class="card">
+  <div class="card-header" style="border-bottom:none;">
+    <div class="row">
+
+
+      <div class="col-md-2">
+        <select class="custom-select" [ngModel]="selectedStatus" (ngModelChange)="selectStatus($event)">
+          <option *ngFor="let status of statuses" [value]="status.status">
+            {{status.status}}
+          </option>
+        </select>
+
+      </div>
+
+      <div class="col-md-3">
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dps" [(ngModel)]="startDate" ngbDatepicker
+                #d="ngbDatepicker" (ngModelChange)="selectStartDate($event)">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-3">
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDate" ngbDatepicker
+                #d1="ngbDatepicker" (ngModelChange)="selectEndDate($event)">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d1.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-md-4">
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col-1">#</th>
+        <th scope="col-4">Ürün</th>
+        <th scope="col-3">Yorum</th>
+        <th scope="col-2">Tarih</th>
+        <th scope="col-1">Yayında</th>
+        <th scope="col-1"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comment of comments">
+        <td> <img src="{{nodejsApi}}/{{comment.productId.image[0]}}" class="card-img-top" style="width:50px;"
+            height="50"></td>
+        <td>{{ comment.productId.title}}</td>       
+
+        <td> <a [routerLink]="['./',comment._id]">{{ comment.comment}} </a>
+        </td>
+        <td>{{ comment.createdAt | date :'short'}} </td>
+        <td> <input type="checkbox" style="width:20px; height: 20px;" [(ngModel)]="comment.publish" class="form-control"
+            [disabled]="true"></td>
+            
+        <td> <a class="btn btn-primary" [routerLink]="['./',comment._id]"> Detay </a>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+  <br>
+
+  <div class="row">
+    <div class="col-md-8">
+
+      <ngb-pagination class="d-flex justify-content-left" style="margin-left: 15px;" size="sm"
+        [(collectionSize)]="totalComments" (pageChange)="nowPage($event)" [(page)]="pageNumber" [(pageSize)]="pageSize"
+        [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right" style="margin-right: 15px;">
+        <b>Bulundu :</b> {{totalComments}}
+      </div>
+
+    </div>
+  </div>
+  <br>

@@ -1,0 +1,649 @@
+<br />
+<br />
+<ngx-spinner type="ball-spin-clockwise"> Siparişiniz Gönderiliyor</ngx-spinner>
+<div [hidden]="paymentPage">
+
+  <div class="row" style="margin:0;padding:0;">
+
+    <div class="col-sm-12"
+      style="margin-left:0; margin-right:0; margin-bottom:10px; font-weight: bold; padding: 3px; background-color:#eee;">
+      <h2 style="font-weight: bold; text-align: center;">Ödeme Bilgileri</h2>
+    </div>
+  </div>
+
+  <div class="container" style="color: black">
+
+    <br />
+
+    <div class="row" [hidden]="paymentButtonDisable" style="
+        padding: 0;
+        margin: 0;
+        border: 1px solid #ddd;        
+        padding-top: 10px;
+        background-color: white;
+      ">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-6 col-md-3" style="padding-top: 7px">
+                <span style="font-weight: bold"> Teslimat Adresi </span>
+              </div>
+
+              <div class="col-6 col-md-9">
+                <select class="custom-select" [ngModel]="selectedAddress"
+                  (ngModelChange)="selectDeliveryAddress($event)">
+                  <option *ngFor="let contact of contacts" [ngValue]="contact">
+                    {{ contact.addressName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-5 col-md-3">
+            <p><span style="font-weight: bold"> Adı : </span></p>
+            <p><span style="font-weight: bold"> Soyadı : </span></p>
+            <p><span style="font-weight: bold"> TC Kimlik No : </span></p>
+            <p><span style="font-weight: bold"> Telefon : </span></p>
+            <p><span style="font-weight: bold"> Email : </span></p>
+            <p><span style="font-weight: bold"> Adres : </span></p>
+            <!-- <p><span style="font-weight: bold"> Adres 2: </span></p> -->
+            <p><span style="font-weight: bold"> Şehir : </span></p>
+            <p><span style="font-weight: bold"> ilçe : </span></p>
+            <!-- <p><span style="font-weight: bold"> Posta Kodu: </span></p> -->
+            <p><span style="font-weight: bold"> Vergi Dairesi: </span></p>
+            <p><span style="font-weight: bold"> Vergi No: </span></p>
+          </div>
+
+          <div class="col-7 col-md-9">
+            <p><span class="bold-head"> </span> {{ selectedDeliveryName }}</p>
+            <p>
+              <span class="bold-head"> </span> {{ selectedDeliverySurname }}
+            </p>
+            <p>
+              <span class="bold-head"> </span>
+              {{ selectedDeliveryIdentityNumber }}
+            </p>
+            <p><span class="bold-head"> </span> {{ selectedDeliveryPhone }}</p>
+            <p><span class="bold-head"> </span> {{ selectedDeliveryEmail }}</p>
+            <p>
+              <span class="bold-head"> </span> {{ selectedDeliveryAddress1 }}
+            </p>
+            <!-- <p>
+              <span class="bold-head"> </span> {{ selectedDeliveryAddress2 }}
+            </p> -->
+            <p><span class="bold-head"> </span> {{ selectedDeliveryState }}</p>
+            <p><span class="bold-head"> </span> {{ selectedDeliveryCity }}</p>
+            <!-- <p>
+              <span class="bold-head"> </span> {{ selectedDeliveryZipCode }}
+            </p> -->
+            <p><span class="bold-head"> </span> {{ selectedDeliveryTaxPlace }}</p>
+            <p>
+              <span class="bold-head"> </span> {{ selectedDeliveryTaxNo }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-6 col-md-3" style="padding-top: 7px">
+                <span style="font-weight: bold"> Fatura Adresi </span>
+              </div>
+
+              <div class="col-6 col-md-9">
+                <select class="custom-select" [ngModel]="selectedBillAddress"
+                  (ngModelChange)="selectBillAddress($event)">
+                  <option *ngFor="let contact of billContacts" [ngValue]="contact">
+                    {{ contact.addressName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-5 col-md-3">
+            <p><span style="font-weight: bold"> Adı : </span></p>
+            <p><span style="font-weight: bold"> Soyadı : </span></p>
+            <p><span style="font-weight: bold"> TC Kimlik No : </span></p>
+            <p><span style="font-weight: bold"> Telefon : </span></p>
+            <p><span style="font-weight: bold"> Email : </span></p>
+            <p><span style="font-weight: bold"> Adres : </span></p>
+            <!-- <p><span style="font-weight: bold"> Adres 2: </span></p> -->
+            <p><span style="font-weight: bold"> Şehir : </span></p>
+            <p><span style="font-weight: bold"> ilçe : </span></p>
+            <!-- <p><span style="font-weight: bold"> Posta Kodu: </span></p> -->
+            <p><span style="font-weight: bold"> Vergi Dairesi: </span></p>
+            <p><span style="font-weight: bold"> Vergi No: </span></p>
+          </div>
+
+          <div class="col-7 col-md-9">
+            <p>
+              <span class="bold-head"> {{ selectedBillName }} </span>
+            </p>
+            <p>
+              <span class="bold-head"> {{ selectedBillSurname }} </span>
+            </p>
+            <p>
+              <span class="bold-head"> {{ selectedBillIdentityNumber }} </span>
+            </p>
+            <p>
+              <span class="bold-head"> {{ selectedBillPhone }} </span>
+            </p>
+            <p>
+              <span class="bold-head"> {{ selectedBillEmail }} </span>
+            </p>
+            <p>
+              <span class="bold-head"> {{ selectedBillAddress1 }} </span>
+            </p>
+            <!-- <p>
+              <span class="bold-head"> {{ selectedBillAddress2 }} </span>
+            </p> -->
+            <p>
+              <span class="bold-head"> {{ selectedBillState }}</span>
+            </p>
+            <p>
+              <span class="bold-head"> {{ selectedBillCity }} </span>
+            </p>
+            <!-- <p>
+              <span class="bold-head">{{ selectedBillZipCode }} </span>
+            </p> -->
+            <p>
+              <span class="bold-head"> {{ selectedBillTaxPlace }} </span>
+            </p>
+            <p>
+              <span class="bold-head">{{ selectedBillTaxNo }} </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row" [hidden]="!paymentButtonDisable" style="
+        padding: 0;
+        margin: 0;
+        border: 1px solid #ddd;        
+        padding-top: 10px;
+        background-color: white;
+      ">
+
+      <div class="col-md-3 col-1">
+
+
+      </div>
+      <div class="col-md-6 col-10" style="text-align: center;">
+        <h3 style="text-align: center;"> Lütfen adres ekleyiniz!!! </h3>
+        <br>
+        <a class="btn btn-dark" [routerLink]="['/address', customerId]">
+          Adres Ekle
+        </a>
+        <br>
+        <br>
+    
+      </div>
+      <div class="col-md-3 col-1">
+
+
+      </div>
+
+    
+
+
+    </div>
+
+    <br />
+
+    <div class="row" style="padding: 0; margin: 0;">
+      <div class="col-md-7" style="margin-left:0; padding-left:0; padding-right:10px;">
+        <div style="min-height: 300px; padding:20px; background-color:white; border:1px solid #d7d7d7;">
+
+          <div class="row" style="margin-bottom: 8px">
+            <div class="col-md-12" style="text-align: center; font-size: 18px; font-weight: bold">
+              Kart veya Banka Kartı
+            </div>
+          </div>
+          <br />
+
+          <div class="row" style="margin-bottom: 8px">
+            <div class="col-md-3" style="padding-top: 5px">
+              <p><span style="font-weight: bold"> Ad Soyad </span></p>
+            </div>
+            <div class="col-md-9">
+              <input type="text" [disabled]="paymentButtonDisable" name="CC_OWNER" #CC_OWNER="ngModel"
+                [(ngModel)]="card.CC_OWNER" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-bottom: 8px">
+            <div class="col-md-3" style="padding-top: 3px">
+              <p><span style="font-weight: bold"> Kart Numarası </span></p>
+            </div>
+            <div class="col-md-9">
+              <input type="text" [disabled]="paymentButtonDisable" name="CC_NUMBER" #CC_NUMBER="ngModel"
+                [(ngModel)]="card.CC_NUMBER" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-bottom: 8px">
+            <div class="col-3 col-md-3" style="padding-top: 6px">
+              <p><span style="font-weight: bold"> Ay/Yıl </span></p>
+            </div>
+            <div class="col-3 col-md-3" style="padding-right: 0">
+              <select class="custom-select" [disabled]="paymentButtonDisable" [ngModel]="selectedMonth"
+                (ngModelChange)="selectMonth($event)">
+                <option *ngFor="let month of months" [value]="month.month">
+                  {{ month.month }}
+                </option>
+              </select>
+            </div>
+            <div class="col-3 col-md-3" style="padding: 0; padding-left: 2px">
+              <select class="custom-select" [disabled]="paymentButtonDisable" [ngModel]="selectedYear"
+                (ngModelChange)="selectYear($event)">
+                <option *ngFor="let year of years" [value]="year.year">
+                  {{ year.year }}
+                </option>
+              </select>
+            </div>
+            <div class="col-3 col-md-3" style="padding-left: 2px">
+              <input type="text" [disabled]="paymentButtonDisable" name="CC_CVV" #CC_CVV="ngModel" placeholder="CCV"
+                [(ngModel)]="card.CC_CVV" class="form-control" />
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px">
+            <div class="col-md-3">
+              <img class="img-fluid" src="../assets/positivessl_trust_seal_lg_222x54.png" />
+            </div>
+            <div class="col-md-9">
+              <img class="img-fluid" src="../assets/logo-band@2x.png" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-5" style="margin-right:0; padding-right:0;padding-left:10px;">
+        <div style=" padding:20px; min-height: 300px; background-color:white; border:1px solid #d7d7d7;">
+          <div class="row">
+            <br />
+            <div class="col-6 col-md-6" style="text-align: left; font-size: 18px">
+              Ara Toplam
+              <br>
+              <span style="font-size:18px;">Kargo Ücreti </span>
+            </div>
+            <div class="col-6 col-md-6" style=" text-align: end; font-size: 18px">
+              {{ grandTotal | currency: "":"":"2.2-2" }} {{ currency }}
+              <br>
+              <span *ngIf="campaignType=='Ucretsiz Kargo'" style="font-size:18px; text-decoration: line-through;">
+                {{cargoPrice}} {{cargoPriceCurrency}}</span>
+              <span *ngIf="campaignType!='Ucretsiz Kargo'" style="font-size:18px;"> {{cargoPrice}}
+                {{cargoPriceCurrency}}</span>
+
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px;">
+            <br />
+            <div class="col-6 col-md-6" style="text-align: left; border-top:1px solid lightgray; font-size: 22px">
+              Toplam
+              <br>
+              <!-- <span style="font-size:14px;">Kargo Ücreti </span> -->
+            </div>
+            <div class="col-6 col-md-6" style="text-align: end; border-top:1px solid lightgray; font-size: 22px">
+              {{ grandGrandTotal | currency: "":"":"2.2-2" }} {{ currency }}
+              <br>
+              <!-- <span style="font-size:14px;"> {{cargoPrice}} {{cargoPriceCurrency}}</span>  -->
+            </div>
+          </div>
+
+
+          <!-- <div class="row">
+            <div class="col-md-12">
+              <textarea rows="2" [(ngModel)]="note" class="col-md-12 form-control"
+                placeholder="İletmek istediğiniz notunuzu buraya yazınız">
+              </textarea>
+            </div>
+          </div> -->
+
+          <div class="row" style="padding: 0; margin: 0; margin-top: 15px; border-radius: 0">
+            <div class="col-md-12" style="padding-right: 0; margin-bottom:10px; margin-right: 0; padding-top: 18px">
+              <div class="row">
+                <input type="checkbox" [disabled]="paymentButtonDisable"
+                  style="margin-top: 2px; height: 20px; width: 20px" [(ngModel)]="checkAgreement"
+                  class="form-control" /> &nbsp;
+
+                  <a (click)="ShowAgreement()" style="cursor: pointer; margin-left:4px; font-weight: bold;"> Mesafeli Satış Sözleşmesi</a>'ni
+                kabul ediyorum
+              </div>
+            </div>
+
+
+
+
+            <button [disabled]="paymentButtonDisable" class="btn-lg btn-dark btn-block" style="margin-top:20px;"
+              (click)="PaymentApproval()" type="button">
+              Ödeme Yap
+            </button>
+
+          </div>
+          <div class="row" style="margin-top:10px; min-height: 27px;">
+
+            <div class="col-12 col-md-12" *ngIf="campaignCode !=''" style="text-align: left;  font-size: 16px">
+              <span style="font-weight: bold;">! {{campaignCode}}</span> Kampanya Kodu uygulandı
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+
+    <!-- <div class="row">
+        <div class="col-md-6">
+            <h5> Teslimat Adresi</h5>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Ad </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_FNAME" #DELIVERY_FNAME="ngModel" [(ngModel)]="delivery.DELIVERY_FNAME"
+                        class="form-control">
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Soyad </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_LNAME" #DELIVERY_LNAME="ngModel" [(ngModel)]="delivery.DELIVERY_LNAME"
+                        class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Email </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_EMAIL" #DELIVERY_EMAIL="ngModel" [(ngModel)]="delivery.DELIVERY_EMAIL"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Telefon </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_PHONE" #DELIVERY_PHONE="ngModel" [(ngModel)]="delivery.DELIVERY_PHONE"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Firma </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_COMPANY" #DELIVERY_COMPANY="ngModel" [(ngModel)]="delivery.DELIVERY_COMPANY" class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Adres 1 </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_ADDRESS" #DELIVERY_ADDRESS="ngModel" [(ngModel)]="delivery.DELIVERY_ADDRESS" class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Adres 2 </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_ADDRESS2" #DELIVERY_ADDRESS2="ngModel" [(ngModel)]="delivery.DELIVERY_ADDRESS2" class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Posta Kodu</span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_ZIPCODE" #DELIVERY_ZIPCODE="ngModel" [(ngModel)]="delivery.DELIVERY_ZIPCODE" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Şehir</span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_CITY" #DELIVERY_CITY="ngModel" [(ngModel)]="delivery.DELIVERY_CITY" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> State</span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_STATE" #DELIVERY_STATE="ngModel" [(ngModel)]="delivery.DELIVERY_STATE" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Ülke Kodu</span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="DELIVERY_COUNTRYCODE" #DELIVERY_COUNTRYCODE="ngModel" [(ngModel)]="delivery.DELIVERY_COUNTRYCODE" class="form-control">
+                </div>
+            </div>
+            <hr>
+
+        </div>
+
+
+        <div class="col-md-6">
+            <h5> Fatura Adresi</h5>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Ad </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_FNAME" #BILL_FNAME="ngModel" [(ngModel)]="billing.BILL_FNAME"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Soyad </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_LNAME" #BILL_LNAME="ngModel" [(ngModel)]="billing.BILL_LNAME"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Email </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_EMAIL" #BILL_EMAIL="ngModel" [(ngModel)]="billing.BILL_EMAIL"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Telefon </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_PHONE" #BILL_PHONE="ngModel" [(ngModel)]="billing.BILL_PHONE"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Fax </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_FAX" #BILL_FAX="ngModel" [(ngModel)]="billing.BILL_FAX"
+                        class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Adres 1 </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_ADDRESS" #BILL_ADDRESS="ngModel" [(ngModel)]="billing.BILL_ADDRESS"
+                        class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Adres 2 </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_ADDRESS2" #BILL_ADDRESS2="ngModel" [(ngModel)]="billing.BILL_ADDRESS2"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Posta Kodu </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_ZIPCODE" #BILL_ZIPCODE="ngModel" [(ngModel)]="billing.BILL_ZIPCODE"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Şehir </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_CITY" #BILL_CITY="ngModel" [(ngModel)]="billing.BILL_CITY"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> Ülke Kodu </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_COUNTRYCODE" #BILL_COUNTRYCODE="ngModel" [(ngModel)]="billing.BILL_COUNTRYCODE"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <p> <span class="bold-head"> İlçe </span></p>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="BILL_STATE" #BILL_STATE="ngModel" [(ngModel)]="billing.BILL_STATE"
+                        class="form-control">
+                </div>
+            </div>
+
+            <hr>
+
+        </div>
+    </div> -->
+
+    <div class="container" style="color: black">
+      <div class="row">
+        <div class="col-md-12" style="padding:0;margin:0;">
+          <table class="table" style="color: black">
+            <thead class="table table-light">
+              <tr>
+                <th scope="col-md-1">#</th>
+                <th scope="col-md-8">Ürün</th>
+                <th scope="col-md-1">Adet</th>
+                <th scope="col-md-2">Toplam Fiyat</th>
+              </tr>
+            </thead>
+            <tbody style="background-color: white">
+              <tr *ngFor="let product of cart" style="color: black">
+                <td>
+                  <img src="{{ nodejsApi }}/{{ product.product.image[0] }}" class="card-img-top" style="width: 50px"
+                    height="50" />
+                </td>
+                <td style="vertical-align: middle">
+                  {{ product.productTitle }} (
+                  <span *ngIf="product.volumeEntity != 'Not'">
+                    <span style="font-weight: bold">
+                      {{ product.volume }} {{ product.volumeEntity }}</span>
+                  </span>
+                  <span *ngIf="product.volumeEntity == 'Not'">
+                    <span style="font-weight: bold"> {{ product.volume }}</span>
+                  </span>
+                  )
+                </td>
+                <td style="vertical-align: middle">
+                  {{ product.unit }}
+                </td>
+
+                <td style="vertical-align: middle">
+                  {{ product.totalPrice | currency: "":"":"2.2-2"
+                  }}{{ product.currency }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div [hidden]="infoPage">
+
+  <div class="col-md-12">
+    <div class="row">
+
+      <div class="col-md-12" style="text-align: center;">
+        <i style="font-size:64px; color:green;" class="fa fa-check-circle"></i>
+        <br>
+        <span style="font-weight: bold;"> {{referanceCode}} </span> referans kodlu siparişiniz alınmıştır.
+        Onaylandığında size mail ile bildirilecektir.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<br />
+<br />

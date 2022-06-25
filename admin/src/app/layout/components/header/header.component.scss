@@ -1,0 +1,101 @@
+$topnav-background-color: #222;
+:host {
+    .navbar {
+        background-color: $topnav-background-color;
+        .navbar-brand {
+            color: #fff;
+        }
+        .nav-item > a {
+            color: #999;
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+    .messages {
+        width: 300px;
+        .media {
+            border-bottom: 1px solid #ddd;
+            padding: 0px 5px;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+        .media-body {
+            h5 {
+                font-size: 13px;
+                font-weight: 600;
+            }
+            .small {
+                margin: 0;
+            }
+            .last {
+                font-size: 12px;
+                margin: 0;
+            }
+        }
+    }
+
+    .notify{
+     
+       
+        border:none;
+        color:#999;
+        margin-right:10px;
+        padding:5px;
+        padding-left:8px;
+        padding-right:10px;
+    
+       
+    }
+
+    .notify:hover{
+        background-color: #666;
+       
+        border:none;
+        color:#fff;
+        margin-right:10px;
+        padding:5px;
+        padding-left:8px;
+        padding-right:10px;
+    }
+    .notify-number{
+        background-color: #cc0000;
+        font-size:12px;
+       
+        border:none;
+        color:white;
+        padding-right:5px;
+        padding-left:3px;
+        margin-left:5px;
+        
+      
+    }
+}
+
+
+.notification {
+
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+  }
+  
+  .notification:hover {
+    background: red;
+  }
+  
+  .notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 7px;
+    border-radius: 50%;
+    background-color: #cc0000;
+    color: white;
+    margin-top:2px;
+    font-size:10px;
+  }

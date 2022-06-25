@@ -1,0 +1,58 @@
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+        <div class="col-sm-9">
+            <h4 class="card-title"> Email Ayar Listesi</h4>  
+        
+        </div>
+        <div class="col-sm-3">
+            <h4 class="card-text pull-right">
+  
+              <a class="btn btn-dark" [routerLink]="['./',0,'edit']"> Yeni </a>
+            </h4>
+        </div>
+    </div>
+   
+  </div>
+
+
+<br>
+
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+       
+        <th scope="col-2">Sahibi</th>     
+        <th scope="col-2">Kullanıcı Adı</th> 
+        <th scope="col-3">SMTP</th> 
+        <th scope="col-2">PORT</th> 
+        <th scope="col-1">Güvenli</th> 
+        <th scope="col-2"></th>  
+    
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let email of emails">    
+    
+        
+      <td>{{ email.owner}}</td>
+      <td>{{ email.userName}}</td>
+      <td>{{ email.smtp}}</td>
+      <td>{{ email.port}}</td>
+      <td>{{ email.secure}}</td>
+      <td> 
+      <a class="btn btn-primary" [routerLink]="['./',email._id ,'edit']">  Detay  </a>
+
+      </td>
+    
+     
+    </tr>
+    </tbody>
+  </table>
+
+
+
+

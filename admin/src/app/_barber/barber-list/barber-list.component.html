@@ -1,0 +1,100 @@
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+        <div class="col-sm-9">
+            <h4 class="card-title">  Barber Listesi</h4>  
+        
+        </div>
+        <div class="col-sm-3">
+            <h4 class="card-text pull-right">
+  
+              <a class="btn btn-dark" [routerLink]="['./',0,'edit']"> Yeni Berber Ekle </a>
+            </h4>
+        </div>
+    </div>
+   
+  </div>
+
+
+<br>
+
+
+<div class="row" style="margin: 0; padding: 0">
+
+  <div class="col-md-6 row" style="margin: 0; padding: 0; padding-left: 10px">
+    <div class="col-md-12">
+      <input
+        type="text"
+        [(ngModel)]="textForSearch"
+        (ngModelChange)="onChange($event)"
+        class="form-control"
+        style="margin-left: 0; border-radius: 0; padding-left: 2px"
+      />
+    </div>
+  </div>
+</div>
+<br>
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+       
+      <th scope="col-1">#</th>   
+        <th scope="col-5">Berber</th>     
+        <th scope="col-2">Aktifleştirildi mi?</th>  
+        <th scope="col-2">Kayıt Tarihi</th>  
+        <th scope="col-2"></th>  
+    
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let barber of barbers">    
+    
+      <td>
+        <img
+          src="{{ nodeJsApi }}/{{ barber.document }}"
+          class="card-img-top"
+          style="width: 50px"
+          height="50"
+        />
+      </td>
+      <td>{{ barber.name}}</td>
+      <td>{{ barber.active}}</td>
+      <td>{{ barber.createdAt | date:'short'}}</td>
+      <td> 
+      <a class="btn btn-primary" [routerLink]="['./',barber._id ,'edit']"> Detay  </a>
+
+      </td>
+    
+     
+    </tr>
+    </tbody>
+  </table>
+  
+  <div class="row">
+    <div class="col-md-8">
+      <ngb-pagination
+        class="d-flex justify-content-left"
+        style="margin-left: 15px"
+        size="sm"
+        [(collectionSize)]="totalItem"
+        (pageChange)="nowPage($event)"
+        [(page)]="pageNumber"
+        [(pageSize)]="pageSize"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+      ></ngb-pagination>
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right" style="margin-right: 15px">
+        <b>Bulundu :</b> {{ totalItem }}
+      </div>
+    </div>
+  </div>
+
+
+
+

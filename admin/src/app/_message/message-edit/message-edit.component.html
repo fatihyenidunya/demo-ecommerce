@@ -1,0 +1,202 @@
+<div class="row" style="margin-top: 2rem; height: 40px">
+  <div class="col-sm-2 align-self-start"></div>
+  <div class="col-sm-8 align-self-center">
+    <div *ngFor="let alert of alerts">
+      <ngb-alert [type]="alert.type" (close)="alertClose(alert)"
+        >{{ alert.message }} - you will redirect to the list in
+        {{ counter }}</ngb-alert
+      >
+    </div>
+  </div>
+  <div class="col-sm-2 align-self-end"></div>
+</div>
+
+<div class="row" style="margin-top: 2rem">
+  <div class="col-sm-1 align-self-start"></div>
+  <div class="col-sm-10 align-self-center">
+    <form
+      class="col s12 white"
+      #customForm="ngForm"
+      (ngSubmit)="OnSubmit(customForm)"
+    >
+      <div class="card align-self-center">
+        <div class="card-header">
+          # <span style="font-weight: bold">{{ messageId }} </span>
+          <a class="btn btn-dark pull-right" [routerLink]="['../../']"> x</a>
+        </div>
+
+        <div class="card-body text-right">
+          <div class="row">
+            <div class="col">
+              <br />
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Göndericinin Adı :</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    name="name"
+                    #name="ngModel"
+                    [(ngModel)]="text.name"
+                    [disabled]="disable"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Gönderildiği Tarih :</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    name="createdAt"
+                    #createdAt="ngModel"
+                    [(ngModel)]="text.createdAt"
+                    [disabled]="disable"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Konusu :</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    name="subject"
+                    #subject="ngModel"
+                    [(ngModel)]="text.subject"
+                    [disabled]="disable"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Mesaj :</label>
+                <div class="col-sm-9">
+                  <textarea
+                    rows="4"
+                    name="message"
+                    [disabled]="disable"
+                    #message="ngModel"
+                    [(ngModel)]="text.message"
+                    class="form-control"
+                  >
+                  </textarea>
+
+                
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Telefon :</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    name="phone"
+                    #phone="ngModel"
+                    [(ngModel)]="text.phone"
+                    [disabled]="disable"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Email :</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    name="mail"
+                    #mail="ngModel"
+                    [(ngModel)]="text.mail"
+                    [disabled]="disable"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Cevap Mesajı :</label>
+                <div class="col-sm-9">
+                  <textarea
+                  rows="4"
+                  name="answer"
+                  #answer="ngModel"
+                  [(ngModel)]="text.answer"
+                  [disabled]="disable"
+                  class="form-control"
+                >
+                </textarea>
+                  
+               
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Gönderildiği Sayfa :</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    name="sendedBy"
+                    #sendedBy="ngModel"
+                    [(ngModel)]="text.sendedBy"
+                    [disabled]="disable"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-3 col-form-label"
+                  >Tip
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    type="checkbox"
+                    name="type"
+                    #type="ngModel"
+                    [(ngModel)]="text.type"
+                    class="form-control"
+                    [disabled]="disable"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-3 col-form-label"
+                  >Cevaplandı mı?
+                </label>
+                <div class="col-sm-9">
+                  
+                  <input
+                    type="checkbox"
+                    name="answered"
+                    #answered="ngModel"
+                    [(ngModel)]="text.answered"
+                    class="form-control"
+                    [disabled]="disable"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <!-- <button type="button" class="btn btn-danger" [disabled]="!disable" (click)="confirmToDelete()"><i
+              class="fa fa-eraser"></i></button> -->
+
+          <button
+            type="button"
+            class="btn btn-success pull-right"
+            type="submit"
+            [disabled]="disable"
+          >
+            <i class="fa fa-save"> Kaydet</i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-info pull-right"
+            style="margin-right: 5px"
+            (click)="edit()"
+            [disabled]="!disable"
+          >
+            <i class="fa fa-edit"> Düzenle</i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-1 align-self-end"></div>
+</div>

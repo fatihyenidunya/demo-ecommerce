@@ -1,0 +1,67 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <!-- <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+
+</div>
+<div class="modal-body">
+  {{ message }}
+  <br />
+  <br />
+  <div class="row" style="padding: 0; margin: 0">
+    <div class="col-md-10" style="padding-left:0;">
+      <input type="text" name="email" #email="ngModel" [(ngModel)]="detailReportSetting.email" class="form-control">
+    
+    </div>
+  </div>
+  <br />
+
+
+  <div class="row" style="padding: 0; margin: 0">
+    <div class="col-md-3" style="padding-left:0;">
+      <select
+        class="custom-select"
+        [ngModel]="selectedReportType"
+        (ngModelChange)="selectReportType($event)"
+      >
+        <option *ngFor="let reportType of reportTypes" [ngValue]="reportType">
+          {{ reportType.type }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <select
+        class="custom-select"
+        [ngModel]="selectedYear"
+        (ngModelChange)="selectYear($event)"
+      >
+        <option *ngFor="let year of years" [ngValue]="year">
+          {{ year.year }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <select
+        class="custom-select"
+        [ngModel]="selectedMonth"
+        [disabled]="disabledMonthly"
+        (ngModelChange)="selectMonth($event)"
+      >
+        <option *ngFor="let month of months" [ngValue]="month">
+          {{ month.month }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="dismiss()">
+    {{ btnCancelText }}
+  </button>
+  <button type="button" class="btn btn-primary" (click)="accept()">
+    {{ btnOkText }}
+  </button>
+</div>

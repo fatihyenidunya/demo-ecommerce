@@ -1,0 +1,149 @@
+<br>
+<div class="row" style="padding:0; margin:0;">
+
+    <div class="col-sm-12"
+        style="margin-left:0; margin-right:0; font-weight: bold; padding: 3px; background-color:#eee;">
+        <h2 style="font-weight: bold; text-align: center;">İletişim</h2>
+    </div>
+    <div class="col-sm-12"
+        style="margin-left:0; margin-right:0; font-weight: bold; padding: 3px; background-color:#eee; margin-bottom: 10px">
+
+
+
+        <h6 style="font-weight: bold; text-align: center;">
+
+            <a [routerLink]="['/category']" style="color: gray;"> Anasayfa </a>
+
+            <i style="color:gray;" class="fa fa-chevron-right"></i>
+
+            <span style="color:gray;"> İletişim </span>
+        </h6>
+
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="col s12 white" #contactForm="ngForm" (ngSubmit)="OnSubmit(contactForm)">
+                <h3>Mesajınız</h3>
+                <br>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Adınız" name="name" [(ngModel)]="name" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Soyadınız" name="lastName" [(ngModel)]="lastName"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Emailiniz" name="mail" [(ngModel)]="mail" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Telefonunuz" name="phone" [(ngModel)]="lastName"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <textarea type="text" placeholder="Mesajınız" name="message" rows="6" [(ngModel)]="message"
+                            class="form-control">
+
+                    </textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-warning"> Gönder</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3>Firma Bilgileri</h3>
+            <br>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-phone"
+                                style="font-size:32px; border-radius: 50%; color:white; background-color: orange; padding:15px; padding-left:18px; "></i>
+                        </div>
+
+                        <div class="col-md-8" style="padding:0; margin:0;">
+                            <div class="row" style="padding-bottom:0; margin-bottom:0;">
+                                <label style="font-size:larger; font-weight: bold;">Telefon</label>
+                            </div>
+                            <div class="row" style="padding-top:0; margin-top:0;">
+                                <label>+90 552 00 39</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-envelope"
+                                style="font-size:32px; border-radius: 50%; color:white; background-color: orange; padding:15px; "></i>
+                        </div>
+
+                        <div class="col-md-8" style="padding:0; margin:0;">
+                            <div class="row" style="padding-bottom:0; margin-bottom:0;">
+                                <label style="font-size:larger; font-weight: bold;">Email</label>
+                            </div>
+                            <div class="row" style="padding-top:0; margin-top:0;">
+                                <label>info@asilgroup.com.tr</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-map-marker"
+                                style="font-size:32px; border-radius: 50%; color:white; background-color: orange; padding:15px; padding-left:20px; padding-right:20px; "></i>
+                        </div>
+
+                        <div class="col-md-8" style="padding:0; margin:0;">
+                            <div class="row" style="padding-bottom:0; margin-bottom:0;">
+                                <label style="font-size:larger; font-weight: bold;">Adres</label>
+                            </div>
+                            <div class="row" style="padding-top:0; margin-top:0;">
+                                <label>İstanbul, Türkiye</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-clock-o"
+                                style="font-size:32px; border-radius: 50%; color:white; background-color: orange; padding:18px; "></i>
+                        </div>
+
+                        <div class="col-md-8" style="padding:0; margin:0;">
+                            <div class="row" style="padding-bottom:0; margin-bottom:0;">
+                                <label style="font-size:larger; font-weight: bold;">Saatler</label>
+                            </div>
+                            <div class="row" style="padding-top:0; margin-top:0;">
+                                <label>Pzt - Cmt 09:00-18:00</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- <div class="col-md-12" style="height:400px;">
+            <lib-google-maps-angular [latLong]="latLong"></lib-google-maps-angular>
+        </div> -->
+    </div>
+</div>

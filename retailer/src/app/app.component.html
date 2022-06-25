@@ -1,0 +1,201 @@
+<div [ngClass]="{'change': isChange}">
+
+    <div class="hamburger-menu" [hidden]="showForMobile" (click)="clickMenu()">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+
+    </div>
+    <section class="sidebar">
+
+        <div class="row" style="padding:0; margin:0; margin-bottom:2rem;">
+
+            <div class="col-4" style="margin-top:5px;">
+
+            </div>
+            <div class="col-4" style="padding-top:0.5rem;">
+
+                <img src="{{ nodejsApi }}/{{ general.imageUrl }}" class="img-fluid" />
+            </div>
+            <div class="col-4" style="margin-top:5px;">
+
+            </div>
+
+        </div>
+
+
+        <div class="menu" *ngFor="let category of categories">
+
+
+
+            <div class="menu-item" *ngIf="category.subCategories[0].length===0">
+
+                <div class="row" style=" padding:0; margin:0;">
+
+                    <div class="col-10">
+
+                        <a class="menu-link" [routerLink]="['/category', category.nameLower]"> {{
+                            category.name }}</a>
+
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="menu-item" *ngIf="category.subCategories[0].length!=0">
+                <div class="row" style=" padding:0; margin:0;">
+
+                    <div class="col-10">
+                        <a class="menu-link" href="#" [routerLink]="['/category', category.nameLower]"
+                            aria-haspopup="true" aria-expanded="false">{{ category.name }}</a>
+                    </div>
+                    <div class="col-2 right" style="padding-top:0.5rem;">
+                        <i class="fa fa-chevron-right" (click)="clickSubMenu(category.name,category.subCategories[0])">
+                        </i>
+                    </div>
+
+                </div>
+
+
+                <!-- 
+                <a style="font-size:16px; margin-left:10px; color:#111;" data-toggle="collapse"
+                    href="#{{category.nameLower}}" aria-expanded="false" aria-controls="collapseExample"
+                    (click)="clickSubMenu()">
+               
+                </a> -->
+
+
+
+            </div>
+
+        </div>
+        <div [ngClass]="{'changed': isSubMenuChange}">
+
+
+            <!-- <div class="hamburger-menu" [hidden]="showForMobile" (click)="closeMenu()">
+                <div class="line line-1"></div>
+                <div class="line line-2"></div>
+                <div class="line line-3"></div>
+
+            </div> -->
+
+            <div class="subMenu">
+
+                <div class="row" style="padding:0; margin:0; margin-bottom:1rem; margin-top:5px; background-color:#eee;">
+
+                    <div class="col-2" style="margin-top:3px;">
+                        <i class="fa fa-chevron-left" style="margin-left:10px;padding:10px;"
+                            (click)="clickSubMenu('','')">
+                        </i>
+                    </div>
+                    <div class="col-10">
+                       <h5 style="margin-top:7px;" > {{topCategory}}</h5> 
+
+
+
+                    </div>
+
+
+                </div>
+
+
+                <ul>
+
+
+
+                    <li  *ngFor="let _category of subCategories" class="menu-item" style="padding-top:0.2rem; padding-bottom:0.2rem;" >
+
+                        <a class="submenu-link" [routerLink]="['/category', _category.nameLower]"> {{
+                            _category.name }}</a>
+                     
+                    </li>
+
+
+
+                </ul>
+
+            </div>
+
+
+
+        </div>
+
+
+        <div class="row" style="padding:0; margin:0; margin-top:5rem;">
+
+            <div class="col-1" style="margin-top:5px;">
+
+            </div>
+            <div class="col-10">
+
+                <div class="row left-vertical-align" style="padding:0;margin:0; margin-top:1rem; ">
+
+                    <a [href]="general.facebook">
+                        <i class="fa fa-facebook-square" style="font-size: 32px; color: #1877f2" aria-hidden="true">
+                        </i>
+                    </a>
+
+                    <a [href]="general.instagram">
+                        <i class="fa fa-instagram" style="font-size: 32px; color: #c32aa3; margin-left: 11px"
+                            aria-hidden="true">
+                        </i>
+                    </a>
+                    <a [href]="general.twitter">
+                        <i class="fa fa-twitter-square" style="font-size: 32px; color: #1da1f2; margin-left: 11px"
+                            aria-hidden="true">
+                        </i>
+                    </a>
+
+                    <a [href]="general.linkedin">
+                        <i class="fa fa-linkedin-square" style="font-size: 32px; color: #0a66c2; margin-left: 11px"
+                            aria-hidden="true">
+                        </i>
+                    </a>
+
+                    <a [href]="general.youtube">
+                        <i class="fa fa-youtube-square" style="font-size: 32px; color: #ff0000; margin-left: 11px"
+                            aria-hidden="true">
+                        </i>
+                    </a>
+
+                    <a [href]="general.youtube">
+                        <i class="fa fa-pinterest-square" style="font-size: 32px; color: #bd081c; margin-left: 11px"
+                            aria-hidden="true">
+                        </i>
+                    </a>
+                </div>
+
+                <div class="row" style="margin:0; margin-top:10px; text-align:center; padding:0">
+                    <i class="fa fa-phone"> &nbsp; +90 212 552 00 39 </i>
+                </div>
+                <div class="row" style="margin:0; margin-top:10px; text-align:center; padding:0">
+                    <i class="fa fa-envelope "> &nbsp; destek@nishman.com.tr</i>
+                </div>
+            </div>
+            <div class="col-2" style="margin-top:5px;">
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+   
+
+
+ 
+
+    <router-outlet>
+
+
+    </router-outlet>
+
+
+
+</div>

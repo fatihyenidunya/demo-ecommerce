@@ -1,0 +1,27 @@
+
+    <div class="ng-autocomplete" style="width:100%;">
+      <ng-autocomplete #auto [data]="searchProducts" [searchKeyword]="keyword" (selected)="selectEvent($event)"
+        (inputChanged)="onChangeSearch($event)" (inputFocused)="onFocused($event)" placeHolder="Ürün Ara"
+        minQueryLength="3" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+      </ng-autocomplete>
+
+      <ng-template #itemTemplate let-item>
+
+        <div class="row" style="padding:0; margin:0;">
+          <div class="col-md-2">
+            <img src="{{ nodejsApi }}/{{ item.image[0] }}" class="img-fluid" />
+    
+          </div>
+          <div class="col-md-10">
+            <a [innerHTML]="item.title"></a>
+          </div>
+        
+        </div>
+ 
+      </ng-template>
+
+      <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+      </ng-template>
+    </div>
+

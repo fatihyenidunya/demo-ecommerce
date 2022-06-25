@@ -1,0 +1,127 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-2">
+
+        <div class="row">
+          <div class="fa fa-search" aria-hidden="true" style="margin-right:-3px;
+          padding:8px;border:1px solid lightgray;background-color: white;"></div>
+          <div>
+            <input type="text" [(ngModel)]="textforsearch" (ngModelChange)="onChange($event)" class="form-control"
+              style="border-left:none; margin-left:0; border-radius: 0;
+            padding-left:2px;">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-2">
+        <select class="custom-select" [ngModel]="selectedFixed" (ngModelChange)="selectFixed($event)">
+          <option *ngFor="let fixed of fixes" [value]="fixed.fixed">
+            {{fixed.fixed}}
+          </option>
+        </select>
+
+      </div>
+      <div class="col-md-2">
+        <select class="custom-select" [ngModel]="selectedCode" (ngModelChange)="selectCode($event)">
+          <option *ngFor="let code of errorCodes" [value]="code.code">
+            {{code.code}}
+          </option>
+        </select>
+
+      </div>
+
+      <div class="col-md-3">
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dps" [(ngModel)]="startDate" ngbDatepicker
+                #d="ngbDatepicker" (ngModelChange)="selectStartDate($event)">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-3">
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDate" ngbDatepicker
+                #d1="ngbDatepicker" (ngModelChange)="selectEndDate($event)">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d1.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+
+  <br>
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+
+
+        <th scope="col-3">Controller</th>
+        <th scope="col-2">Function</th>
+
+        <th scope="col-1">Line</th>
+        <th scope="col-1">Fixed</th>
+        <th scope="col-2">Occured</th>
+
+        <th scope="col-1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let error of errors" >
+
+
+     
+
+
+
+          <td scope="col-2"> {{error.controller}}</td>
+          <td scope="col-3"> {{error.function}}</td>
+          <td scope="col-1">{{error.line}}</td>
+          <td scope="col-1">{{error.code}}</td>        
+          <td scope="col-2"> {{error.createdAt | date :'short'}}</td>
+          <td scope="col-1">
+            <a class="btn btn-primary" [routerLink]="['./',error._id]"> Detay</a>
+
+          </td>
+     
+
+      </tr>
+    </tbody>
+  </table>
+
+
+  <br>
+
+  <div class="row">
+    <div class="col-md-8">
+
+      <ngb-pagination class="d-flex justify-content-left" style="margin-left: 15px;" size="sm"
+        [(collectionSize)]="totalItems" (pageChange)="nowPage($event)" [(page)]="pageNumber" [(pageSize)]="pageSize"
+        [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right" style="margin-right: 15px;">
+        <b>Found :</b> {{totalItems}}
+      </div>
+
+    </div>
+  </div>
+  <br>
+  <br>

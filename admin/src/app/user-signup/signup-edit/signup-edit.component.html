@@ -1,0 +1,70 @@
+<div class="signup-page" [@routerTransition]>
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+      <!-- <img class="user-avatar" src="assets/images/logo.png" width="150px" /> -->
+      <h1>Yeni Kullanıcı</h1>
+      <form class="col s12" style="background-color:#eee;" #userRegistrationForm="ngForm"
+        (ngSubmit)="OnSubmit(userRegistrationForm)">
+        <div class="form-content">
+          <div class="form-group">
+
+            <input class="validate form-control  input-sm" type="text" placeholder="UserName" name="userName"
+              #userName="ngModel" [(ngModel)]="user.userName" required>
+
+          </div>
+
+          <div class="form-group">
+
+
+            <input class="validate form-control  input-sm" type="text" placeholder="Email" name="email" #email="ngModel"
+              [(ngModel)]="user.email" [pattern]="emailPattern">
+
+          </div>
+
+          <div class="form-group">
+
+            <input class="validate  form-control  input-sm" type="password" name="password" #password="ngModel"
+              placeholder="Password" [(ngModel)]="user.password" required minlength="5">
+
+          </div>
+
+          <div class="form-group">
+
+            <select class="custom-select" [ngModel]="selectedRole" (ngModelChange)="selectRole($event)"
+              [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let role of roles" [value]="role.userRole">
+                {{role.userRole}}
+              </option>
+            </select>
+
+
+          </div>
+
+        </div>
+
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+              <button [disabled]="!userRegistrationForm.valid" class="btn btn-large btn-success pull-left"
+                type="submit">Kaydet</button>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-danger" [disabled]="!disable" (click)="userDelete()"><i
+                  class="fa fa-eraser"> Sil</i></button>
+            </div>
+
+          </div>
+
+          <br>
+        </div>
+
+
+
+
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,999 @@
+<nav class="navbar navbar-expand-lg fixed-top">
+  <a class="navbar-brand" href="#">Nishman </a>
+  <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+    <!-- <span class="navbar-toggler-icon"></span> -->
+    <i class="fa fa-bars text-muted" aria-hidden="true"></i>
+  </button>
+  <div class="collapse navbar-collapse">
+    <form class="form-inline my-2 my-lg-0">
+      <!-- <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}" > -->
+    </form>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item d-none d-xl-block">
+        <!-- <a
+                    href="https://github.com/start-angular/SB-Admin-BS4-Angular-7/archive/master.zip"
+                    class="nav-link btn mt-1" role="button"
+                    style="padding: .375rem 1rem !important;border-color: #999;"
+                >
+                    {{ 'Download Now' | translate }}
+                </a> -->
+      </li>
+      &nbsp;
+
+      <li class="nav-item">
+        <div class="btn-group">
+          <div
+            class="notify notification"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span> <i class="fa fa-info" aria-hidden="true"></i></span>
+            <span *ngIf="customerOrderCanceledNotifyCount != 0" class="badge">{{
+              customerOrderCanceledNotifyCount
+            }}</span>
+          </div>
+
+          <div
+            class="dropdown-menu"
+            style="
+              width: 300px;
+              max-height: 400px;
+              left: 0;
+              margin-left: -200px;
+              padding-top: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <div style="max-height: 350px; overflow-y: scroll">
+              <div
+                class="col-sm-12"
+                *ngFor="let order of customerOrderCanceledNotifies"
+                [style.background-color]="
+                  order.isChecked === true ? '#ffffff' : '#eeeeee'
+                "
+                style="
+                  border: 1px solid #eee;
+                  margin-top: 2px;
+                  padding-top: 5px;
+                  padding-bottom: 2px;
+                "
+              >
+                <a
+                  [routerLink]="['/orderRetails', order.orderId]"
+                  style="color: black; text-decoration: none"
+                >
+                  <div class="row" style="padding-left: 5px">
+                    <div class="col-sm-7">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.customer }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.country }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.grandTotal }} {{ order.currency }}</span
+                        >
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          {{ order.createdAt | date: "short" }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a
+              class="btn btn-light btn-block"
+              href="{{canceledOkay_}}"
+              style=" text-decoration: none"
+            >
+              Daha Fazla
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <div class="btn-group">
+          <div
+            class="notify notification"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span> <i class="fa fa-times" aria-hidden="true"></i></span>
+            <span
+              *ngIf="customerOrderCanceledWantedNotifyCount != 0"
+              class="badge"
+              >{{ customerOrderCanceledWantedNotifyCount }}</span
+            >
+          </div>
+
+          <div
+            class="dropdown-menu"
+            style="
+              width: 300px;
+              max-height: 400px;
+              left: 0;
+              margin-left: -200px;
+              padding-top: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <div style="max-height: 350px; overflow-y: scroll">
+              <div
+                class="col-sm-12"
+                *ngFor="let order of customerOrderCanceledWantedNotifies"
+                [style.background-color]="
+                  order.isChecked === true ? '#ffffff' : '#eeeeee'
+                "
+                style="
+                  border: 1px solid #eee;
+                  margin-top: 2px;
+                  padding-top: 5px;
+                  padding-bottom: 2px;
+                "
+              >
+                <a
+                  [routerLink]="['/orderRetails', order.orderId]"
+                  style="color: black; text-decoration: none"
+                >
+                  <div class="row" style="padding-left: 5px">
+                    <div class="col-sm-7">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.customer }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.country }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.grandTotal }} {{ order.currency }}</span
+                        >
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          {{ order.createdAt | date: "short" }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a
+              class="btn btn-light btn-block"
+              href="{{canceledWanted_}}"
+              style="text-decoration: none"
+            >
+              Daha Fazla
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <div class="btn-group">
+          <div
+            class="notify notification"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span> <i class="fa fa-check" aria-hidden="true"></i></span>
+            <span *ngIf="customerShippedNotifyCount != 0" class="badge">{{
+              customerShippedNotifyCount
+            }}</span>
+          </div>
+
+          <div
+            class="dropdown-menu"
+            style="
+              width: 300px;
+              max-height: 400px;
+              left: 0;
+              margin-left: -200px;
+              padding-top: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <div style="max-height: 350px; overflow-y: scroll">
+              <div
+                class="col-sm-12"
+                *ngFor="let order of customerShippedNotifies"
+                [style.background-color]="
+                  order.isChecked === true ? '#ffffff' : '#eeeeee'
+                "
+                style="
+                  border: 1px solid #eee;
+                  margin-top: 2px;
+                  padding-top: 5px;
+                  padding-bottom: 2px;
+                "
+              >
+                <a
+                  [routerLink]="['/orderRetails', order.orderId]"
+                  style="color: black; text-decoration: none"
+                >
+                  <div class="row" style="padding-left: 5px">
+                    <div class="col-sm-7">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.customer }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.country }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.grandTotal }} {{ order.currency }}</span
+                        >
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          {{ order.createdAt | date: "short" }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a
+              class="btn btn-light btn-block"
+              href="{{shipmentSuccessed_}}"
+              style=" text-decoration: none"
+            >
+              Daha Fazla
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <div class="btn-group">
+          <div
+            class="notify notification"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span> <i class="fa fa-server" aria-hidden="true"></i></span>
+            <span *ngIf="customerPreparingNotifyCount != 0" class="badge">{{
+              customerPreparingNotifyCount
+            }}</span>
+          </div>
+          <div
+            class="dropdown-menu"
+            style="
+              width: 300px;
+              max-height: 400px;
+              left: 0;
+              margin-left: -200px;
+              padding-top: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <div style="max-height: 350px; overflow-y: scroll">
+              <div
+                class="col-sm-12"
+                *ngFor="let order of customerPreparingNotifies"
+                [style.background-color]="
+                  order.isChecked === true ? '#ffffff' : '#eeeeee'
+                "
+                style="
+                  border: 1px solid #eee;
+                  margin-top: 2px;
+                  padding-top: 5px;
+                  padding-bottom: 2px;
+                "
+              >
+                <a
+                  [routerLink]="['/orderRetails', order.orderId]"
+                  (click)="changeNotify(order._id)"
+                  style="color: black; text-decoration: none"
+                >
+                  <div class="row" style="padding-left: 5px">
+                    <div class="col-sm-7">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.customer }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.country }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.grandTotal }} {{ order.currency }}</span
+                        >
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          {{ order.createdAt | date: "short" }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a
+              class="btn btn-light btn-block"
+              href="{{gettingReady_}}"
+              style=" text-decoration: none"
+            >
+              Daha Fazla
+            </a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item" [hidden]="operationHide">
+        <div class="btn-group">
+          <div
+            class="notify notification"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span> <i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+            <span *ngIf="newCustomerOrderCount != 0" class="badge">{{
+              newCustomerOrderCount
+            }}</span>
+          </div>
+          <div
+            class="dropdown-menu"
+            style="
+              width: 300px;
+              max-height: 400px;
+              left: 0;
+              margin-left: -200px;
+              padding-top: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <div style="max-height: 350px; overflow-y: scroll">
+              <div
+                class="col-sm-12"
+                *ngFor="let order of newCustomerOrders"
+                [style.background-color]="
+                  order.isChecked === true ? '#ffffff' : '#eeeeee'
+                "
+                style="
+                  border: 1px solid #eee;
+                  margin-top: 2px;
+                  padding-top: 5px;
+                  padding-bottom: 2px;
+                "
+              >
+                <a
+                  [routerLink]="['/orderRetails', order.orderId]"
+                  style="color: black; text-decoration: none"
+                >
+                  <div class="row" style="padding-left: 5px">
+                    <div class="col-sm-7">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.customer }} - 
+                          {{ order.status }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.country }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.grandTotal }} {{ order.currency }}</span
+                        >
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          {{ order.createdAt | date: "short" }}</span
+                        >
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          Sahibi : {{ order.userName }}</span
+                        >
+                      </div>
+                      <div class="row">
+                        <!-- <span style="font-size:10px; font-weight: bold;">
+                                                    Notify for : {{order.notifyOwner }}</span> -->
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a
+              class="btn btn-light btn-block"
+              href="{{pendingApproval}}"
+              style=" text-decoration: none"
+            >
+              Daha Fazla
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Customer ended here -->
+
+      <li class="nav-item" hidden="true">
+        <div class="btn-group">
+          <div
+            class="notify notification"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span> <i class="fa fa-times" aria-hidden="true"></i></span>
+            <span *ngIf="customerOrderCanceledNotifyCount != 0" class="badge">{{
+              customerOrderCanceledNotifyCount
+            }}</span>
+          </div>
+
+          <div
+            class="dropdown-menu"
+            style="
+              width: 300px;
+              max-height: 400px;
+              left: 0;
+              margin-left: -200px;
+              padding-top: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <div style="max-height: 350px; overflow-y: scroll">
+              <div
+                class="col-sm-12"
+                *ngFor="let order of customerOrderCanceledNotifies"
+                [style.background-color]="
+                  order.isChecked === true ? '#ffffff' : '#eeeeee'
+                "
+                style="
+                  border: 1px solid #eee;
+                  margin-top: 2px;
+                  padding-top: 5px;
+                  padding-bottom: 2px;
+                "
+              >
+                <a
+                  [routerLink]="['/orderRetails', order.orderId]"
+                  style="color: black; text-decoration: none"
+                >
+                  <div class="row" style="padding-left: 5px">
+                    <div class="col-sm-7">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.customer }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.country }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.grandTotal }} {{ order.currency }}</span
+                        >
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          {{ order.createdAt | date: "short" }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a
+              class="btn btn-light btn-block"
+              [routerLink]="['../../notifies/customer', orderCanceled]"
+              style=" text-decoration: none"
+            >
+              Daha Fazla
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item" hidden="true">
+        <div class="btn-group">
+          <div
+            class="notify notification"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span>
+              <i class="fa fa-check-square-o" aria-hidden="true"></i
+            ></span>
+            <span *ngIf="customerApprovedOrderCount != 0" class="badge">{{
+              customerApprovedOrderCount
+            }}</span>
+          </div>
+          <div
+            class="dropdown-menu"
+            style="
+              width: 300px;
+              max-height: 400px;
+              left: 0;
+              margin-left: -200px;
+              padding-top: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <div style="max-height: 350px; overflow-y: scroll">
+              <div
+                class="col-sm-12"
+                *ngFor="let order of customerApprovedOrders"
+                [style.background-color]="
+                  order.isChecked === true ? '#ffffff' : '#eeeeee'
+                "
+                style="
+                  border: 1px solid #eee;
+                  margin-top: 2px;
+                  padding-top: 5px;
+                  padding-bottom: 2px;
+                "
+              >
+                <a
+                  [routerLink]="['/orderRetails', order.orderId]"
+                  style="color: black; text-decoration: none"
+                >
+                  <div class="row" style="padding-left: 5px">
+                    <div class="col-sm-7">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.customer }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.country }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.grandTotal }} {{ order.currency }}</span
+                        >
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          {{ order.createdAt | date: "short" }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a
+              class="btn btn-info btn-block"
+              [routerLink]="['../notifies/customer', orderApproved]"
+              style=" text-decoration: none"
+            >
+             Daha Fazla
+            </a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item" hidden="true">
+        <div class="btn-group">
+          <div
+            class="notify notification"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span> <i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+            <span *ngIf="newCustomerOrderCount != 0" class="badge">{{
+              newCustomerOrderCount
+            }}</span>
+          </div>
+          <div
+            class="dropdown-menu"
+            style="
+              width: 300px;
+              max-height: 400px;
+              left: 0;
+              margin-left: -200px;
+              padding-top: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <div style="max-height: 350px; overflow-y: scroll">
+              <div
+                class="col-sm-12"
+                *ngFor="let order of newCustomerOrders"
+                [style.background-color]="
+                  order.isChecked === true ? '#ffffff' : '#eeeeee'
+                "
+                style="
+                  border: 1px solid #eee;
+                  margin-top: 2px;
+                  padding-top: 5px;
+                  padding-bottom: 2px;
+                "
+              >
+                <a
+                  [routerLink]="['/orderRetails', order.orderId]"
+                  style="color: black; text-decoration: none"
+                >
+                  <div class="row" style="padding-left: 5px">
+                    <div class="col-sm-7">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.customer }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.country }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.grandTotal }} {{ order.currency }}</span
+                        >
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          {{ order.createdAt | date: "short" }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a
+              class="btn btn-info btn-block"
+              [routerLink]="['../notifies/customer',pendingApproval]"
+              style=" text-decoration: none"
+            >
+              Daha Fazla
+            </a>
+          </div>
+        </div>
+      </li>
+      <li
+        [hidden]="operationHide"
+        style="height: 30px; border: 1px solid gray; margin-right: 10px"
+      ></li>
+
+      <li class="nav-item" [hidden]="warehouseHide">
+        <div class="btn-group">
+          <div
+            class="notify notification"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span> <i class="fa fa-times" aria-hidden="true"></i></span>
+            <span
+              *ngIf="warehouseCustomerOrderCanceledNotifyCount != 0"
+              class="badge"
+              >{{ warehouseCustomerOrderCanceledNotifyCount }}</span
+            >
+          </div>
+
+          <div
+            class="dropdown-menu"
+            style="
+              width: 300px;
+              max-height: 400px;
+              left: 0;
+              margin-left: -200px;
+              padding-top: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <div style="max-height: 350px; overflow-y: scroll">
+              <div
+                class="col-sm-12"
+                *ngFor="let order of warehouseCustomerOrderCanceledNotifies"
+                [style.background-color]="
+                  order.isChecked === true ? '#ffffff' : '#eeeeee'
+                "
+                style="
+                  border: 1px solid #eee;
+                  margin-top: 2px;
+                  padding-top: 5px;
+                  padding-bottom: 2px;
+                "
+              >
+                <a
+                  [routerLink]="['/warehouseRetail/', order.orderId]"
+                  style="color: black; text-decoration: none"
+                >
+                  <div class="row" style="padding-left: 5px">
+                    <div class="col-sm-7">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.customer }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.country }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          {{ order.createdAt | date: "short" }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a
+              class="btn btn-light btn-block"
+              href="{{ canceledWanted }}"
+              style=" text-decoration: none"
+            >
+             Daha Fazla
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item" [hidden]="warehouseHide">
+        <div class="btn-group">
+          <div
+            class="notify notification"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span>
+              <i class="fa fa-check-square-o" aria-hidden="true"></i
+            ></span>
+            <span
+              *ngIf="warehouseApprovedOrderRetailerCount != 0"
+              class="badge"
+              >{{ warehouseApprovedOrderRetailerCount }}</span
+            >
+          </div>
+          <div
+            class="dropdown-menu"
+            style="
+              width: 300px;
+              max-height: 400px;
+              left: 0;
+              margin-left: -200px;
+              padding-top: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <div style="max-height: 350px; overflow-y: scroll">
+              <div
+                class="col-sm-12"
+                *ngFor="let order of warehouseApprovedOrderRetailers"
+                [style.background-color]="
+                  order.isChecked === true ? '#ffffff' : '#eeeeee'
+                "
+                style="
+                  border: 1px solid #eee;
+                  margin-top: 2px;
+                  padding-top: 5px;
+                  padding-bottom: 2px;
+                "
+              >
+                <a
+                  [routerLink]="['/warehouseRetail/', order.orderId]"
+                  style="color: black; text-decoration: none"
+                >
+                  <div class="row" style="padding-left: 5px">
+                    <div class="col-sm-7">
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.customer }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <span style="font-size: 12px">
+                          {{ order.country }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row">
+                        <span style="font-size: 10px; font-weight: bold">
+                          {{ order.createdAt | date: "short" }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a
+              class="btn btn-light btn-block"
+              href="{{ orderApproved }}"
+              style=" text-decoration: none"
+            >
+            Daha Fazla
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li
+        [hidden]="operationHide"
+        style="height: 30px; border: 1px solid gray; margin-right: 10px"
+      ></li>
+
+      <li class="nav-item">
+        <a (click)="Logout()"> {{ userName }} Logout</a>
+        <!-- <a href="javascript:void(0)" class="nav-link mt-1"
+                    style="padding: 0.375rem 1rem !important; border-color: #999;"
+                    (click)="rltAndLtr()"
+                >
+                    RTL/LTR
+                </a> -->
+      </li>
+      &nbsp;
+      <!-- <li class="nav-item dropdown" ngbDropdown>
+                <a class="nav-link" href="javascript:void(0)" ngbDropdownToggle>
+                    <i class="fa fa-envelope"></i> <b class="caret"></b><span class="sr-only">(current)</span>
+                </a>
+                <ul class="dropdown-menu-right messages" ngbDropdownMenu>
+                    <li class="media">
+                        <img class="d-flex align-self-center mr-3"
+                            src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg" alt="Generic placeholder image"
+                        >
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1">John Smith</h5>
+                            <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                            <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <img class="d-flex align-self-center mr-3"
+                            src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg"
+                            alt="Generic placeholder image"
+                        >
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1">John Smith</h5>
+                            <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                            <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <img class="d-flex align-self-center mr-3"
+                            src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg"
+                            alt="Generic placeholder image"
+                        />
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1">John Smith</h5>
+                            <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                            <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown" ngbDropdown>
+                <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                    <i class="fa fa-bell"></i> <b class="caret"></b><span class="sr-only">(current)</span>
+                </a>
+                <div class="dropdown-menu-right" ngbDropdownMenu>
+                    <a href="javascript:void(0)" class="dropdown-item">
+                        {{ 'Pending Task' | translate }} <span class="badge badge-info">6</span>
+                    </a>
+                    <a href="javascript:void(0)" class="dropdown-item">
+                        {{ 'In queue' | translate }} <span class="badge badge-info"> 13</span>
+                    </a>
+                    <a href="javascript:void(0)" class="dropdown-item">
+                        {{ 'Mail' | translate }} <span class="badge badge-info"> 45</span>
+                    </a>
+                    <li class="dropdown-divider"></li>
+                    <a href="javascript:void(0)" class="dropdown-item">
+                        {{ 'View All' | translate }}
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" ngbDropdown>
+               <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                    <i class="fa fa-language"></i> {{ 'Language' | translate }} <b class="caret"></b>
+                </a> 
+                <div class="dropdown-menu-right" ngbDropdownMenu>
+                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en')">
+                        {{ 'English' | translate }}
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fr')">
+                        {{ 'French' | translate }}
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('ur')">
+                        {{ 'Urdu' | translate }}
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('es')">
+                        {{ 'Spanish' | translate }}
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('it')">
+                        {{ 'Italian' | translate }}
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fa')">
+                        {{ 'Farsi' | translate }}
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('de')">
+                        {{ 'German' | translate }}
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('zh-CHS')">
+                        {{ 'Simplified Chinese' | translate }}
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" ngbDropdown>
+                <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                    <i class="fa fa-user"></i> John Smith <b class="caret"></b>
+                </a>
+                <div class="dropdown-menu-right" ngbDropdownMenu>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-fw fa-user"></i> {{ 'Profile' | translate }}
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-fw fa-envelope"></i> {{ 'Inbox' | translate }}
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}
+                    </a>
+                    <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
+                        <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
+                    </a>
+                </div>
+            </li> -->
+    </ul>
+  </div>
+</nav>

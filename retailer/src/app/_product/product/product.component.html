@@ -1,0 +1,370 @@
+<br />
+<br />
+
+<div class="container">
+  <div class="row">
+    <br />
+    <div class="col-md-4">
+      <div class="row">
+        <img src="{{ nodejsApi }}/{{ productImage }}" class="img-fluid" />
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <i
+            class="fa fa-search-plus pull-right"
+            data-toggle="modal"
+            data-target=".bd-example-modal-lg"
+            style="font-size: 18px"
+          ></i>
+        </div>
+      </div>
+      <div class="row">
+        <div
+          class="col-md-4"
+          *ngFor="let image of product.image; let i = index"
+          style="padding: 5px"
+        >
+          <div style="border: 1px solid #eee">
+            <img
+              src="{{ nodejsApi }}/{{ image }}"
+              (click)="showImage(i)"
+              class="card-img-top"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade bd-example-modal-lg"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myLargeModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header" style="border: none">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img
+                src="{{ nodejsApi }}/{{ productImage }}"
+                class="center"
+                style="width: 80%"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <h4 style="color: black; font-weight: bold">{{ product.title }}</h4>
+      <div class="row col-md-12">
+        <div
+          [socialShare]="'fb'"
+          style="
+            background-color: #3b5998;
+            padding: 1px;
+            margin-right: 10px;
+            padding-left: 4px;
+            padding-right: 6px;
+            color: white;
+          "
+        >
+          <i class="fa fa-facebook-square" style="color: white"></i> Paylaş
+        </div>
+        <div
+          [socialShare]="'tw'"
+          style="
+            background-color: #00acee;
+            padding: 1px;
+            margin-right: 10px;
+            padding-left: 4px;
+            padding-right: 6px;
+            color: white;
+          "
+        >
+          <i class="fa fa-twitter-square" style="color: white"></i> Paylaş
+        </div>
+
+        <div
+          [socialShare]="'pn'"
+          style="
+            background-color: #c8232c;
+            padding: 1px;
+            margin-right: 10px;
+            padding-left: 4px;
+            padding-right: 6px;
+            color: white;
+          "
+        >
+          <i class="fa fa-pinterest-square" style="color: white"></i> Paylaş
+        </div>
+      </div>
+
+      <br />
+
+      <div [innerHtml]="product.turkishDescription"></div>
+
+      <br />
+    </div>
+
+    <div class="col-md-3">
+      <br />
+      <div class="card">
+        <div class="card-body">
+          <div class="col-md-12" style="margin-bottom: 10px; margin-top: -20px">
+            <div class="row">
+              <div
+                class="col-md-4"
+                style="margin: 0; padding: 0; min-height: 42px"
+              >
+                <div
+                  *ngIf="product.freeCargo"
+                  style="
+                    background-color: #ddd;
+                    text-align-last: center;
+                    padding: 10px;
+                  "
+                >
+                  <i
+                    class="fa fa-truck"
+                    style="font-size: 20px; color: #444"
+                  ></i>
+                </div>
+              </div>
+              <div class="col-md-4"></div>
+              <div class="col-md-4" style="margin: 0; padding: 0">
+                <div
+                  *ngIf="
+                    product.listPrice != product.salePrice &&
+                    product.listPrice != 0
+                  "
+                  style="
+                    background-color: #c8232c;
+                    color: white;
+                    text-align-last: center;
+                    padding: 10px;
+                  "
+                >
+                  % {{ product.discount }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12" style="text-align: center; font-size:16px; font-weight:bold;">
+            <label style="text-align: center">
+              {{ product.productId.volume }}
+              <span *ngIf="product.productId.volumeEntity != 'Not'">
+                {{ product.productId.volumeEntity }}</span
+              >
+            </label>
+          </div>
+
+          <div
+            class="col-md-12"
+            style="
+              text-align: center;
+              background-color: #eee;
+              padding-top: 10px;
+              padding-bottom: 10px;
+              margin-bottom: 10px;
+              font-size: 20px;
+            "
+          >
+            <label> {{ product.salePrice }}</label>
+            <label> {{ product.currency }}</label>
+
+            <label
+              *ngIf="
+                product.listPrice != product.salePrice && product.listPrice != 0
+              "
+              style="margin-left: 10px; text-decoration: line-through"
+            >
+              {{ product.listPrice }}</label
+            >
+            <label
+              style="text-decoration: line-through"
+              *ngIf="
+                product.listPrice != product.salePrice && product.listPrice != 0
+              "
+            >
+              {{ product.currency }}</label
+            >
+          </div>
+
+          <!-- <div class="col-md-12"
+                        *ngIf="product.color!='undefined' && product.color!=''  && product.color!=undefined"
+                        style="margin-top:5px; text-align:center;background-color:#eee;  padding:0;  font-size:22px;">
+
+                        <select class="custom-select" [(ngModel)]="selectedColor" (ngModelChange)="selectColor($event)"
+                            [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let color of colors" [value]="color">
+                                {{color}}
+                            </option>
+                        </select>
+
+                    </div> -->
+
+          <!-- <div class="col-md-12"
+                        *ngIf="product.size!='undefined' && product.size!='' && product.size != undefined"
+                        style="margin-top:5px;text-align:center;background-color:#eee; padding:0;  font-size:22px;">
+                        <select class="custom-select" [(ngModel)]="selectedSize" (ngModelChange)="selectSize($event)">
+                            <option *ngFor="let size of sizes" [ngValue]="size">
+                                {{size.size}}
+                            </option>
+                        </select>
+
+                    </div> -->
+
+          <div class="row" style="padding: 0; margin: 0; margin-top: 5px">
+            <button
+              class="fa fa-minus col-md-4 btn btn-secondary"
+              style="border-radius: 0"
+              (click)="down(product)"
+            ></button>
+
+            <input
+              type="text"
+              placeholder="0"
+              name="orderQuantity"
+              #orderQuantity="ngModel"
+              [(ngModel)]="product.orderQuantity"
+              style="border-radius: 0; font-size: 20px"
+              class="form-control col-md-4"
+            />
+
+            <button
+              class="fa fa-plus col-md-4 btn btn-secondary"
+              style="border-radius: 0"
+              (click)="up(product)"
+            ></button>
+          </div>
+
+          <!-- <div class="row" style="padding:0; margin:0;">
+                        <span style="font-size:18px;" >Toplam : {{product.unitPrice}} {{product.currency}}</span>
+
+                    </div> -->
+
+          <div
+            class="row"
+            style="padding: 0; margin: 0; margin-top: 10px; border-radius: 0"
+          >
+            <button
+              class="btn btn-warning btn-lg btn-block"
+              (click)="
+                addToCart(
+                  product.productId._id,
+                  product.orderQuantity,
+                  product.salePrice,
+                  product.currency,
+                  product.productId.volume,
+                  product.productId.volumeEntity
+                )
+              "
+              type="button"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-8">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link active"
+            id="comment-tab"
+            data-toggle="tab"
+            href="#comment"
+            role="tab"
+            aria-controls="comment"
+            aria-selected="false"
+            >Yorumlar</a
+          >
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link"
+            id="payment-tab"
+            data-toggle="tab"
+            href="#payment"
+            role="tab"
+            aria-controls="payment"
+            aria-selected="false"
+            >Ödeme Yöntemleri</a
+          >
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="comment"
+          role="tabpanel"
+          aria-labelledby="comment-tab"
+        >
+          ...
+
+          <br />
+
+          <form
+            class="col s12 white"
+            #commentForm="ngForm"
+            (ngSubmit)="OnSubmitComment(commentForm)"
+          >
+            <div class="card-body">
+              <br />
+
+              <div class="form-group row text-right">
+                <label class="col-sm-2 col-form-label">Yorum :</label>
+                <div class="col-sm-8">
+                  <textarea
+                    type="text"
+                    name="city"
+                    #city="ngModel"
+                    [(ngModel)]="comment.comment"
+                    class="form-control"
+                  ></textarea>
+                </div>
+                <div class="col-sm-2">
+                  <button
+                    type="button"
+                    class="btn btn-warning pull-right"
+                    type="submit"
+                  >
+                    Gönder
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group row" *ngFor="let comment of comments">
+                {{ comment.comment }}
+              </div>
+            </div>
+          </form>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="payment"
+          role="tabpanel"
+          aria-labelledby="payment-tab"
+        >
+          <h5>Ödeme yöntemleri</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

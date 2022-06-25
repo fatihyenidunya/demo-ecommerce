@@ -1,0 +1,56 @@
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+        <div class="col-sm-9">
+            <h4 class="card-title"> Bildirim Email Listesi</h4>  
+        
+        </div>
+        <div class="col-sm-3">
+            <h4 class="card-text pull-right">
+  
+              <a class="btn btn-dark" [routerLink]="['./',0,'edit']"> Yeni </a>
+            </h4>
+        </div>
+    </div>
+   
+  </div>
+
+
+<br>
+
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+       
+        <th scope="col-3">Kimin</th>     
+        <th scope="col-3">Email</th> 
+        <th scope="col-2">Ne İçin</th>       
+        <th scope="col-2"></th>  
+    
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let email of emails">    
+    
+
+      
+      <td>{{ email.whose}}</td>
+      <td>{{ email.email}}</td>
+      <td>{{ email.whatFor}}</td>
+
+      <td> 
+      <a class="btn btn-primary" [routerLink]="['./',email._id ,'edit']"> Detay  </a>
+
+      </td>
+    
+     
+    </tr>
+    </tbody>
+  </table>
+
+
+
+

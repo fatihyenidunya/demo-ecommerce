@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-9">
+        <h4 class="card-title">E-Bulten Listesi</h4>
+      </div>
+      <div class="col-sm-3">
+        <h4 class="card-text pull-right">
+          <a class="btn btn-dark" [routerLink]="['./', 0, 'edit']"> Yeni </a>
+        </h4>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+
+
+  <div class="card-body">
+    <div class="row" style="
+        padding: 0;
+        margin: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #eee;
+        font-weight:bold;
+      ">
+      <div class="col-md-3">#</div>
+      <div class="col-md-6">Başlık</div>
+      <div class="col-md-3"></div>
+    </div>
+    <div class="row" style="padding: 0; margin: 0; padding-top: 5px; padding-bottom: 5px"
+      *ngFor="let newsletter of newsletters">
+      <div class="col-md-3">
+        <img src="{{ nodejsApi }}/{{ newsletter.imageUrl }}" class="card-img-top" style="width: 240px" height="80" />
+      </div>
+      <div class="col-md-6">
+        {{ newsletter.title }}
+      </div>
+      <div class="col-md-3">
+        <div class="row" style="padding: 0; margin: 0">
+          <div class="col-md-4">
+            <a class="btn btn-primary" [routerLink]="['./', newsletter._id, 'edit']">
+              Detay
+            </a>
+          </div>
+          <div class="col-md-8">
+            <button class="btn btn-primary" (click)="onSendNewsletter(newsletter._id, newsletter.title )">
+              E-Bülteni Gönder
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

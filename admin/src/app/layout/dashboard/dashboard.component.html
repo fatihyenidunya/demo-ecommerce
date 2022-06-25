@@ -1,0 +1,230 @@
+<div [@routerTransition]>
+  <h2 class="text-muted">Dashboard</h2>
+  <!-- <div class="row">
+        <div class="col-md-12">
+            <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let slider of sliders">
+                    <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%">
+                    <div class="carousel-caption">
+                        <h3>{{slider.label}}</h3>
+                        <p>{{slider.text}}</p>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div> -->
+  <hr />
+
+  <div class="row" [hidden]="hide">
+    <div class="col-xl-3 col-lg-6">
+      <app-stat
+        [bgClass]="'primary'"
+        [icon]="'fa-clock-o'"
+        [count]="pending"
+        [label]="'Pending !'"
+        [status]="'Pending Approval'"
+        [forWhat]="'orders'"
+      ></app-stat>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <app-stat
+        [bgClass]="'warning'"
+        [icon]="'fa-tasks'"
+        [count]="gettingReady"
+        [label]="'Getting Ready !'"
+        [status]="'Getting Ready'"
+        [forWhat]="'orders'"
+      >
+      </app-stat>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <app-stat
+        [bgClass]="'success'"
+        [icon]="'fa-truck'"
+        [count]="shipped"
+        [label]="'Shipped!'"
+        [status]="'Shipment Successed'"
+        [forWhat]="'orders'"
+      ></app-stat>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <app-stat
+        [bgClass]="'danger'"
+        [icon]="'fa-times'"
+        [count]="cancel"
+        [label]="'Cancels'"
+        [status]="'Canceled Okay'"
+        [forWhat]="'orders'"
+      ></app-stat>
+    </div>
+  </div>
+  <hr [hidden]="hide" />
+
+  <div>
+    <p [hidden]="stockInfo">Stok Bilgisi Getiriliyor...</p>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-2">
+      <button type="button" class="btn btn-light" (click)="getProductStock()">
+        Bitmiş Ürün
+      </button>
+    </div>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-light" (click)="getSemiProductStock()">
+          Yarı Mamül
+        </button>
+      </div>
+
+      <div class="col-md-2">
+        <button type="button" class="btn btn-light" (click)="getRawMaterialStock()">
+         Hammadde
+        </button>
+      </div>
+  </div>
+  <br />
+
+  <div class="row" [hidden]="productStockPageHide">
+    <div class="col-md-2" *ngFor="let product of products">
+      <div
+        class="card"
+        style="margin-bottom: 10px; border: 2px solid #fff"
+        [style.border-color]="
+          product.virtualStock <= product.unit ? '#cc0000' : 'silver'
+        "
+      >
+        <div class="card-header" style="text-align: center">
+          {{ product.volume }}
+          <span *ngIf="product.volumeEntity !== 'Not'">
+            {{ product.volumeEntity }}
+          </span>
+        </div>
+
+        <div class="card-body">
+          <a
+            [routerLink]="['../product', product.productId, 'edit']"
+            style="font-size: 10px"
+          >
+            <img
+              src="{{ imageApi }}/{{ product.imageUrl }}"
+              class="image-size"
+            />
+          </a>
+        </div>
+
+        <div class="card-footer">
+          <button
+            type="button"
+            class="btn btn-block"
+            style="background-color: transparent; font-size: 12px"
+            (click)="
+              updateStock(
+                product.productId,
+                product.title,
+                product.imageUrl,
+                product.stock,
+                product.virtualStock,
+                product.quantityInBox
+              )
+            "
+          >
+            Stock :
+            {{ math.round(product.virtualStock / product.quantityInBox) }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" [hidden]="semiProductStockPageHide">
+     
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+       
+        <th scope="col-5">Semi Product</th>     
+        <th scope="col-3">Stock</th>   
+        <th scope="col-2"></th>  
+        <th scope="col-2"></th>  
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let semiProduct of semiProducts">    
+    
+        
+      <td>{{ semiProduct.name}}</td>
+    
+      <td>{{ semiProduct.stock}} {{ semiProduct.stockEntity}} </td>
+      <td> 
+      <a class="btn btn-info" [routerLink]="['../semiproduct',semiProduct._id ,'edit']"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </a>
+
+      </td>
+      <td>
+      
+      </td>
+     
+    </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="row" [hidden]="rawMaterialStockPageHide">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col-md-5">Raw Material</th>
+            <th scope="col-md-3">Stock</th>
+            <th scope="col-md-2"></th>
+            <th scope="col-md-2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rawMaterial of rawMaterials">
+            <td>{{ rawMaterial.name }}</td>
+            <td>{{ rawMaterial.stock }} {{ rawMaterial.stockEntity }}</td>
+    
+            <td>
+              <a
+                class="btn btn-info"
+                [routerLink]="['../rawmaterial', rawMaterial._id, 'edit']"
+              >
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </a>
+            </td>
+            <td>
+            
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card card-default">
+        <div class="card-header">
+          <!-- <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline -->
+        </div>
+        <!-- /.card-header -->
+        <!-- <app-timeline></app-timeline> -->
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col-lg-8 -->
+    <div class="col-lg-4">
+      <div class="card card-default mb-3">
+        <div class="card-header">
+          <!-- <i class="fa fa-bell fa-fw"></i> Notifications card -->
+        </div>
+        <!-- /.card-header -->
+        <!-- <app-notification></app-notification> -->
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+      <!-- <app-chat></app-chat> -->
+      <!-- /.card .chat-card -->
+    </div>
+    <!-- /.col-lg-4 -->
+  </div>
+</div>

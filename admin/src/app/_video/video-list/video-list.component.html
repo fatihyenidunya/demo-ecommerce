@@ -1,0 +1,55 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-9">
+        <h4 class="card-title"> Videolar</h4>
+
+      </div>
+      <div class="col-sm-3">
+        <h4 class="card-text pull-right">
+
+          <a class="btn btn-dark" [routerLink]="['./',0,'edit']"> Yeni </a>
+        </h4>
+      </div>
+    </div>
+
+  </div>
+
+
+  <br>
+
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+
+        <th scope="col-5">#</th>
+        <th scope="col-3">Başlık</th>
+        <th scope="col-1">Sırası</th>
+        <th scope="col-1">Anasayfada mı?</th>
+        <th scope="col-1">Yayında mı?</th>
+        <th scope="col-1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let video of videos">
+      <td>
+        <iframe [src]="video.videoUrl" width="240" height="160"
+        frameborder="0" allowfullscreen></iframe> </td>
+
+        <td>{{ video.title}}</td>
+        <td>{{ video.order}}</td>
+        <td>{{ video.mainPage}}</td>
+        <td>{{ video.publish}}</td>
+
+
+        <td>
+          <a class="btn btn-primary" [routerLink]="['./',video._id ,'edit']">  Detay</a>
+
+        </td>
+
+
+      </tr>
+    </tbody>
+  </table>

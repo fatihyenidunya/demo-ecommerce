@@ -1,0 +1,132 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-9">
+        <h4 class="card-title">Ödemeler</h4>
+      </div>
+      <div class="col-sm-3">
+        <h4 class="card-text pull-right"></h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+
+        <div class="row">
+          <div class="fa fa-search" aria-hidden="true" style="margin-right:-3px;
+          padding:8px;border:1px solid lightgray;background-color: white;"></div>
+          <div>
+            <input type="text" placeholder="Alıcı Adı" [(ngModel)]="nameforsearch" (ngModelChange)="onChange($event)"
+              class="form-control" style="border-left:none; margin-left:0; border-radius: 0;
+            padding-left:2px;">
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-3">
+
+        <div class="row">
+          <div class="fa fa-search" aria-hidden="true" style="margin-right:-3px;
+          padding:8px;border:1px solid lightgray;background-color: white;"></div>
+          <div>
+            <input type="text" placeholder="Alıcı Soyadı" [(ngModel)]="lastNameforsearch"
+              (ngModelChange)="onLastNameChange($event)" class="form-control" style="border-left:none; margin-left:0; border-radius: 0;
+            padding-left:2px;">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dps" [(ngModel)]="startDate" ngbDatepicker
+                #d="ngbDatepicker" (ngModelChange)="selectStartDate($event)">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-3">
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDate" ngbDatepicker
+                #d1="ngbDatepicker" (ngModelChange)="selectEndDate($event)">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d1.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col-1">Kodu</th>
+        <th scope="col-2">Durumu</th>
+        <th scope="col-1">Ülke</th>
+        <th scope="col-2">Ödenen</th>
+        <th scope="col-3">Alıcı</th>
+        <th scope="col-2">Tarihi</th>
+        <th scope="col-1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payment of payments">
+        <td scope="col-1">
+          {{payment.referanceCode}}
+        </td>
+        <td scope="col-2">
+
+          <p class="stock-size" [style.color]="payment.sale.status =='Paid' ? '#007F00' : '#e13030'
+          ">
+            {{ payment.sale.status }}
+
+          </p>
+
+
+        </td>
+        <td scope="col-2">
+
+
+          {{ payment.sale.locale }}
+        </td>
+        <td scope="col-2">
+          {{ payment.sale.paidPrice }} {{ payment.sale.currency }}
+        </td>
+        <td scope="col-3">
+          {{ payment.buyer.name }} {{ payment.buyer.surname }}
+        </td>
+        <td scope="col-2">{{payment.createdAt | date :'short'}}</td>
+        <td scope="col-1">
+
+          <a class="btn btn-primary" [routerLink]="['./', payment._id]"> Detay </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br />
+
+  <div class="row">
+    <div class="col-md-8">
+      <ngb-pagination class="d-flex justify-content-left" style="margin-left: 15px" size="sm"
+        [(collectionSize)]="totalPayment" (pageChange)="nowPage($event)" [(page)]="pageNumber" [(pageSize)]="pageSize"
+        [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right" style="margin-right: 15px">
+        <b>Bulundu :</b> {{ totalPayment }}
+      </div>
+    </div>
+  </div>
+</div>

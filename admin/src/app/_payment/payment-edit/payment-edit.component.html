@@ -1,0 +1,370 @@
+<div
+  class="row"
+  style="
+    margin: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding-left: 10px;
+    padding-top: 8px;
+    padding-bottom: 10px;
+  "
+>
+  <div class="col-md-3">
+    <div class="row">
+      <span class="mini-header"> Durum : </span>
+      <span
+        class="text"
+        style="padding-left: 5px"
+        [style.color]="payment.sale.status == 'Paid' ? '#007F00' : '#e13030'"
+        >{{ payment.sale.status }}
+      </span>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="row">
+      <span class="mini-header"> Müşteri : </span>
+      <span style="padding-left: 5px" class="text">
+        {{ payment.buyer.name }} {{ payment.buyer.surname }}
+      </span>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="row" style="font-weight: bold">
+      <span class="mini-header"> Ödeme : </span>
+      <span style="padding-left: 5px" class="text"
+        >{{ payment.sale.paidPrice }} {{ payment.sale.currency }}
+      </span>
+    </div>
+  </div>
+  <div class="col-md-3 pull-right">
+    <span class="mini-header"> Ödeme Tarihi : </span>
+    <span style="padding-left: 5px" class="text"
+      >{{ payment.createdAt | date: "short" }}
+    </span>
+  </div>
+</div>
+
+<div
+  class="row"
+  style="
+    margin: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding-left: 10px;
+    padding-top: 8px;
+    padding-bottom: 10px;
+  "
+>
+  <div class="col-md-6">
+    <div class="row">
+      <label class="col-sm-3 mini-header">Email :</label>
+      <div class="col-sm-9 text">{{ payment.buyer.email }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-3 mini-header">Telefon :</label>
+      <div class="col-sm-9 text">{{ payment.buyer.gsmNumber }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-3 mini-header">Şehir :</label>
+      <div class="col-sm-9 text">{{ payment.buyer.city }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-3 mini-header">Ülke :</label>
+      <div class="col-sm-9 text">{{ payment.buyer.country }}</div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="row">
+      <label class="col-sm-4 mini-header">IP :</label>
+      <div class="col-sm-8 text">{{ payment.buyer.ip }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Last Login :</label>
+      <div class="col-sm-6 text">{{ payment.buyer.lastLoginDate }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Kayıt Tarihi :</label>
+      <div class="col-sm-6 text">{{ payment.buyer.registrationDate }}</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="row"
+  style="
+    margin: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding-left: 10px;
+    padding-top: 8px;
+    padding-bottom: 10px;
+  "
+>
+  <div class="col-md-6">
+    <div
+      class="row"
+      style="
+        text-align: center;
+        margin-bottom: 10px;
+        padding-left: 15px;
+        font-weight: bold;
+      "
+    >
+      Teslimat Adresi
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Müşteri Adı Soyadı :</label>
+      <div class="col-sm-8 text">{{ payment.shippingAddress.contactName }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Ülke :</label>
+      <div class="col-sm-8 text">{{ payment.shippingAddress.country }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Şehir :</label>
+      <div class="col-sm-8 text">{{ payment.shippingAddress.city }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Posta Kodu :</label>
+      <div class="col-sm-8 text">{{ payment.shippingAddress.zipCode }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Adres :</label>
+      <div class="col-sm-8 text">{{ payment.shippingAddress.address }}</div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div
+      class="row"
+      style="
+        text-align: center;
+        margin-bottom: 10px;
+        padding-left: 15px;
+        font-weight: bold;
+      "
+    >
+      Fatura Adresi
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Müşteri Adı Soyadı :</label>
+      <div class="col-sm-8 text">{{ payment.billingAddress.contactName }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Ülke :</label>
+      <div class="col-sm-8 text">{{ payment.billingAddress.country }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Şehir :</label>
+      <div class="col-sm-8 text">{{ payment.billingAddress.city }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Posta Kodu :</label>
+      <div class="col-sm-8 text">{{ payment.billingAddress.zipCode }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Adres :</label>
+      <div class="col-sm-8 text">{{ payment.billingAddress.address }}</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="row"
+  style="
+    margin: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding-left: 10px;
+    padding-top: 8px;
+    padding-bottom: 10px;
+  "
+>
+  <div class="col-md-6">
+    <div
+      class="row"
+      style="
+        text-align: center;
+        margin-bottom: 10px;
+        padding-left: 15px;
+        font-weight: bold;
+      "
+    >
+      Satış Bilgileri
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Auth Code :</label>
+      <div class="col-sm-8 text">{{ payment.sale.authCode }}</div>
+    </div>
+
+    <div class="row">
+      <label class="col-sm-4 mini-header">BasketId :</label>
+      <div class="col-sm-8 text">{{ payment.sale.basketId }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Payment Id :</label>
+      <div class="col-sm-8 text">{{ payment.sale.paymentId }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Fraud Status :</label>
+      <div class="col-sm-8 text">{{ payment.sale.fraudStatus }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">ConversationId :</label>
+      <div class="col-sm-8 text">{{ payment.sale.conversationId }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Comm Fee :</label>
+      <div class="col-sm-8 text">{{ payment.sale.iyziCommissionFee }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-4 mini-header">Comm Rate A :</label>
+      <div class="col-sm-8 text">
+        {{ payment.sale.iyziCommissionRateAmount }}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div
+      class="row"
+      style="
+        text-align: center;
+        margin-bottom: 10px;
+        padding-left: 15px;
+        font-weight: bold;
+      "
+    >
+      Card Informations
+    </div>
+    <div class="row">
+      <label class="col-sm-5 mini-header">Association :</label>
+      <div class="col-sm-7 text">{{ payment.sale.cardAssociation }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-5 mini-header">Card Family :</label>
+      <div class="col-sm-7 text">{{ payment.sale.cardFamily }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-5 mini-header">Card Type :</label>
+      <div class="col-sm-7 text">{{ payment.sale.cardType }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-5 mini-header">First Six Number :</label>
+      <div class="col-sm-7 text">{{ payment.sale.binNumber }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-5 mini-header">Last Four Number :</label>
+      <div class="col-sm-7 text">{{ payment.sale.lastFourDigits }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-5 mini-header">Installments :</label>
+      <div class="col-sm-7 text">{{ payment.sale.installment }}</div>
+    </div>
+    <div class="row">
+      <label class="col-sm-5 mini-header">Ödenen Miktar :</label>
+      <div class="col-sm-7 text">
+        {{ payment.sale.paidPrice }} {{ payment.sale.currency }}
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="row"
+  style="
+    margin: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding-left: 10px;
+    padding-top: 8px;
+    padding-bottom: 10px;
+  "
+>
+  <div class="col-md-3">
+    <div class="row">
+      <button
+        type="button"
+        form="shipmentDetailForm"
+        (click)="cancel()"
+        class="btn btn-danger pull-left"
+      >
+        İptal Et
+      </button>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="row">
+      {{ errorMessage }}
+    </div>
+  </div>
+  <div class="col-md-1">
+    <div class="row"></div>
+  </div>
+  <div class="col-md-3 pull-right"></div>
+</div>
+<div
+  class="row"
+  style="
+    margin: 10px;
+    margin-bottom: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding-left: 10px;
+    padding-top: 8px;
+    padding-bottom: 10px;
+  "
+>
+  <div class="col-md-6" style="font-weight: bold">Ürün</div>
+
+  <div class="col-md-2" style="font-weight: bold">Birim Fiyat</div>
+  <div class="col-md-1" style="font-weight: bold">Adet</div>
+  <div class="col-md-2" style="font-weight: bold">Toplam Fiyat</div>
+  <div class="col-md-1" style="font-weight: bold"></div>
+</div>
+
+<div
+  class="row"
+  style="
+    margin: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding-left: 10px;
+    padding-top: 8px;
+    padding-bottom: 10px;
+  "
+  *ngFor="let item of basketItems"
+>
+  <div class="col-md-6">
+    <a [routerLink]="['../../product', item.id, 'edit']">
+      {{ item.name }} -
+
+      <span *ngIf="item.volumeEntity != 'Not'">
+        {{ item.volume }}
+        {{ item.volumeEntity }}
+      </span>
+      <span *ngIf="item.volumeEntity == 'Not'">
+        {{ item.volume }}
+      </span>
+    </a>
+  </div>
+
+  <div class="col-md-2">{{ item.unitPrice }}</div>
+  <div class="col-md-1">{{ item.unit }}</div>
+  <div class="col-md-2">{{ item.price }}{{ payment.sale.currency }}</div>
+  <div class="col-md-1">
+    <button
+      type="button"
+      form="shipmentDetailForm"
+      [disabled]="item.status === 'Refunded' ? true : false"
+      (click)="
+      confirmToRefund(item.price, item.paymentTransactionId, payment.orderId, item.id,item.name,item.volume,item.volumeEntity,payment.buyer.name,payment.buyer.surname,payment.sale.currency)
+      "
+      class="btn btn-danger"
+    >
+      İade
+    </button>
+  </div>
+</div>
+<br />
+<br />

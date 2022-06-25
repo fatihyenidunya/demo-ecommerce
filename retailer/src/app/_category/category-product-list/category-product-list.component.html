@@ -1,0 +1,254 @@
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" *ngFor="let category of categories">
+      <div
+        class="col-sm-12"
+        style="font-weight: bold; padding: 3px; margin-bottom: 10px"
+      >
+        <h2 style="font-weight: bold">{{ category.name }}</h2>
+      </div>
+
+      <div class="row" style="padding: 0; margin: 0; padding-bottom: 20px">
+        <div
+          class="col-md-3"
+          style="
+            min-height: 300px;
+            margin: 0;
+            padding: 5px;
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+          "
+          *ngFor="let pro of category.products"
+        >
+          <div
+            style="
+              border: 1px solid #ddd;
+
+              padding: 5px;
+              color: black;
+              text-align: center;
+              background-color: white;
+            "
+          >
+            <div class="row" style="min-height: 40px; padding: 0; margin: 0">
+              <div class="col-3 col-md-3" style="padding-left: 0">
+                <div
+                  *ngIf="pro.freeCargo"
+                  class="fa fa-truck"
+                  style="
+                    margin-left: 0;
+                    background-color: #ddd;
+                    color: #444;
+                    text-align: center;
+                    padding: 10px;
+                  "
+                ></div>
+              </div>
+              <div class="col-6 col-md-5"></div>
+
+              <div class="col-3 col-md-4" style="margin: 0; padding: 0">
+                <div
+                  *ngIf="pro.listPrice != pro.salePrice && pro.listPrice != 0 && pro.discount !=0"
+                  style="
+                    background-color: #ffa500;
+                    border: 1px solid #ffa500;
+                    color: #333;
+                    text-align: center;
+                  "
+                >
+                  <div style="padding-top: 5px; padding-bottom: 5px">
+                    <span class="fa fa-arrow-down"></span> % {{ pro.discount }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-4" *ngIf="pro.sizes.length==0" style="margin:0; padding:0;">
+
+                                    <div *ngIf="pro.listPrice != pro.salePrice && pro.listPrice !=0"
+                                        style="background-color: #c8232c; color:white; text-align: center;">
+
+                                        <div style="padding-top:5px; padding-bottom:5px;"> % {{pro.discount}}
+                                        </div>
+
+                                    </div>
+                                </div> -->
+              <!-- 
+                                <div class="col-md-4" *ngIf="pro.sizes.length !==0 && pro.size[0].listPrice !=0"
+                                    style="margin:0; padding:0;">
+                                    <div *ngIf="pro.sizes[0].listPrice != pro.sizes[0].salePrice"
+                                        style="background-color: #c8232c; color:white; text-align: center;">
+
+                                        <div style="padding-top:5px; padding-bottom:5px;"> % {{pro.discount}}
+                                        </div>
+
+                                    </div>
+
+
+                                </div> -->
+            </div>
+            <div class="row">
+              <a
+                [routerLink]="[
+                  '../../product',
+                  pro.productId.turkishTitleLower + '&' + pro.productId._id
+                ]"
+              >
+                <div class="col-md-12">
+                  <img
+                    src="{{ nodejsApi }}/{{ pro.productId.image[0] }}"
+                    class="img-fluid"
+                  />
+                </div>
+              </a>
+            </div>
+            <div class="row" style="min-height: 60px">
+         
+            
+                <div class="col-md-12">
+                  <div style="color: black; margin-top: 5px; text-align: center; ">     
+                     <a [routerLink]="['../../product',pro.productId.turkishTitleLower + '&' + pro.productId._id]" style="color: black;">{{ pro.title }}</a>
+                  
+                  
+                  </div>
+                </div>
+           
+            </div>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-8" style="font-weight: bold; font-size:14px;">
+                <span
+                  
+                  *ngIf="pro.productId.volumeEntity != 'Not'"
+                >
+                  {{ pro.productId.volume }}
+                  {{ pro.productId.volumeEntity }}
+                </span>
+                <span
+                 
+                  *ngIf="pro.productId.volumeEntity == 'Not'"
+                >
+                  {{ pro.productId.volume }}
+                </span>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+              <div
+                class="col-md-12"
+                style="
+                  text-align: center;
+                  color: black;
+                  padding-top: 10px;
+                  padding-bottom: 10px;
+                  margin-bottom: 10px;
+                  font-size: 20px;
+                "
+              >
+                <div>
+                  <label> {{ pro.salePrice }}</label>
+                  <label> {{ pro.currency }}</label>
+
+                  <label
+                    *ngIf="pro.listPrice != pro.salePrice && pro.listPrice != 0"
+                    style="margin-left: 10px; text-decoration: line-through"
+                  >
+                    {{ pro.listPrice }}</label
+                  >
+                  <label
+                    style="text-decoration: line-through"
+                    *ngIf="pro.listPrice != pro.salePrice && pro.listPrice != 0"
+                  >
+                    {{ pro.currency }}</label
+                  >
+                </div>
+
+                <!-- 
+                                    <div *ngIf="pro.sizes.length==0">
+                                        <label> {{pro.salePrice}}</label>
+                                        <label> {{pro.priceCurrency}}</label>
+
+                                        <label *ngIf="pro.listPrice != pro.salePrice  && pro.listPrice !=0"
+                                            style="margin-left:10px; text-decoration:line-through;">
+                                            {{pro.listPrice}}</label>
+                                        <label style="text-decoration:line-through;"
+                                            *ngIf="pro.listPrice != pro.salePrice  && pro.listPrice !=0">
+                                            {{pro.priceCurrency}}</label>
+                                    </div> -->
+                <!-- <div *ngIf="pro.sizes.length!=0">
+
+                                        <label> {{pro.sizes[0].salePrice}}</label>
+                                        <label> {{pro.priceCurrency}}</label>
+
+                                        <label
+                                            *ngIf="pro.sizes[0].listPrice != pro.sizes[0].salePrice && pro.size[0].listPrice !=0"
+                                            style="margin-left:10px; text-decoration:line-through;">
+                                            {{pro.sizes[0].listPrice}}</label>
+                                        <label style="text-decoration:line-through;"
+                                            *ngIf="pro.sizes[0].listPrice != pro.sizes[0].salePrice && pro.size[0].listPrice !=0">
+                                            {{pro.priceCurrency}}</label>
+
+                                    </div> -->
+              </div>
+            </div>
+            <div
+              class="row"
+              style="padding: 0; margin: 0; margin-top: 10px; border-radius: 0"
+            >
+              <div class="col-5 col-md-5" style="padding-left: 0; margin: 0">
+                <input
+                  type="number"
+                  placeholder="1"
+                  name="orderQuantity"
+                  min="1"
+                  [disabled]="hide[pro.productId._id]"
+                  #orderQuantity="ngModel"
+                  [(ngModel)]="pro.orderQuantity"
+                  style="
+                    margin: 0;
+                    border-radius: 0;
+                    border: none;
+                    border: 1px solid #eee;
+                  "
+                  class="form-control"
+                />
+              </div>
+              <div class="col-7 col-md-7" style="padding: 0; margin: 0">
+                <button
+                  [disabled]="hide[pro.productId._id]"
+                  class="btn btn-dark btn-block"
+                  (click)="
+                    addToCart(
+                      pro.productId._id,
+                      pro.orderQuantity,
+                      pro.salePrice,
+                      pro.currency,
+                      pro.productId.volume,
+                      pro.productId.volumeEntity
+                    )
+                  "
+                  type="button"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <ngb-pagination
+    class="d-flex justify-content-center"
+    size="sm"
+    [(collectionSize)]="totalOrder"
+    (pageChange)="currentPage($event)"
+    [(page)]="pageNumber"
+    [(pageSize)]="pageSize"
+    [maxSize]="5"
+    [rotate]="true"
+    [boundaryLinks]="true"
+  ></ngb-pagination>
+</div>

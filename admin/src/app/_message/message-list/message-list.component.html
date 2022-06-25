@@ -1,0 +1,76 @@
+
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-9">
+        <h4 class="card-title"> İletişim Sayfasından Gelen Mesajlar</h4>
+
+      </div>
+      <div class="col-sm-3">
+        <!-- <h4 class="card-text pull-right">
+
+          <a class="btn btn-dark" [routerLink]="['./',0,'edit']"> New </a>
+        </h4> -->
+      </div>
+    </div>
+
+  </div>
+
+
+  <br>
+
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+
+        <th scope="col-3">Mesajı Gönderenin Adı</th>
+        <th scope="col-3">Konusu</th>
+        <th scope="col-2">Tipi</th>
+        <th scope="col-2">Cevaplandı mı?</th>
+        <th scope="col-2">Gönderildiği Tarih</th>
+        <th scope="col-2"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let message of messages">
+
+
+
+        <td>{{ message.name}}</td>
+        <td>{{ message.message}}</td>
+        <td>{{ message.type}}</td>
+        <td>{{ message.answered}}</td>
+        <td>{{ message.createdAt | date :'short'}}</td>
+
+        <td>
+          <a class="btn btn-primary" [routerLink]="['./',message._id ,'edit']">  Detay </a>
+
+        </td>
+
+
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+
+<div class="row">
+    <div class="col-md-8">
+
+        <ngb-pagination class="d-flex justify-content-left" style="margin-left: 15px;" size="sm"
+            [(collectionSize)]="totalItems" (pageChange)="nowPage($event)" [(page)]="pageNumber" [(pageSize)]="pageSize"
+            [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+
+    </div>
+    <div class="col-md-4">
+        <div class="pull-right" style="margin-right: 15px;">
+            <b>Bulundu :</b> {{totalItems}}
+        </div>
+
+    </div>
+</div>
+<br>

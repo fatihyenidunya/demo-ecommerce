@@ -1,0 +1,207 @@
+<div class="card"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="fa fa-search" aria-hidden="true" style="
+              margin-right: -3px;
+              padding: 8px;
+              border: 1px solid lightgray;
+              background-color: white;
+            "></div>
+          <div>
+            <input type="text" [(ngModel)]="textforsearch" [disabled]="disableTitleInput" (ngModelChange)="onChange($event)" class="form-control"
+              style="
+                border-left: none;
+                margin-left: 0;
+                border-radius: 0;
+                padding-left: 2px;
+              " />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-dark" [disabled]="disableBarcodeInput" (click)="selectTitle()">Başlık</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-dark" [disabled]="disableTitleInput"  (click)="selectBarcode()">Barkod</button>
+          </div>
+        </div>  
+
+      </div>
+
+      <div class="col-md-4">
+        <div class="row">
+          <div class="fa fa-barcode" aria-hidden="true" style="
+              margin-right: -3px;
+              padding: 8px;
+              border: 1px solid lightgray;
+              background-color: white;
+            
+            "></div>
+          <div>
+            <input type="text" name="barcode" #barcode="ngModel" [(ngModel)]="barcodeText" [disabled]="disableBarcodeInput" (ngModelChange)="onBarcodeChange($event)" class="form-control"
+              style="
+                border-left: none;
+                margin-left: 0;
+                border-radius: 0;
+                padding-left: 2px;
+              " />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-3">
+      <button type="button" class="btn btn-danger pull-right" style="margin-right:5px;"
+          (click)="makePdf()"><i class="fa fa-file-pdf-o"></i></button> 
+      </div> -->
+      <div class="col-sm-2">
+        <h4 class="card-text pull-right">
+          <a class="btn btn-dark" [routerLink]="['./', 0, 'edit']">
+            Yeni Ürün
+          </a>
+        </h4>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row"
+    style="margin:0; font-size: 12px; padding-top:10px; padding-bottom:10px; background-color: #555; color:white;">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-6">
+      Ürün
+    </div>
+
+    <div class="col-md-3">
+      Çeşit
+    </div>
+
+    <div class="col-md-2">
+
+    </div>
+  </div>
+  <div class="row" *ngFor="let product of products"
+    style="margin:0; font-size: 12px; border-bottom:1px solid gray; padding-top:10px; padding-bottom:10px;">
+
+    <div class="col-md-1">
+      <img src="{{ imageApi }}/{{ product.image[0] }}" class="card-img-top" style="width: 50px" height="50" />
+    </div>
+    <div class="col-md-6">
+      {{ product.title }}
+    </div>
+
+    <div class="col-md-3">
+
+      <div *ngIf="product.colors.length !=0">
+
+        <div class="row">
+          <div class="col-md-6" style="border-bottom: 1px solid lightgray;">
+            Renk
+          </div>
+          <div class="col-md-4" style="border-bottom: 1px solid lightgray;">
+            Stok
+          </div>
+          <div class="col-md-2" style="border-bottom: 1px solid lightgray;">
+
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="product.colors.length !=0">
+        <div *ngFor="let variable of product.colors">
+          <div class="row" style="padding-top:1px; padding-bottom:1px;">
+            <div class="col-md-6" style="padding-top:3px;">
+              {{variable.color}}
+            </div>
+            <div class="col-md-4" style="padding-top:3px;">
+              {{variable.stock}}
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-light" style="padding-top:0;padding-bottom:0; font-size: 16px"
+                (click)="stockUpdate(product._id,product.title,product.image[0],variable,variable.stockCode)">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="product.sizes.length !=0">
+
+        <div class="row">
+          <div class="col-md-6" style="border-bottom: 1px solid lightgray;">
+            Hacim
+          </div>
+          <div class="col-md-4" style="border-bottom: 1px solid lightgray;">
+            Stok
+          </div>
+          <div class="col-md-2" style="border-bottom: 1px solid lightgray;">
+
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="product.sizes.length !=0">
+        <div *ngFor="let variable of product.sizes">
+          <div class="row" style="padding-top:1px; padding-bottom:1px;">
+            <div class="col-md-6" style="padding-top:3px;">
+              {{variable.volume}} {{variable.volumeEntity}}
+            </div>
+            <div class="col-md-4" style="padding-top:3px;">
+              {{variable.stock}}
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-light" style="padding-top:0;padding-bottom:0; font-size: 16px"
+                (click)="stockUpdate(product._id,product.title,product.image[0],variable,variable.stockCode)">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-md-2">
+
+
+
+      <a class="btn btn-primary pull-right" [routerLink]="['./', product._id, 'edit']"
+        style="font-size: 10px; padding: 5px">
+        Detay
+      </a>
+<!-- 
+      <button class="btn btn-primary pull-right" style="padding: 5px; font-size: 10px" (click)="copy(product)">
+        Kopyala
+      </button> -->
+    </div>
+
+  </div>
+
+
+
+  <br />
+
+  <div class="row">
+    <div class="col-md-8">
+      <ngb-pagination class="d-flex justify-content-left" style="margin-left: 15px" size="sm"
+        [(collectionSize)]="totalProduct" (pageChange)="nowPage($event)" [(page)]="pageNumber" [(pageSize)]="pageSize"
+        [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right" style="margin-right: 15px">
+        <b>Found :</b> {{ totalProduct }}
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+</div>

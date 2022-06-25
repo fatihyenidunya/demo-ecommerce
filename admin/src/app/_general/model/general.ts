@@ -1,0 +1,95 @@
+export class General {
+    _id: string;
+    favicon: string;
+    title: string;
+    metaDescription: string;
+    phone: string;
+    mail: string;
+    registerBtn: string;
+    loginBtn: string;
+    imageUrl: string;
+    aboutUs: string;
+    contact: string;
+    productsBtn: string;
+    catalog: string;
+    language: string;
+    imageUrlTwo: string;
+    imageUrlThree: string;
+    summary: string;
+    latestProducts: string;
+    info: string;
+    aboutUsText: string;
+    cargo: string;
+    cargoText: string;
+    privacyPolicy: string;
+    privacyPolicyText: string;
+    newsletterHeader: string;
+    instagram: string;
+    facebook: string;
+    youtube: string;
+    linkedin: string;
+    tweeter: string;
+    copyright: string;
+    messageText: string;
+    namePlaceholder: string;
+    lastNamePlaceholder: string;
+    phonePlaceholder: string;
+    messagePlaceholder: string;
+    contactText: string;
+    phoneText: string;
+    mailText: string;
+    webAdress: string;
+    address: string;
+    addressText: string;
+    workingHours: string;
+    workingHoursText: string;
+
+
+}
+
+export interface IGeneral {
+    _id: string;
+    favicon: string;
+    title: string;
+    metaDescription: string;
+    phone: string;
+    mail: string;
+    registerBtn: string;
+    imageUrl: string;
+    aboutUs: string;
+    contact: string;
+    productsBtn: string;
+    catalog: string;
+    language: string;
+    imageUrlTwo: string;
+    imageUrlThree: string;
+    summary: string;
+    latestProducts: string;
+    info: string;
+    aboutUsText: string;
+    cargo: string;
+    cargoText: string;
+    privacyPolicy: string;
+    privacyPolicyText: string;
+    newsletterHeader: string;
+    instagram: string;
+    facebook: string;
+    youtube: string;
+    linkedin: string;
+    tweeter: string;
+    copyright: string;
+    messageText: string;
+    namePlaceholder: string;
+    lastNamePlaceholder: string;
+    phonePlaceholder: string;
+    messagePlaceholder: string;
+    contactText: string;
+    phoneText: string;
+    mailText: string;
+    webAdress: string;
+    address: string;
+    addressText: string;
+    workingHours: string;
+    workingHoursText: string;
+
+}

@@ -1,0 +1,200 @@
+#navBarSearchForm input[type=text]{
+    width:300px !important;
+    border-radius:0;
+}
+
+#navBarSearchForm button{
+
+    border-radius:0;
+}
+
+
+.ng-autocomplete {
+    width: 400px;
+    content:'\f556'
+}
+
+
+
+
+  
+
+
+
+@keyframes circles {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.hamburger-menu {
+  width: 1.6rem;
+  height: 1.6rem;
+  position: absolute;
+  top: 1.4rem;
+  left: 1rem;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  cursor: pointer;
+  transition: left 0.7s;
+}
+
+.change .hamburger-menu {
+  left: 18rem;
+  
+}
+
+.line {
+  width: 100%;
+  height: 0.2rem;
+  background-color: #000;
+  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.2);
+}
+
+.change .line {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.change .line-1 {
+  transform: rotate(45deg) translate(0.3rem, 0.35rem);
+}
+
+.change .line-2 {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.change .line-3 {
+  transform: rotate(-45deg) translate(0.3rem, -0.35rem);
+}
+
+.hamburger-menu span {
+  position: absolute;
+  left: 5rem;
+  width: 5rem;
+  height: 3rem;
+  background-color: #e2b646;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: "Baloo Da 2", serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+}
+
+.change .hamburger-menu:hover span {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hamburger-menu span::before {
+  content: "";
+  position: absolute;
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid #e2b646;
+  border-bottom: 1rem solid transparent;
+  border-top: 1rem solid transparent;
+  top: 50%;
+  left: -2rem;
+  transform: translateY(-50%);
+}
+
+
+
+.sidebar {
+  width: 20rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -20rem;
+  background-color:white;
+  border-right:1px solid #eee;
+  transition: left 0.5s;
+  z-index: 100;
+ 
+
+}
+
+.change .sidebar {
+  left: 0;
+}
+
+.menu {
+
+}
+
+
+
+.subMenu {
+  width: 20rem;
+  height: 60vh;
+  position: fixed;
+  top: 10vh;
+  left: -20rem;
+  background-color: white;
+  transition: left 0.5s;
+  z-index: 300;
+  border-right:1px solid #eee;
+}
+
+
+
+.changed .subMenu {
+  left: 0;
+
+}
+
+.menu-item {
+  text-align: left;
+  list-style-type: none;
+  border-bottom:1px solid lightgray;
+ 
+}
+
+.right{
+  cursor:pointer;
+  padding-top:1rem;
+
+}
+.menu-link {
+  font-family: "Baloo Da 2", serif;
+  font-size: 1.3rem;
+  color: #111;
+  position: relative;
+  text-decoration: none;
+}
+
+.submenu-link {
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  color: #111;
+  position: relative;
+  text-decoration: none;
+}
+
+
+.menu-link::before {
+  content: attr(data-content);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #c29525;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: width 0.3s ease-in-out;
+}
+
+.menu-link:hover::before {
+  width: 100%;
+}

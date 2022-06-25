@@ -1,0 +1,327 @@
+<br />
+<div class="container">
+  <div
+    class="row"
+    style="
+      border: 1px solid #e5e5e5;
+      border-bottom: none;
+      background-color: white;
+      padding-top: 10px;
+    "
+  >
+    <div class="col-md-3">
+      <p>
+        <span class="bold-head"> Ülke : </span>
+        {{ orderCustomer.delivery[0].countryCode }}
+      </p>
+    </div>
+    <div class="col-md-5">
+      <p>
+        <span class="bold-head"> Müşteri : </span> {{ orderCustomer.customer }}
+      </p>
+    </div>
+
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <p>
+        <span class="bold-head"> Sipariş Tarihi : </span>
+        {{ orderCustomer.createdAt | date: "short" }}
+      </p>
+    </div>
+  </div>
+  <div
+    class="row"
+    style="
+      border: 1px solid #e5e5e5;
+      border-bottom: none;
+      background-color: white;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      margin-top: 10px;
+    "
+  >
+ 
+    <div class="col-md-5 form-group row">
+      <label class="col-md-4" style="font-weight: bold; padding-top:5px;"> Durum</label>
+      <select
+        class="custom-select col-md-8"
+        [(ngModel)]="selectedStatus"
+        (ngModelChange)="selectStatus($event)"
+      >
+        <option *ngFor="let status of statuses" [value]="status.status">
+          {{ status.status }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-2">
+      <button
+        type="button"
+        form="shipmentDetailForm"
+        (click)="approveThis()"
+        [disabled]="approvedButtonDisabled"
+        class="btn btn-success pull-left"
+      >
+        Onayla
+      </button>
+    </div>
+
+    <div class="col-md-2"></div>
+    <div class="col-md-3"></div>
+  </div>
+
+  <div
+    class="row"
+    style="
+      border: 1px solid #e5e5e5;
+
+      background-color: white;
+      padding-top: 10px;
+
+      margin-top: 10px;
+    "
+  >
+    <div class="col-md-5 form-group row">
+      <label class="col-md-4" style="font-weight: bold; padding-top:5px; "> Kargo Firması</label>
+      <select
+        class="custom-select col-md-8"
+        [(ngModel)]="selectedCargoCompany"
+        (ngModelChange)="selectCargoCompany($event)"
+        [disabled]="cargoInfoDisabled"
+      >
+        <option *ngFor="let cargoCompany of cargoCompanies" [value]="cargoCompany.company">
+          {{ cargoCompany.company }}
+        </option>
+      </select>
+    </div>
+
+
+    <div class="col-md-5 form-group row">
+      <label class="col-md-4"  style="font-weight: bold; padding-top:5px; text-align: right;">Takip Kodu</label>
+      <input type="text" [disabled]="cargoInfoDisabled" class="form-control col-md-8" [(ngModel)]="trackingCode" />
+    </div>
+    <div class="col-md-1">
+      <button
+        type="button"
+        form="shipmentDetailForm"
+        (click)="confirmCargoTrackingCode()"
+        [disabled]="cargoInfoDisabled"
+        class="btn btn-light pull-left"
+      >
+        Kaydet
+      </button>
+    </div>
+    <div class="col-md-1">
+      <button type="button" class="btn btn-light pull-right" (click)="isCollapsed=
+      !isCollapsed">
+        <i class="fa fa-chevron-down" aria-hidden="true" [hidden]="isCollapsed"></i>
+        <i class="fa fa-chevron-up" aria-hidden="true" [hidden]="!isCollapsed"></i>
+      </button>
+    </div>
+
+    
+  </div>
+  <div  class="row"  [ngbCollapse]="!isCollapsed">
+    <div class="row" style="margin:0; padding:0;">
+      <div class="col-md-6" style=" border:1px solid #ddd; margin:0; padding-top:10px; background-color: white;">
+        <div class="row">
+          <div class="col-md-12" style="margin:0;padding:0;">
+            <div class="row">
+              <div class="col-md-4">
+
+              </div>
+              <div class="col-md-4" style="padding-top:7px;">
+                <span style="font-weight: bold;"> Teslimat Bilgileri </span>
+              </div>
+
+              <div class="col-md-4">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3">
+            <p> <span style="font-weight: bold;"> Adı: </span></p>
+            <p> <span style="font-weight: bold;"> Soyadı: </span></p>
+            <p> <span style="font-weight: bold;"> Telefon: </span></p>
+            <p> <span style="font-weight: bold;"> Email: </span></p>
+            <p> <span style="font-weight: bold;"> Adres 1: </span></p>           
+            <p> <span style="font-weight: bold;"> İlçe: </span></p>
+            <p> <span style="font-weight: bold;"> Şehir: </span></p>
+            <p> <span style="font-weight: bold;"> Posta Kodu: </span></p>
+          </div>
+
+          <div class="col-md-9">
+            <p> {{ orderCustomer.delivery[0].name}} </p>
+            <p> {{ orderCustomer.delivery[0].lastName}} </p>
+            <p> {{ orderCustomer.delivery[0].phone}} </p>
+            <p> {{ orderCustomer.delivery[0].email}} </p>
+            <p> {{ orderCustomer.delivery[0].addressOne}} </p>         
+            <p> {{ orderCustomer.delivery[0].state}} </p>
+            <p> {{ orderCustomer.delivery[0].city}} </p>
+            <p> {{ orderCustomer.delivery[0].zipCode}} </p> 
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-6" style="border:1px solid #ddd; margin:0; padding-top:10px; background-color: white;">
+        <div class="row">
+          <div class="col-md-12" style="margin:0;padding:0;">
+            <div class="row">
+              <div class="col-md-4">
+
+              </div>
+              <div class="col-md-4" style="padding-top:7px;">
+                <span style="font-weight: bold;"> Fatura Bilgileri </span>
+              </div>
+
+              <div class="col-md-4">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3">
+            <p> <span style="font-weight: bold;"> Adı: </span></p>
+            <p> <span style="font-weight: bold;"> Soyadı: </span></p>
+            <p> <span style="font-weight: bold;"> Telefon: </span></p>
+            <p> <span style="font-weight: bold;"> Email: </span></p>
+            <p> <span style="font-weight: bold;"> Adres 1: </span></p>
+           
+            <p> <span style="font-weight: bold;"> İlçe: </span></p>
+            <p> <span style="font-weight: bold;"> Şehir: </span></p>
+            <p> <span style="font-weight: bold;"> Posta Kodu: </span></p>
+          </div>
+
+          <div class="col-md-9">
+             <p> {{ orderCustomer.billing[0].name}} </p>
+            <p> {{ orderCustomer.billing[0].lastName}} </p>
+            <p> {{ orderCustomer.billing[0].phone}} </p>
+            <p> {{ orderCustomer.billing[0].email}} </p>
+            <p> {{ orderCustomer.billing[0].addressOne}} </p>
+           
+            <p> {{ orderCustomer.billing[0].state}} </p>
+            <p> {{ orderCustomer.billing[0].city}} </p>
+            <p> {{ orderCustomer.billing[0].zipCode}} </p> 
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <div
+    class="row header"
+    style="
+      border: 1px solid #e5e5e5;
+      padding-bottom: 5px;
+      padding-top: 10px;
+      margin-bottom: 10px;
+    "
+  >
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+      <h6 class="head-1">Ürün</h6>
+    </div>
+
+    <div class="col-md-1">
+      <h6>Adet</h6>
+    </div>
+
+    <div class="col-md-1">
+      <h6 class="head-3">Hazır</h6>
+    </div>
+    <div class="col-md-2">
+      <h6 class="head-3">Durumu</h6>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+  <div class="row product-layout" *ngFor="let product of orderProducts">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-1">
+          <img
+            src="{{ nodejsApi }}/{{ product.product.image[0] }}"
+            class="image-size"
+          />
+        </div>
+        <div class="col-md-5">
+          <p>{{ product.productTitle }}</p>
+          <p style="font-weight: bold;">Stok : {{ product.stock }}</p>
+        </div>
+        <!-- <div class="col-md-1">
+            {{product.stock}}
+
+          </div> -->
+        <div class="col-md-1">
+          <p>{{ product.unit }}</p>
+        </div>
+
+        <div class="col-md-1">
+          <p>{{ product.readyUnitNumber }}</p>
+        </div>
+        <div class="col-md-2">
+          <p>{{ product.productStatus }}</p>
+        </div>
+
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-light btn-size"
+            [disabled]="productGeadyButtonDisabled"
+            
+            (click)="
+              operation(
+                product._id,
+                orderCustomer.customer,
+                orderId,
+                product.product._id,
+                product.product.image[0],
+                product.productTitle,
+                'Eklendi',
+                product.stockCode,
+                product.stock,
+                product.unit,
+                product.readyUnitNumber
+              )
+            "
+          >
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-light btn-size"
+        
+            [disabled]="productGeadyButtonDisabled"
+            (click)="
+              operation(
+                product._id,
+                orderCustomer.customer,
+                orderId,
+                product.product._id,
+                product.product.image[0],
+                product.product.title,
+                'Cikarildi',
+                product.stockCode,
+                product.stock,
+                product.unit,
+                product.readyUnitNumber
+              )
+            "
+          >
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

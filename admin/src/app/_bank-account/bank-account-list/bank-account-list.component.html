@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-9">
+        <h4 class="card-title">Account List</h4>
+      </div>
+      <div class="col-sm-3">
+        <h4 class="card-text pull-right">
+          <a class="btn btn-dark" [routerLink]="['./', 0, 'edit']"> New </a>
+        </h4>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col-3">Currency</th>
+        <th scope="col-3">Bank</th>
+        <th scope="col-3">Branch</th>
+        <th scope="col-4">Account No</th>
+        <th scope="col-1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let account of accounts">
+        <td>{{ account.currency }}</td>
+        <td>{{ account.bank }}</td>
+
+        <td>{{ account.branch }}</td>
+        <td>{{ account.accountNo }}</td>
+
+        <td>
+          <a class="btn btn-info" [routerLink]="['./', account._id, 'edit']">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

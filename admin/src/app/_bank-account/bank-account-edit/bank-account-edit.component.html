@@ -1,0 +1,97 @@
+
+<div class="row" style="margin-top:2rem; height: 40px;">
+  <div class="col-sm-2 align-self-start">     
+  </div>
+  <div class="col-sm-8 align-self-center">
+    <div *ngFor="let alert of alerts">
+      <ngb-alert [type]="alert.type" (close)="alertClose(alert)">{{ alert.message }} - you will redirect to the list in {{counter}}</ngb-alert>
+    </div>
+  </div>
+  <div class="col-sm-2 align-self-end">     
+  </div>
+</div>
+
+   
+
+
+<div class="row" style="margin-top:2rem">
+  <div class="col-sm-2 align-self-start">     
+  </div>
+  <div class="col-sm-8 align-self-center">
+          <div class="card align-self-center">
+              <div class="card-header">
+            
+               # <span style="font-weight: bold">{{bankAccount._id}}  </span> 
+               <a  class="btn btn-dark pull-right" [routerLink]="['../../']"> x</a>
+              </div>
+            
+             <div class="card-body text-right">   
+               <div class="row">
+             
+                <div class="col"> 
+                  <br>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Bank :</label>
+                        <div class="col-sm-9">                
+                            <input type="text" [(ngModel)]="bankAccount.bank"  [disabled] = "disable" class="form-control" >
+                        </div>                      
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Branch :</label>
+                      <div class="col-sm-9">                
+                          <input type="text" [(ngModel)]="bankAccount.branch"  [disabled] = "disable" class="form-control" >
+                      </div>                      
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Account No :</label>
+                    <div class="col-sm-9">                
+                        <input type="text" [(ngModel)]="bankAccount.accountNo"  [disabled] = "disable" class="form-control" >
+                    </div>                      
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Currency :</label>
+                  <div class="col-sm-9">                
+                    <select class="custom-select" [disabled] = "disable" [ngModel]="selectedCurrency" (ngModelChange)="selectCurrency($event)">
+                      <option *ngFor="let currency of currencies" [value]="currency.currency">
+                        {{currency.currency}}
+                      </option>
+                    </select>
+                  </div>                      
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">IBAN No :</label>
+                <div class="col-sm-9">                
+                    <input type="text" [(ngModel)]="bankAccount.ibanNo"  [disabled] = "disable" class="form-control" >
+                </div>                      
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Swift Code :</label>
+              <div class="col-sm-9">                
+                  <input type="text" [(ngModel)]="bankAccount.swiftCode"  [disabled] = "disable" class="form-control" >
+              </div>                      
+          </div>
+                </div>  
+            
+              </div>
+            </div>
+             <div class="card-footer">
+              <button type="button" class="btn btn-danger" [disabled]="!disable" (click)="confirmToDelete()"><i class="fa fa-eraser"></i></button>
+              
+              <button type="button"  class="btn btn-success pull-right" (click)="opeation()" [disabled]="disable"><i class="fa fa-save"></i></button>
+              <button type="button" class="btn btn-info pull-right" style="margin-right:5px;" (click)="edit()"  [disabled]="!disable" ><i class="fa fa-edit"></i></button>
+              
+             
+            
+             </div> 
+            
+            
+            </div>
+  </div>
+  <div class="col-sm-2 align-self-end">      
+  </div>
+</div>
+
+
+
+
+

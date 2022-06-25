@@ -1,0 +1,59 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="col-sm-12" *ngFor="let blog of blogs">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                          
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{nodejsApi}}/{{blog.imageUrl}}" class="card-img-top">
+                        </div>
+                        <div class="col-md-4">
+                           
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{blog.createdAt | date :'short'}}
+                            </div>
+                            <div class="col-md-3">
+                                {{blog.writer}}
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <br>
+                                <a [routerLink]="['./',blog._id ]">
+                                    <h5> {{blog.title}} </h5>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a [routerLink]="['./',blog._id ]">
+                                    <p>{{blog.summary}}</p>
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <ngb-pagination class="d-flex justify-content-center" size="sm" [(collectionSize)]="totalBlog"
+        (pageChange)="currentPage($event)" [(page)]="pageNumber" [(pageSize)]="pageSize" [maxSize]="5" [rotate]="true"
+        [boundaryLinks]="true"></ngb-pagination>
+</div>

@@ -1,0 +1,78 @@
+<div class="signup-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img class="user-avatar" src="assets/images/logo.png" width="150px" />
+            <h1></h1>
+            <form class="col s12 white" #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
+                <div class="form-content">
+                    <div class="form-group">
+                       
+                        <input class="validate form-control input-underline input-lg" type="text" placeholder="UserName" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required>
+                        <!-- <label data-error="Required field!">UserName</label> -->
+                    </div>
+
+                    <div class="form-group">
+                        
+
+                        <input class="validate form-control input-underline input-lg" type="text"  placeholder="Email" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern">
+                        <!-- <label data-error="Invalid email!">Email</label> -->
+                    </div>
+
+                    <div class="form-group">
+                      
+
+                        <input class="validate  form-control input-underline input-lg" type="password" name="Password" #Password="ngModel" placeholder="Password" [(ngModel)]="user.Password" required minlength="3">
+                        <!-- <label [attr.data-error]="Password.errors!=null?(Password.errors.required?'Required field!':'Minimum 3 characters needed'):''">Password</label> -->
+                    </div>
+                    <!-- <div class="form-group">
+                   
+                        <input class="validate form-control input-underline input-lg" type="password" placeholder="Repeat Password"  name="Password" #Password="ngModel" placeholder="Password" [(ngModel)]="user.Password" required minlength="3">
+
+                    </div> -->
+
+                    <!-- <div class="form-group">
+                   
+                        <input class="validate form-control input-underline input-lg" type="text" placeholder="Customer"  name="Customer" #Customer="ngModel" [(ngModel)]="user.Customer">
+  
+                    </div>
+                    <div class="form-group">
+                   
+                        <input class="validate form-control input-underline input-lg" type="text" placeholder="Officer"  name="Officer" #Officer="ngModel" [(ngModel)]="user.Officer">
+  
+                    </div>
+
+
+                    <div class="form-group">
+                   
+                        <input class="validate form-control input-underline input-lg" type="text" placeholder="Country"  name="Country" #Country="ngModel" [(ngModel)]="user.Country">
+  
+                    </div>
+
+                    <div class="form-group">
+                   
+                        <input class="validate form-control input-underline input-lg" type="text" placeholder="Address"  name="Address" #Address="ngModel" [(ngModel)]="user.Address">
+  
+                    </div>
+                    <div class="form-group">
+                   
+                        <input class="validate form-control input-underline input-lg" type="text" placeholder="Phone"  name="Phone" #Phone="ngModel" [(ngModel)]="user.Phone">
+  
+                    </div> -->
+
+                    <div class="row" *ngIf="roles">
+                        <ul style="list-style-type:none;">
+                          <li *ngFor="let item of roles;let i = index">
+                            <input type="checkbox" [id]="'roles-'+i" value="{{item.id}}" 
+                            [checked]="item.selected"  (change)="updateSelectedRoles(i)">
+                            <label [for]="'roles-'+i">{{item.name}}</label>
+                          </li>
+                        </ul>
+                      </div>
+                </div>
+
+                <button [disabled]="!userRegistrationForm.valid" class="btn-large btn-submit rounded-btn" type="submit">Register</button>
+              
+            </form>
+        </div>
+    </div>
+</div> 

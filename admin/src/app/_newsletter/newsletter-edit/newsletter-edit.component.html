@@ -1,0 +1,157 @@
+<div class="row" style="margin-top:2rem; height: 40px;">
+  <div class="col-sm-2 align-self-start">
+  </div>
+  <div class="col-sm-8 align-self-center">
+    <div *ngFor="let alert of alerts">
+      <ngb-alert [type]="alert.type" (close)="alertClose(alert)">{{ alert.message }} - you will redirect to the list in
+        {{counter}}</ngb-alert>
+    </div>
+  </div>
+  <div class="col-sm-2 align-self-end">
+  </div>
+</div>
+
+
+<div class="row" style="margin-top:2rem">
+  <div class="col-sm-1 align-self-start">
+  </div>
+  <div class="col-sm-10 align-self-center">
+    <form class="col s12 white" #customForm="ngForm" (ngSubmit)="OnSubmit(customForm)">
+      <div class="card align-self-center">
+        <div class="card-header">
+
+          # <span style="font-weight: bold">{{newsletterId}} </span>
+          <a class="btn btn-dark pull-right" [routerLink]="['../../']"> x</a>
+        </div>
+
+        <div class="card-body text-right">
+
+          <div class="row">
+            <br>
+
+            <img src="{{nodejsApi}}/{{newsletter.imageUrl}}" class="card-img-top" style="width:960;" height="300">
+
+            <input class="validate form-control input-underline input-sm" type="file" name="image"
+              (change)="handleFileInput($event)">
+          </div>
+          <div class="row">
+
+            <div class="col">
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Başlık :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="title" #title="ngModel" [(ngModel)]="newsletter.title" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Açıklama :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="description" #description="ngModel" [(ngModel)]="newsletter.description"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Tip :</label>
+                <div class="col-sm-9">
+                  <select class="custom-select" [disabled]="disable" [ngModelOptions]="{ standalone: true }" [(ngModel)]="selectedType" (ngModelChange)="selectType($event)">
+                    <option *ngFor="let type of types" [value]="type.type">
+                      {{ type.type }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Miktar :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="amount" #amount="ngModel" [(ngModel)]="newsletter.amount"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Alt Limit :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="subLimit" #subLimit="ngModel" [(ngModel)]="newsletter.subLimit" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Limit :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="limit" #limit="ngModel" [(ngModel)]="newsletter.limit" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Code :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="code" #code="ngModel" [(ngModel)]="newsletter.code" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Başlangıç :</label>
+                <div class="col-sm-9">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input class="form-control" [disabled]="disable" placeholder="yyyy-mm-dd" name="dps" [(ngModel)]="startDate"
+                        ngbDatepicker #d="ngbDatepicker" (ngModelChange)="selectStartDate($event)">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary fa fa-calendar" [disabled]="disable" (click)="d.toggle()"
+                          type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Bitiş :</label>
+                <div class="col-sm-9">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input class="form-control" [disabled]="disable" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDate" ngbDatepicker
+                        #d1="ngbDatepicker" (ngModelChange)="selectEndDate($event)">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary fa fa-calendar" [disabled]="disable" (click)="d1.toggle()"
+                          type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Link :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="link" #link="ngModel" [(ngModel)]="newsletter.link" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div> -->
+
+            </div>
+
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-danger" [disabled]="!disable" (click)="confirmToDelete()"><i
+              class="fa fa-eraser"> Sil</i></button>
+
+          <button type="button" class="btn btn-success pull-right" type="submit" [disabled]="disable"><i
+              class="fa fa-save"> Kaydet</i></button>
+          <button type="button" class="btn btn-info pull-right" style="margin-right:5px;" (click)="edit()"
+            [disabled]="!disable"><i class="fa fa-edit"> Düzenle</i></button>
+
+
+
+        </div>
+
+
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-1 align-self-end">
+  </div>
+</div>

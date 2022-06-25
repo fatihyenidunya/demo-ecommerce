@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-9">
+        <h4 class="card-title"> Kategoriler</h4>
+
+      </div>
+      <div class="col-sm-3">
+        <h4 class="card-text pull-right">
+
+          <a class="btn btn-dark" [routerLink]="['./',0,'edit']"> Yeni </a>
+        </h4>
+      </div>
+    </div>
+
+  </div>
+
+
+  <br>
+
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col-2"></th>
+        <th scope="col-6">Kategori</th>
+        <th scope="col-2">Üst Kategori</th>
+        <th scope="col-2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <!-- <td>{{ category._id }}</td>  -->
+        <td></td>
+        <td>{{ category.name }}</td>
+        <td>{{ category.isTopCategory }}</td>
+        <td>
+          <a class="btn btn-primary" [routerLink]="['./',category._id ,'edit']"> Detay </a>
+
+          <button class="btn btn-primary" (click)="subCategory(category._id,category.name,category.nameLower)">Alt Kategori </button>
+
+        </td>
+
+
+      </tr>
+    </tbody>
+  </table>

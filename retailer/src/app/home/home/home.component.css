@@ -1,0 +1,304 @@
+.col-item {
+    border: 1px solid #E1E1E1;
+    border-radius: 5px;
+    background: #FFF;
+}
+
+.col-item .photo img {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.col-item .info {
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    margin-top: 1px;
+}
+
+.col-item:hover .info {
+    background-color: #F5F5DC;
+}
+
+.col-item .price {
+    /*width: 50%;*/
+    float: left;
+    margin-top: 5px;
+}
+
+.col-item .price h5 {
+    line-height: 20px;
+    margin: 0;
+}
+
+.price-text-color {
+    color: #219FD1;
+}
+
+.col-item .info .rating {
+    color: #777;
+}
+
+.col-item .rating {
+    /*width: 50%;*/
+    float: left;
+    font-size: 17px;
+    text-align: right;
+    line-height: 52px;
+    margin-bottom: 10px;
+    height: 52px;
+}
+
+.col-item .separator {
+    border-top: 1px solid #E1E1E1;
+}
+
+.clear-left {
+    clear: left;
+}
+
+.col-item .separator p {
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.col-item .separator p i {
+    margin-right: 5px;
+}
+
+.col-item .btn-add {
+    width: 50%;
+    float: left;
+}
+
+.col-item .btn-add {
+    border-right: 1px solid #E1E1E1;
+}
+
+.col-item .btn-details {
+    width: 50%;
+    float: left;
+    padding-left: 10px;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+[data-slide="prev"] {
+    margin-right: 10px;
+}
+
+.slick-slide {
+    outline: none;
+}
+
+.slick-slide:focus {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+.carousel-item.active {
+    border: solid 0.3em;
+    border-color: red;
+}
+
+.slick-list {
+    outline: none !important;
+}
+
+.carousel-control:focus {
+    border: 0;
+    outline: none;
+}
+
+.carousel-control-prev {
+    background-color: orange;
+}
+
+.carousel-control-next {
+    background-color: orange;
+}
+
+::ng-deep .carousel-control-prev {
+    padding: 0 !important;
+}
+
+::ng-deep .carousel-control-prev ::ng-deep .carousel-control-prev-icon {
+    color: black !important;
+    width: 40px;
+    height: 40px;
+}
+
+::ng-deep .carousel-control-next ::ng-deep .carousel-control-next-icon {
+    color: orange !important;
+    width: 40px;
+    height: 40px;
+}
+
+
+
+.carousel-indicators li {
+    width: 2px!important;
+    background-color: black;
+}
+
+.carousel-indicators li {
+    width: 20px!important;
+    height: 20px !important;
+    border-radius: 50% !important;
+
+
+}
+
+::ng-deep  .carousel-indicators li {
+    width: 30px!important;
+    background-color:gray;
+    height: 4px !important;
+     border-radius: 2px !important 
+}
+
+::ng-deep .carousel-indicators .active {
+    width: 30px!important;
+    background-color: gray;
+    height: 4px !important;
+     border-radius: 2px !important 
+}
+
+.carousel {
+    outline: none;
+}
+
+.slide .carousel-control-next {
+    width: 50px;
+    height: 50px;
+    color: orange;
+    ;
+}
+
+.nav-item {
+    background-color: #444;
+}
+
+.nav-item .nav-link {
+    color: white;
+}
+
+.nav-item .active {
+    background-color: orange;
+    color: #444;
+    border-radius: none;
+}
+
+#content {
+    width: 100%;
+    height: 620px;
+    margin: 0 auto;
+    border-radius: 3px;
+}
+
+#gallery_img {
+    width: 100%;
+    height: 440px;
+    position: relative;
+}
+
+#lefty {
+    width: 40px;
+    position: absolute;
+    top: 200px;
+    left: 50px;
+    font-size: 40px;
+}
+
+#righty {
+    width: 40px;
+    position: absolute;
+    top: 200px;
+    right: 50px;
+    font-size: 40px;
+}
+
+#play, #pause {
+    width: 20px;
+    position: absolute;
+    top: 220px;
+    right: 100px;
+}
+
+#play {
+    display: none;
+}
+
+#expand {
+    width: 20px;
+    position: absolute;
+    top: 410px;
+    right: 100px;
+}
+
+#thumbs {
+    height: 100px;
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
+    float: left;
+    overflow: auto;
+    margin-top: 15px;
+    white-space: nowrap;
+}
+
+.thumbs_style {
+    display: inline-block;
+}
+
+.thumbs_style img {
+    width: 105px;
+    height: 80px;
+    border-radius: 3px;
+    border: 3px solid rgba(0, 0, 0, 0.4);
+}
+
+.gallery_img_style {
+    width: 100%;
+    height: 440px;
+    border-radius: 3px;
+    position: absolute;
+}
+
+.title {
+    color: black;
+    padding-top: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.title:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+.articleTitle {
+    color: black;
+    padding-top: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.articleTitle:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.image-size{
+    /* min-height: 200px;
+    max-height: 200px; */
+    text-align: center;
+
+}

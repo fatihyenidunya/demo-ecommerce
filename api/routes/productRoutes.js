@@ -1,0 +1,46 @@
+const express = require('express');
+const router = express.Router();
+const { body } = require('express-validator');
+const productController = require('../controllers/productController');
+const isAuth = require('../middleware/is-auth');
+
+router.get('/list', isAuth, productController.getProductList);
+router.get('/stock', isAuth, productController.getProductStock);
+router.get('/findcustomerproducts', isAuth, productController.getFindCustomerProducts);
+router.get('/getProducts', isAuth, productController.getProducts);
+router.get('/getProductForVolume/:volume', isAuth, productController.getProductForVolume);
+router.get('/listformobile', productController.getProductsForMobile);
+router.get('/latest/:country', productController.getProductLatests);
+router.get('/categoryProducts/:category', productController.getCategoryProducts);
+router.get('/search/:text', productController.getSearchResult);
+router.get('/productsByCategoryId/:categoryId', productController.getProductsByCategoryId);
+
+router.get('/productsByTopCategory/:country/:topCategory', productController.getProductsByTopCategory);
+router.get('/productsByTopCategoryForMobile/:topCategory', productController.getProductsByTopCategoryForMobile)
+router.get('/list/:productId', productController.getProduct);
+router.get('/getForIndividualProduct/:country/:productId', productController.getForIndividualProduct);
+router.get('/list/:title', productController.getProductByTitle);
+router.post('/new', productController.postAddProduct);
+router.post('/copy', productController.postCopyProduct);
+router.put('/updateStock/:productId', isAuth, productController.putUpdateStock);
+router.post('/productstocklog', productController.postProductStockLog);
+router.get('/getProductStockLog/:productId', productController.getProductStockLog);
+router.put('/update/:productId', isAuth, productController.putUpdateProduct);
+router.put('/updatePrice/:productId', isAuth, productController.putUpdatePrice);
+router.put('/deletePrice/:productId', isAuth, productController.putDeletePrice);
+router.put('/updateColor/:productId', isAuth, productController.putUpdateColor);
+router.put('/updateSize/:productId', isAuth, productController.putUpdateSize);
+router.put('/deleteColor/:productId', isAuth, productController.putDeleteColor);
+router.put('/saveColor/:productId', isAuth, productController.putSaveNewColor);
+router.put('/uploadProductImage/:productId', isAuth, productController.putUploadProductImage);
+router.put('/deleteProductImage/:productId', isAuth, productController.putDeleteProductImage);
+router.delete('/delete/:productId', isAuth, productController.deleteProduct);
+router.post('/newcomment', productController.postNewComment);
+router.get('/comments/:productId', productController.getComments);
+router.post('/savecountryprice', isAuth, productController.countryProductPrice);
+router.post('/getcountryprices/:productId', productController.countryProductPrices);
+router.get('/getcountryprice/:priceId', productController.countryPrice);
+router.delete('/deletecountryprice/:priceId', isAuth, productController.deleteCountryPrice);
+router.put('/putcountryprice/:priceId', isAuth, productController.putCountryPrice);
+router.get('/findbarcode', isAuth, productController.getFindProductViaBarcode);
+module.exports = router;

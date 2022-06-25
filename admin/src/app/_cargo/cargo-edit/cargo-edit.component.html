@@ -1,0 +1,240 @@
+<br>
+<div class="container">
+  <div class="row" style="border:1px solid #e5e5e5; border-bottom:none; background-color: #eee; padding-top:10px;">
+    <div class="col-md-2">
+
+      <p><span class="bold-head"> Country : </span> {{country}} </p>
+
+    </div>
+    <div class="col-md-4">
+      <p><span class="bold-head"> Customer : </span> {{customer}} </p>
+
+    </div>
+
+    <div class="col-md-3">
+      <p> <span class="bold-head"> Grand Total : </span> {{order.grandTotal | currency:' ':' ':'.2-2'}}
+        {{order.currency}} </p>
+    </div>
+    <div class="col-md-3">
+      <p> <span class="bold-head"> Order Date : </span> {{orderDate | date: 'short' }} </p>
+    </div>
+
+  </div>
+
+  <div class="row" style="border:1px solid #e5e5e5; background-color:white; padding-top:10px; padding-bottom:10px;">
+    <div class="col-md-2">
+
+      <a class="pull-left" [hidden]="show" [routerLink]="['../../orderRetails',orderId]">
+        <div class="btn btn-secondary"> Order Detail </div>
+      </a>
+
+      <a class="pull-left" [hidden]="!show" [routerLink]="['../../../orderRetails',orderId]">
+        <div class="btn btn-secondary"> Order Detail </div>
+      </a>
+
+
+    </div>
+
+    <div class="col-md-3">
+
+      <select class="custom-select" [disabled]="selectDisable" [(ngModel)]="selectedStatus"
+        (ngModelChange)="selectStatus($event)">
+        <option *ngFor="let status of statuses" [value]="status.status">
+          {{status.status}}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-2">
+
+      <button type="submit" form='shipmentDetailForm' [disabled]="approvedButtonDisabled"
+        class="btn btn-success pull-left">Approve this</button>
+
+    </div>
+    <div class="col-md-2">
+    
+    </div>
+    <div class="col-md-2">
+
+      <button type="button" class="btn btn-default" (click)="isCollapsed=
+      !isCollapsed"> Teslimat Bilgileri
+        <i class="fa fa-chevron-down" aria-hidden="true" [hidden]="isCollapsed"></i>
+        <i class="fa fa-chevron-up" aria-hidden="true" [hidden]="!isCollapsed"></i>
+      </button>
+    </div>
+
+
+  </div>
+
+
+  <div class="row" [ngbCollapse]="!isCollapsed">
+    <div class="row" style="margin:0; padding:0;">
+      <div class="col-md-6" style=" border:1px solid #ddd; padding-top:10px; background-color: #eee;">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+
+              </div>
+              <div class="col-md-4" style="padding-top:7px;">
+                <span style="font-weight: bold;"> Teslimat Bilgileri </span>
+              </div>
+
+              <div class="col-md-4">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3">
+            <p> <span style="font-weight: bold;"> Adı: </span></p>
+            <p> <span style="font-weight: bold;"> Soyadı: </span></p>
+            <p> <span style="font-weight: bold;"> Telefon: </span></p>
+            <p> <span style="font-weight: bold;"> Email: </span></p>
+            <p> <span style="font-weight: bold;"> Adres 1: </span></p>
+            <p> <span style="font-weight: bold;"> Adres 2: </span></p>
+            <p> <span style="font-weight: bold;"> İlçe: </span></p>
+            <p> <span style="font-weight: bold;"> Şehir: </span></p>
+            <p> <span style="font-weight: bold;"> Posta Kodu: </span></p>
+          </div>
+
+          <div class="col-md-9">
+            <p> <span class="bold-head"> </span> {{ selectedDeliveryFname}} </p>
+            <p> <span class="bold-head"> </span> {{ selectedDeliveryLname}} </p>
+            <p> <span class="bold-head"> </span> {{ selectedDeliveryPhone}} </p>
+            <p> <span class="bold-head"> </span> {{ selectedDeliveryEmail}} </p>
+            <p> <span class="bold-head"> </span> {{ selectedDeliveryAddress1}}</p>
+            <p> <span class="bold-head"> </span> {{ selectedDeliveryAddress2}}</p>
+            <p> <span class="bold-head"> </span> {{ selectedDeliveryState}}</p>
+            <p> <span class="bold-head"> </span> {{ selectedDeliveryCity}}</p>
+            <p> <span class="bold-head"> </span> {{ selectedDeliveryZipCode}}</p>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-6" style="border:1px solid #ddd; padding-top:10px; background-color: #eee;">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+
+              </div>
+              <div class="col-md-4" style="padding-top:7px;">
+                <span style="font-weight: bold;"> Fatura Bilgileri </span>
+              </div>
+
+              <div class="col-md-4">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3">
+            <p> <span style="font-weight: bold;"> Adı: </span></p>
+            <p> <span style="font-weight: bold;"> Soyadı: </span></p>
+            <p> <span style="font-weight: bold;"> Telefon: </span></p>
+            <p> <span style="font-weight: bold;"> Email: </span></p>
+            <p> <span style="font-weight: bold;"> Adres 1: </span></p>
+            <p> <span style="font-weight: bold;"> Adres 2: </span></p>
+            <p> <span style="font-weight: bold;"> İlçe: </span></p>
+            <p> <span style="font-weight: bold;"> Şehir: </span></p>
+            <p> <span style="font-weight: bold;"> Posta Kodu: </span></p>
+          </div>
+
+          <div class="col-md-9">
+            <p> {{ selectedBillFname}} </p>
+            <p> {{ selectedBillLname}} </p>
+            <p> {{ selectedBillPhone}} </p>
+            <p> {{ selectedBillEmail}} </p>
+            <p> {{ selectedBillAddress1}} </p>
+            <p> {{ selectedBillAddress2}} </p>
+            <p> {{ selectedBillState}} </p>
+            <p> {{ selectedBillCity}} </p>
+            <p> {{ selectedBillZipCode}} </p>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <form class="col s12 white" style=" padding:0; margin:0; margin-top:5px;" id="shipmentDetailForm"
+      #shipmentDetailForm="ngForm" (ngSubmit)="OnSubmit(shipmentDetailForm)">
+
+
+    </form>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12" style="margin:0; padding:0;">
+      <div class="row header">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-4">
+          <h6 class="head-1">Product</h6>
+        </div>
+        <div class="col-md-2">
+          <h6> Unit Price</h6>
+        </div>
+        <div class="col-md-2">
+          <h6>Unit</h6>
+        </div>
+        <div class="col-md-1">
+          <h6 class="head-3">Box</h6>
+        </div>
+        <div class="col-md-2">
+          <h6 class="head-4">Total Price</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12" *ngFor="let product of orderProducts">
+
+
+      <div class="col-md-12">
+        <div class="row">
+
+          <div class="col-md-1">
+            <img src="{{nodejsApi}}/{{product.product.image[0]}}" class="image-size">
+
+          </div>
+          <div class="col-md-4">
+            <p> {{product.product.turkishTitle}}</p>
+
+          </div>
+          <div class="col-md-2">
+            <p> {{product.unitPrice}} {{product.currency}}</p>
+
+          </div>
+          <div class="col-md-2">
+            <p> {{product.unit}}</p>
+          </div>
+
+          <div class="col-md-1">
+            <p> {{product.box}}</p>
+          </div>
+          <div class="col-md-2">
+            <p class="bold-head"> {{product.totalPrice | currency:' ':' ':'.2-2'}}
+              {{product.currency}}</p>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+  </div>
+
+
+
+</div>

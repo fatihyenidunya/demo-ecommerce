@@ -1,0 +1,98 @@
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div
+            class="fa fa-search"
+            aria-hidden="true"
+            style="
+              margin-right: -3px;
+              padding: 8px;
+              border: 1px solid lightgray;
+              background-color: white;
+            "
+          ></div>
+          <div>
+            <input
+              type="text"
+              [(ngModel)]="textforsearch"
+              (ngModelChange)="onChange($event)"
+              class="form-control"
+              style="
+                border-left: none;
+                margin-left: 0;
+                border-radius: 0;
+                padding-left: 2px;
+              "
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5"></div>
+        <div class="col-sm-3">
+            <h4 class="card-text pull-right">
+  
+              <a class="btn btn-dark" [routerLink]="['./',0,'edit']"> Yeni </a>
+            </h4>
+        </div>
+    </div>
+   
+  </div>
+
+
+<br>
+
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+       
+        <th scope="col-3">#</th>     
+        <th scope="col-3">Başlık</th> 
+        <th scope="col-2">Sırası</th>       
+        <th scope="col-2"></th>  
+    
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let blog of blogs">    
+    
+      <td> <img src="{{imageApi}}/{{blog.imageUrl}}" class="card-img-top" style="width:100px;" height="100"></td>
+      
+      <td>{{ blog.title}}</td>
+      <td>{{ blog.order}}</td>
+      
+
+      <td> 
+      <a class="btn btn-primary" [routerLink]="['./',blog._id ,'edit']"> Detay  </a>
+
+      </td>
+    
+     
+    </tr>
+    </tbody>
+  </table>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md-8">
+
+      <ngb-pagination class="d-flex justify-content-left" style="margin-left: 15px;" size="sm"
+        [(collectionSize)]="totalItems" (pageChange)="nowPage($event)" [(page)]="pageNumber" [(pageSize)]="pageSize"
+        [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right" style="margin-right: 15px;">
+        <b>Bulundu :</b> {{totalItems}}
+      </div>
+
+    </div>
+  </div>
+
+

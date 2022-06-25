@@ -1,0 +1,56 @@
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+        <div class="col-sm-9">
+            <h4 class="card-title"> Anasayfa Slider Listesi</h4>  
+        
+        </div>
+        <div class="col-sm-3">
+            <h4 class="card-text pull-right">
+  
+              <a class="btn btn-dark" [routerLink]="['./',0,'edit']"> Yeni </a>
+            </h4>
+        </div>
+    </div>
+   
+  </div>
+
+
+<br>
+
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+       
+        <th scope="col-3">#</th>     
+        <th scope="col-3">Başlık</th> 
+        <th scope="col-2">Sırası</th>       
+        <th scope="col-2"></th>  
+    
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let slider of sliders">    
+    
+      <td> <img src="{{imageApi}}/{{slider.imageUrl}}" class="card-img-top" style="width:240px;" height="80"></td>
+      
+      <td>{{ slider.title}}</td>
+      <td>{{ slider.order}}</td>
+      
+
+      <td> 
+      <a class="btn btn-primary" [routerLink]="['./',slider._id ,'edit']">  Detay </a>
+
+      </td>
+    
+     
+    </tr>
+    </tbody>
+  </table>
+
+
+
+

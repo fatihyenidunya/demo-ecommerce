@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <span style="font-weight: bold">{{ company }} </span> {{ title }}
+  </h4>
+  <!-- <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+</div>
+<div class="modal-body">
+  <div class="form-group row">
+    <label style="font-weight: bold; margin-left:15px; margin-right:5px;"> {{ messageHead1 }} </label>
+    <label> {{ message1 }} </label>
+    <label style="font-weight: bold;margin-left:20px; margin-right:5px;"> {{ messageHead2 }} </label>
+    <label> {{ message2 }} </label>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="decline()">
+    {{ btnCancelText }}
+  </button>
+  <button type="button" class="btn btn-primary" (click)="accept()">
+    {{ btnOkText }}
+  </button>
+</div>

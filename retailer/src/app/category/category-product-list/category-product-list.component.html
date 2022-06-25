@@ -1,0 +1,247 @@
+<br />
+
+<div class="col-sm-12" *ngFor="let category of categories">
+  <div class="row">
+
+    <div class="col-sm-12"
+      style="margin-left:0; margin-right:0; font-weight: bold; padding: 3px; background-color:#eee;">
+      <h2 style="font-weight: bold; text-align: center;">{{ category.name }}</h2>
+    </div>
+    <div class="col-sm-12"
+      style="margin-left:0; margin-right:0; font-weight: bold; padding: 3px; background-color:#eee; margin-bottom: 10px">
+
+      <h6 style="font-weight: bold; text-align: center;" *ngIf="category.isTopCategory == false">
+
+        <a [routerLink]="['/category']" style="color: gray;"> Mainpage </a>
+
+        <i style="color:gray;" class="fa fa-chevron-right"></i>
+
+        <a [routerLink]="['/category',category.topCategoryNameLower]" style="color: gray;"> {{category.topCategoryName}}
+        </a>
+        <i style="color:gray;" class="fa fa-chevron-right "></i>
+        <span style="color:gray;"> {{category.name}} </span>
+      </h6>
+
+      <h6 style="font-weight: bold; text-align: center;" *ngIf="category.isTopCategory == true">
+
+        <a [routerLink]="['/category']" style="color: gray;"> Mainpage </a>
+
+        <i style="color:gray;" class="fa fa-chevron-right"></i>
+
+        <span style="color:gray;"> {{category.name}} </span>
+      </h6>
+
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="row" style="padding: 0; margin: 0; padding-bottom: 20px">
+        <div class="col-6 col-md-3" style="
+    
+            margin: 0;
+            padding: 5px;
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+          " *ngFor="let pro of category.products">
+          <div style="
+              border: 1px solid #ddd;
+              min-height: 500px;
+              padding: 5px;
+              color: black;
+              text-align: center;
+              background-color:white;
+            ">
+            <div class="row" style="min-height: 40px; padding: 0; margin: 0">
+              <div class="col-3 col-md-3" style="padding-left: 0">
+                <!-- <div
+                  *ngIf="pro.freeCargo"
+                  class="fa fa-truck"
+                  style="
+                    margin-left: 0;
+                    background-color: #ddd;
+                    color: #444;
+                    text-align: center;
+                    padding: 10px;
+                  "
+                ></div> -->
+              </div>
+              <div class="col-6 col-md-5"></div>
+
+              <div class="col-3 col-md-4" style="margin: 0; padding: 0">
+                <div *ngIf="pro.discount !=0" style="
+                    background-color: #ffa500;
+                    border: 1px solid #ffa500;
+                    color: #333;
+                    text-align: center;
+                  ">
+                  <div style="padding-top: 5px; padding-bottom: 5px">
+                    <span class="fa fa-arrow-down"></span> % {{ pro.discount }}
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="row">
+              <a [routerLink]="[
+                  '/product',
+                  pro.turkishTitleLower + '&' + pro._id
+                ]">
+                <div class="col-md-12">
+                  <img src="{{ nodejsApi }}/{{ pro.image[0] }}" class="img-fluid" />
+                </div>
+              </a>
+            </div>
+            <div class="row" style="min-height: 70px">
+              <div class="col-md-12">
+                <div style="color: black; margin-top: 5px; text-align: center; ">
+                  <a [routerLink]="['../../product',pro.titleLower + '&' + pro._id]" style="color: black;">{{
+                    pro.title }}</a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-8" style="font-weight: bold; font-size:14px;">
+                <span *ngIf="pro.volumeEntity != 'Not'">
+                  {{ pro.volume }}
+                  {{ pro.volumeEntity }}
+                </span>
+                <span *ngIf="pro.volumeEntity == 'Not'">
+                  {{ pro.volume }}
+                </span>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row" style="margin:0;">
+              <div class="col-md-12" *ngIf="pro.colors.length!=0" style="
+                  text-align: center;
+                  color: black;
+                  padding-top: 10px;
+                  padding-bottom: 10px;
+                  margin-bottom: 10px;
+                  font-size: 20px;
+                ">
+                <div class="col-md-12"
+                  style="margin-top:5px; text-align:center;background-color:#fff; color:orange; padding:0;  font-size:22px;">
+
+                  {{pro.colors[0].color}}
+
+                </div>
+                <div>
+
+
+                  <label *ngIf="pro.colors[0].listPrice != pro.colors[0].salePrice && pro.colors[0].listPrice != 0"
+                    style=" text-decoration: line-through">
+                    {{ pro.colors[0].listPrice }}</label>
+                  <label style="text-decoration: line-through; margin-right: 10px;"
+                    *ngIf="pro.colors[0].listPrice != pro.colors[0].salePrice && pro.colors[0].listPrice != 0">
+                    {{ pro.colors[0].listPriceCurrency }}</label>
+                  <label> {{ pro.colors[0].salePrice }}</label>
+                  <label> {{ pro.colors[0].salePriceCurrency }}</label>
+                </div>
+
+
+              </div>
+
+            </div>
+            <div class="row" style="margin:0;">
+              <div class="col-md-12" *ngIf="pro.sizes.length!=0" style="
+              text-align: center;
+              color: black;
+              padding-top: 10px;
+              padding-bottom: 10px;
+              margin-bottom: 10px;
+              font-size: 20px;
+            ">
+                <div>
+                  <div class="col-md-12"
+                    style="margin-top:5px; text-align:center;background-color:#fff; color:orange; padding:0;  font-size:22px;">
+
+                    {{pro.sizes[0].volume}} {{pro.sizes[0].volumeEntity}}
+
+                  </div>
+
+                  <label *ngIf="pro.sizes[0].listPrice != pro.sizes[0].salePrice && pro.sizes[0].listPrice != 0"
+                    style=" text-decoration: line-through">
+                    {{ pro.sizes[0].listPrice }}</label>
+                  <label style="text-decoration: line-through; margin-right: 10px;"
+                    *ngIf="pro.sizes[0].listPrice != pro.sizes[0].salePrice && pro.sizes[0].listPrice != 0">
+                    {{ pro.sizes[0].listPriceCurrency }}</label>
+                  <label> {{ pro.sizes[0].salePrice }}</label>
+                  <label> {{ pro.sizes[0].salePriceCurrency }}</label>
+                </div>
+
+
+
+              </div>
+            </div>
+
+
+            <div class="row" style="padding: 0; margin: 0;  border-radius: 0">
+
+              <div class="col-md-12 col-12" *ngIf="pro.sizes.length!=1">
+
+                There are different selections
+
+
+
+
+              </div>
+
+
+              <div *ngIf="pro.sizes.length==1" class="col-12 col-md-5  offset-md-0" style="padding-left: 0; margin: 0">
+                <input type="number" placeholder="1" name="orderQuantity" min="1" [disabled]="hide[pro._id]"
+                  #orderQuantity="ngModel" [(ngModel)]="pro.orderQuantity" style="
+                    margin: 0;
+                    border-radius: 0;
+                    border: none;
+                    border: 1px solid #eee;
+                  " class="form-control" />
+              </div>
+              <div *ngIf="pro.sizes.length==1" class="col-12 col-md-7" style="padding: 0; margin: 0">
+                <button [disabled]="hide[pro._id]" *ngIf="pro.colors.length!=0" class="btn btn-dark btn-block" (click)="
+                    addToCart(
+                      pro._id,
+                      pro.title,
+                      pro.orderQuantity,
+                      pro.colors[0].stockCode,
+                      pro.colors[0].salePrice,
+                      pro.colors[0].salePriceCurrency,
+                      pro.colors[0].color,
+                      pro.colors[0].volume,
+                      pro.colors[0].volumeEntity
+                    )
+                  " type="button">
+                  Add to Cart
+                </button>
+                <button [disabled]="hide[pro._id]" *ngIf="pro.sizes.length!=0" class="btn btn-dark btn-block" (click)="
+                  addToCart(
+                    pro._id,
+                    pro.title,
+                    pro.orderQuantity,
+                    pro.sizes[0].stockCode,
+                    pro.sizes[0].salePrice,
+                    pro.sizes[0].salePriceCurrency,
+                    pro.sizes[0].size,
+                    pro.sizes[0].volume,
+                    pro.sizes[0].volumeEntity
+                  )
+                " type="button">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <ngb-pagination class="d-flex justify-content-center" size="sm" [(collectionSize)]="totalOrder"
+    (pageChange)="currentPage($event)" [(page)]="pageNumber" [(pageSize)]="pageSize" [maxSize]="5" [rotate]="true"
+    [boundaryLinks]="true"></ngb-pagination>
+</div>

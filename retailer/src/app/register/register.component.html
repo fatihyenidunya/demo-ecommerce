@@ -1,0 +1,233 @@
+<ngx-spinner type="ball-spin-clockwise"> Kaydınız Oluşturuluyor</ngx-spinner>
+<div>
+  <div class="row" style="margin: 0; padding-top: 20px;">
+    <div class="col-8 offset-2 col-md-3 offset-md-0"
+      style="padding-top: 5px; color: black; font-family: Arial, Helvetica, sans-serif;">
+      <i class="fa fa-phone"> &nbsp; +90 212 552 00 39</i>
+    </div>
+    <div class="col-6 offset-2 col-md-2 offset-md-0"
+      style="padding-top: 5px; color: black; font-family: Arial, Helvetica, sans-serif;">
+    </div>
+    <div class="col-md-3">
+      <div class="pull-right"></div>
+    </div>
+
+    <div class="col-8 offset-1 col-md-4 offset-md-0"
+      style="padding-top: 5px; color: black; font-family: Arial, Helvetica, sans-serif;">
+      <i class="fa fa-envelope pull-right"> &nbsp;destek@asilgroup.com.tr</i>
+    </div>
+  </div>
+
+  <br>
+
+
+
+
+
+  <div class="row" style="padding:0; margin:0;">
+    <div class="col-md-12 offset-md-0 col-10 offset-1" style="padding:0;  padding-bottom: 40px;">
+      <form class="col s12" #customForm="ngForm" (ngSubmit)="OnSubmit(customForm)" >
+        <div class="card bg-light text-black align-self-center">
+          <div class=" row">
+            <div class="col-md-5 col-4">
+
+            </div>
+            <div class="col-md-2 col-4">
+              <a [routerLink]="['/login']" > 
+              <img src="../../../assets/nishman-logo-beyaz.png" class="img-fluid" />
+            </a>
+            </div>
+            <div class="col-md-5 col-4">
+
+            </div>
+
+
+          </div>
+
+          <div class="card-body row">
+            <div class="col-md-6">
+
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Adı :</label>
+                <div class="col-sm-8">
+                  <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control"
+                    [ngModelOptions]="{standalone: true}" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Soyadı :</label>
+                <div class="col-sm-8">
+                  <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control"
+                    [ngModelOptions]="{standalone: true}" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">TC Kimlik No :</label>
+                <div class="col-sm-8">
+                  <input type="text" name="tcId" #tcId="ngModel" minlength="11" maxlength="11" [(ngModel)]="user.tcId"
+                    class="form-control" [ngModelOptions]="{standalone: true}" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Vergi Dairesi :</label>
+                <div class="col-sm-8">
+                  <input type="text" name="taxPlace"  #taxPlace="ngModel"
+                    [(ngModel)]="user.taxPlace" class="form-control" [ngModelOptions]="{standalone: true}" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Vergi No :</label>
+                <div class="col-sm-8">
+                  <input type="text" name="taxNo" minlength="10" maxlength="10" #taxNo="ngModel"
+                    [(ngModel)]="user.taxNo" class="form-control" [ngModelOptions]="{standalone: true}" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Berber Ünvanı :</label>
+                <div class="col-sm-8">
+                  <input type="text" name="company" #company="ngModel" [(ngModel)]="user.company" class="form-control"
+                    [ngModelOptions]="{standalone: true}" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Telefon :</label>
+                <div class="col-sm-8">
+                  <input type="text" name="phone" #phone="ngModel" [(ngModel)]="user.phone" class="form-control"
+                    [ngModelOptions]="{standalone: true}" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Şehir :</label>
+                <div class="col-sm-8">
+                  <select class="custom-select" [(ngModel)]="selectedCity"  [ngModelOptions]="{standalone: true}" (ngModelChange)="selectCity($event)">
+                    <option *ngFor="let city of cities" [ngValue]="city" >
+                      {{city.name}}
+                    </option>
+                  </select>
+                </div>          
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">İlçe :</label>
+                <div class="col-sm-8">
+                  <select class="custom-select" [(ngModel)]="selectedState"  [ngModelOptions]="{standalone: true}" (ngModelChange)="selectState($event)">
+                    <option *ngFor="let state of states" [ngValue]="state" >
+                      {{state.name}}
+                    </option>
+                  </select>
+                </div>          
+              </div>
+
+
+              <div class="form-group row" >
+                <label class="col-sm-4 col-form-label">Açık Adres :</label>
+                <div class="col-sm-8">
+
+
+                  <textarea class="form-control" [(ngModel)]="user.openAddress" [ngModelOptions]="{standalone: true}">
+
+                    </textarea>
+
+                </div>
+              </div> 
+
+            </div>
+            <div class="col-md-6">
+
+
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">E-Mail :</label>
+                <div class="col-sm-8">
+                  <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control"
+                    [ngModelOptions]="{standalone: true}" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Şifre :</label>
+                <div class="col-sm-8">
+                  <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password"
+                    class="form-control" [ngModelOptions]="{standalone: true}" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Şifre Tekrarı :</label>
+                <div class="col-sm-8">
+                  <input type="password" name="confirm" #confirm="ngModel" [(ngModel)]="user.confirm"
+                    class="form-control" [ngModelOptions]="{standalone: true}" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                  <button type="submit" [disabled]="registerBtnDisabled"  class="btn btn-block btn-warning" style="font-weight: bold">
+                    Kayıt Ol
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> </label>
+                <div class="col-sm-8">
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" [disabled]="disable"
+                        (change)="handleImageFile($event)" id="inputGroupFile04">
+                      <label class="custom-file-label" for="inputGroupFile04"> Belge seçmek için tıklayınız</label>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+
+                  <div [hidden]="hidden">
+                    <img class="img-fluid" [src]="nodejsApi + '/' + documentUrl" />
+                  </div>
+                  <div [hidden]="!hidden">
+
+                    <h2 style="color:black; font-size:14px;"> Belge yükleyebilmek için önce kayıt olmanız gerekmektedir.
+                    </h2>
+
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <div class="row" style="padding: 0; padding-bottom: 10px; margin: 0; height: 50px;">
+            <div class="col-md-12">
+              <span style="font-weight: bold;" [hidden]="hideMessage"> Üyeliğiniz onaylandığında size mail olarak bildirilecektir. <span style="text-decoration: underline;"> Vergi Levhası</span> yada <span style="text-decoration: underline;"> Ustalık-Kalfalık Belgesi</span> yüklemeyi unutmayınız! Sisteme erişmek için  <a [routerLink]="['/login']" > Giriş Ekranı</a>'na tıklayınız. </span>
+
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+
+  <div class="row" style="margin:0; padding-bottom: 30px; padding-top:50px;">
+    <div class="col-10 offset-1 col-md-6  offset-md-0" [hidden]="showForMobile">
+      <span class="fa fa-map-marker" style="color: black; font-family: Arial, Helvetica, sans-serif;">
+        Kavaklı Mah. İstanbul Cad. NO.19/1 Beylikdüzü &nbsp;&nbsp;&nbsp;34520 -
+        ISTANBUL - TURKEY</span>
+    </div>
+
+    <div class="col-11 offset-0 col-md-6  offset-md-0"
+      style="font-size: 14px; color: black; font-family: Arial, Helvetica, sans-serif;">
+      <span class="pull-right fa fa-copyright">
+        2018 ASİL GROUP - Tüm hakları saklıdır.</span>
+    </div>
+  </div>
+</div>

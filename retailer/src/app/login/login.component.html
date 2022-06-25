@@ -1,0 +1,126 @@
+<div style="height: 100vh;">
+
+  <div class="row" style="margin: 0; padding-top:20px; height: 4vh">
+    <div class="col-8 offset-3 col-md-3 offset-md-0" style="padding-top: 5px; color: black">
+      <i class="fa fa-phone"> &nbsp; +90 212 552 00 39</i>
+    </div>
+    <div class="col-6 offset-0 col-md-2 offset-md-0" style="padding-top: 5px; color: black"></div>
+    <div class="col-md-3">
+      <div class="pull-right"></div>
+    </div>
+
+    <div class="col-10 offset-0 col-md-4 offset-md-0" style="padding-top: 5px; color: black">
+      <i class="fa fa-envelope pull-right"> &nbsp;destek@asilgroup.com.tr</i>
+    </div>
+  </div>
+  <div class="row" style="margin:0; height: 10vh">
+
+  </div>
+  <br>
+
+  <div class="row" style="margin:0;  height: 65vh">
+    <div class="col-md-3 col-0"></div>
+    <div class="col-md-6 col-12">
+      <form class="col s12" #loginForm="ngForm" (ngSubmit)="OnLoginSubmit(loginForm)">
+        <div class="card bg-light">
+          <div class="row" style="padding:0;">
+            <div class="col-md-3 col-4">
+
+            </div>
+            <div class="col-md-6 col-4">
+              <img src="../../../assets/nishman-logo-beyaz.png" class="img-fluid" />
+            </div>
+            <div class="col-md-3 col-4">
+
+            </div>
+
+          </div>
+
+
+
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+
+                <div class="form-group row">
+                  <label class="col-sm-3 text-black">Email :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 text-black">Şifre :</label>
+                  <div class="col-sm-9">
+                    <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password"
+                      class="form-control" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin:5px; padding:5px; color:red; min-height: 32px; text-align: center;" class="row">
+
+              <label class="col-sm-3 "></label>
+              <div class="col-sm-9" *ngIf="errorMessage!=''">
+                {{errorMessage}}
+              </div>
+
+
+
+            </div>
+          </div>
+          <div class="card-footer">
+
+
+
+            <div class="row">
+              <div class="col-12 col-offset-2 col-sm-4 col-md-4" style="margin-top:10px;">
+                <!-- <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div> -->
+                <button type="submit" class="btn btn-block btn-warning" style="margin-right : 5px; font-weight: bold">
+                  Giriş
+                </button>
+              </div>
+              <div class="col-12 col-sm-8 col-md-8" style="margin-top:10px;">
+                <!-- <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div> -->
+
+                <a class="btn btn-block btn-light" style="margin-right: 5px; font-weight: bold"
+                  [routerLink]="['/register']">
+                  Bayilik Başvurusu
+                </a>
+              </div>
+              <!-- <div class="col-5 col-md-3">
+                                  <button type="button" class="btn btn-warning pull-right" (click)="signInWithGoogle()" style="margin-right:5px; background-color:#db4a39 ; border:none;">
+                                        <i class="fa fa-google"> </i>  Login</button>
+                              </div> -->
+              <!--   <div class="col-4 col-md-3">
+             <button type="button" class="btn btn-warning pull-right" (click)="singInWithFB()" style="margin-right:5px; background-color:#3b5998; border:none;">
+                                        <i class="fa fa-facebook">  </i> Login </button> 
+                  </div>-->
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-3 col-0">
+      <!-- <img
+            src="http://localhost:5500/rest/images/90ef3de4-ad4f-4ab5-8724-22732856bd2f.png"
+            class="img-fluid"
+          /> -->
+    </div>
+  </div>
+  <div class="row" style="margin:0; height: 10vh">
+
+  </div>
+  <div class="row" style="margin:0; height: 10vh">
+    <div class="col-10  offset-1 col-md-6  offset-md-0" [hidden]="showForMobile">
+      <span class="fa fa-map-marker" style="color: black">
+        Kavaklı Mah. İstanbul Cad. NO.19/1 Beylikdüzü &nbsp;&nbsp;&nbsp;34520 -
+        ISTANBUL - TURKEY</span>
+    </div>
+
+    <div class="col-11 offset-0 col-md-6  offset-md-0" style="font-size: 14px; color: black">
+      <span class="pull-right fa fa-copyright">
+        2018 ASİL GROUP - Tüm hakları saklıdır.</span>
+    </div>
+  </div>
+</div>

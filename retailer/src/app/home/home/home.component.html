@@ -1,0 +1,611 @@
+<!-- 
+
+
+<div class="carousel-fluid">
+    <div id="content">
+
+
+        <div id="gallery_img">
+
+            <div id="image">
+
+            </div>
+            <div id="lefty"> <i class="fa fa-chevron-left"></i> </div>
+            <div id="righty"> <i class="fa fa-chevron-right"></i> </div>
+            <div id="play"> <i class="fa fa-play"></i> </div>
+            <div id="pause"> <i class="fa fa-pause"></i> </div>
+            <div id="expand"> <i class="fa fa-expand"></i> </div>
+        </div>
+        <div id="thumbs">
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/a.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/b.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/c.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/d.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/e.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/f.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/g.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/h.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/i.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/j.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/k.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/l.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/m.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/n.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/o.jpg"> </div>
+            <div class="thumbs_style"> <img src="{{nodejsApi}}/images/thumbs/p.jpg"> </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="carousel-fluid">
+  <ngb-carousel [wrap]="true" #carousel [interval]="3000" [pauseOnHover]="pauseOnHover" (slide)="onSlide($event)">
+    <ng-template ngbSlide *ngFor="let slider of sliders">
+      <a [href]="slider.link">
+
+
+        <div class="picsum-img-wrappe">
+          <img src="{{ nodejsApi }}/{{ slider.imageUrl }}"  style="width:100%; border: none; outline: none" />
+        </div>
+        <div class="carousel-caption">
+          <h3>{{ slider.title }}</h3>
+        </div>
+      </a>
+    </ng-template>
+  </ngb-carousel>
+</div>
+
+<br />
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="col-md-6">
+        <br />
+
+        <img
+          src="{{ nodejsApi }}/{{ general.imageUrlTwo }}"
+          class="img-fluid"
+        />
+      </div>
+
+      <div class="col-md-6"></div>
+    </div>
+    <div class="col-md-7">
+      {{ general.summary }}
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class="row" style="padding: 0; margin: 0">
+    <div class="col-md-3"></div>
+    <div class="col-md-6" style="
+        text-align: center;
+        color: black;
+        font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 20px;
+      ">
+      <!-- <h2 style="font-weight: bold">{{ general.latestProducts }}</h2> -->
+      <h2 style="font-weight: bold">Last Products</h2>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+
+  <div class="row" style="padding: 0; margin: 0">
+    <ngb-carousel>
+      <ng-template ngbSlide *ngFor="let product of productLatests">
+        <div class="row" style="padding: 0; margin: 0; padding-bottom: 20px">
+          <div class="col-6 col-md-3" style="
+              min-height: 500px;
+              margin: 0;
+              padding: 5px;
+              padding-bottom: 14px;
+            " *ngFor="let pro of product">
+
+            <div style="
+         border: 1px solid #ddd;
+         min-height: 500px;
+         padding: 5px;
+         color: black;
+         text-align: center;
+         background-color:white;
+       ">
+              <div class="row" style="min-height: 40px; padding: 0; margin: 0">
+                <div class="col-3 col-md-3" style="padding-left: 0">
+                  <!-- <div
+             *ngIf="pro.freeCargo"
+             class="fa fa-truck"
+             style="
+               margin-left: 0;
+               background-color: #ddd;
+               color: #444;
+               text-align: center;
+               padding: 10px;
+             "
+           ></div> -->
+                </div>
+                <div class="col-6 col-md-5"></div>
+
+                <div class="col-3 col-md-4" style="margin: 0; padding: 0">
+                  <div *ngIf="pro.discount !=0" style="
+               background-color: #ffa500;
+               border: 1px solid #ffa500;
+               color: #333;
+               text-align: center;
+             ">
+                    <div style="padding-top: 5px; padding-bottom: 5px">
+                      <span class="fa fa-arrow-down"></span> % {{ pro.discount }}
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="row">
+                <a [routerLink]="[
+             '/product',
+             pro.titleLower + '&' + pro._id
+           ]">
+                  <div class="col-md-12">
+                    <img src="{{ nodejsApi }}/{{ pro.image[0] }}" class="img-fluid image-size" />
+                  </div>
+                </a>
+              </div>
+              <div class="row" style="min-height: 70px">
+                <div class="col-md-12">
+                  <div style="color: black; margin-top: 5px; text-align: center; ">
+                    <a [routerLink]="['../../product',pro.titleLower + '&' + pro._id]" style="color: black;">{{
+                      pro.title }}</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="font-weight: bold; font-size:14px;">
+                  <span *ngIf="pro.volumeEntity != 'Not'">
+                    {{ pro.volume }}
+                    {{ pro.volumeEntity }}
+                  </span>
+                  <span *ngIf="pro.volumeEntity == 'Not'">
+                    {{ pro.volume }}
+                  </span>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="row" style="margin:0;">
+                <div class="col-md-12" *ngIf="pro.colors.length!=0" style="
+             text-align: center;
+             color: black;
+             padding-top: 10px;
+             padding-bottom: 10px;
+             margin-bottom: 10px;
+             font-size: 20px;
+           ">
+                  <div class="col-md-12"
+                    style="margin-top:5px; text-align:center;color:#ffa500;  padding:0;  font-size:22px;">
+
+                    {{pro.colors[0].color}}
+
+                  </div>
+                  <div>
+
+
+                    <label *ngIf="pro.colors[0].listPrice != pro.colors[0].salePrice && pro.colors[0].listPrice != 0"
+                      style=" text-decoration: line-through">
+                      {{ pro.colors[0].listPrice }}</label>
+                    <label style="text-decoration: line-through; margin-right: 10px;"
+                      *ngIf="pro.colors[0].listPrice != pro.colors[0].salePrice && pro.colors[0].listPrice != 0">
+                      {{ pro.colors[0].listPriceCurrency }}</label>
+                    <label> {{ pro.colors[0].salePrice }}</label>
+                    <label> {{ pro.colors[0].salePriceCurrency }}</label>
+                  </div>
+
+
+                </div>
+              </div>
+              <div class="row" style="margin:0;">
+                <div class="col-md-12" *ngIf="pro.sizes.length!=0" style="
+         text-align: center;
+         color: black;
+         padding-top: 10px;
+         padding-bottom: 10px;
+         margin-bottom: 10px;
+         font-size: 20px;
+       ">
+                  <div>
+                    <div class="col-md-12"
+                      style="margin-top:5px; text-align:center;color:#ffa500;  padding:0;  font-size:22px;">
+
+                      {{pro.sizes[0].volume}} {{pro.sizes[0].volumeEntity}}
+
+                    </div>
+
+                    <label *ngIf="pro.sizes[0].listPrice != pro.sizes[0].salePrice && pro.sizes[0].listPrice != 0"
+                      style=" text-decoration: line-through">
+                      {{ pro.sizes[0].listPrice }}</label>
+                    <label style="text-decoration: line-through; margin-right: 10px;"
+                      *ngIf="pro.sizes[0].listPrice != pro.sizes[0].salePrice && pro.sizes[0].listPrice != 0">
+                      {{ pro.sizes[0].listPriceCurrency }}</label>
+                    <label> {{ pro.sizes[0].salePrice }}</label>
+                    <label> {{ pro.sizes[0].salePriceCurrency }}</label>
+                  </div>
+
+
+
+                </div>
+              </div>
+
+              <div class="row" style="padding: 0; margin: 0;border-radius: 0">
+
+                <div class="col-md-12 col-12" *ngIf="pro.sizes.length!=1">
+
+                  There are different selections
+  
+  
+  
+  
+                </div>
+
+
+
+
+                <div *ngIf="pro.sizes.length==1" class="col-12 col-md-5" style="padding-left: 0; margin: 0">
+                  <input type="number" placeholder="1" name="orderQuantity" min="1" [disabled]="hide[pro._id]"
+                    #orderQuantity="ngModel" [(ngModel)]="pro.orderQuantity" style="
+               margin: 0;
+               border-radius: 0;
+               border: none;
+               border: 1px solid #eee;
+             " class="form-control" />
+                </div>
+
+                <div *ngIf="pro.sizes.length==1" class="col-12 col-md-7" style="padding: 0; margin: 0">
+                  <button [disabled]="hide[pro._id]" *ngIf="pro.colors.length!=0" class="btn btn-dark btn-block"
+                    (click)="
+                    addToCart(
+                      pro._id,
+                      pro.title,
+                      pro.orderQuantity,
+                      pro.colors[0].stockCode,
+                      pro.colors[0].salePrice,
+                      pro.colors[0].salePriceCurrency,
+                      pro.colors[0].color,
+                      pro.colors[0].volume,
+                      pro.colors[0].volumeEntity
+                    )
+                  " type="button">
+                    Add to Cart
+                  </button>
+                  <button [disabled]="hide[pro._id]" *ngIf="pro.sizes.length!=0" class="btn btn-dark btn-block" (click)="
+                  addToCart(
+                    pro._id,
+                    pro.title,
+                    pro.orderQuantity,
+                    pro.sizes[0].stockCode,
+                    pro.sizes[0].salePrice,
+                    pro.sizes[0].salePriceCurrency,
+                    pro.sizes[0].size,
+                    pro.sizes[0].volume,
+                    pro.sizes[0].volumeEntity
+                  )
+                " type="button">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+</div>
+
+<br />
+<br />
+
+<div class="container">
+  <div class="row" style="padding: 0; margin: 0; padding: 5px;">
+    <div class="col-md-12" style=" padding:0; margin:0; background-color: #444;">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item" *ngFor="let category of mainpageCategories">
+          <a class="nav-link {{ category.active }}" style="border-radius: 0; font-size: 20px" data-toggle="pill"
+            href="#{{ category.categoryNameLower }}">
+            {{ category.category }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row" style="padding: 0; margin: 0;">
+    <div class="tab-content">
+      <div *ngFor="let category of mainpageCategories" class="tab-pane fade {{ category.active }} {{ category.show }}"
+        id="{{ category.categoryNameLower }}">
+        <br />
+        <div class="row" style="padding: 0; margin: 0; padding-bottom: 20px">
+          <div class="col-6 col-md-3" style="
+              min-height: 300px;
+              margin: 0;
+              padding: 5px;
+              padding-bottom: 14px;
+              margin-bottom: 20px;
+            " *ngFor="let pro of category.products">
+            <div style="
+           border: 1px solid #ddd;
+           min-height: 500px;
+           padding: 5px;
+           color: black;
+           text-align: center;
+           background-color:white;
+         ">
+              <div class="row" style="min-height: 40px; padding: 0; margin: 0">
+                <div class="col-3 col-md-3" style="padding-left: 0">
+                  <!-- <div
+               *ngIf="pro.freeCargo"
+               class="fa fa-truck"
+               style="
+                 margin-left: 0;
+                 background-color: #ddd;
+                 color: #444;
+                 text-align: center;
+                 padding: 10px;
+               "
+             ></div> -->
+                </div>
+                <div class="col-6 col-md-5"></div>
+
+                <div class="col-3 col-md-4" style="margin: 0; padding: 0">
+                  <div *ngIf="pro.discount !=0" style="
+                 background-color: #ffa500;
+                 border: 1px solid #ffa500;
+                 color: #333;
+                 text-align: center;
+               ">
+                    <div style="padding-top: 5px; padding-bottom: 5px">
+                      <span class="fa fa-arrow-down"></span> % {{ pro.discount }}
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="row">
+                <a [routerLink]="[
+               '/product',
+               pro.titleLower + '&' + pro._id
+             ]">
+                  <div class="col-md-12">
+                    <img src="{{ nodejsApi }}/{{ pro.image[0] }}" class="img-fluid" />
+                  </div>
+                </a>
+              </div>
+              <div class="row" style="min-height: 100px">
+                <div class="col-md-12">
+                  <div style="color: black; margin-top: 5px; text-align: center; ">
+                    <a [routerLink]="['../../product',pro.titleLower + '&' + pro._id]" style="color: black;">{{
+                      pro.title }}</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="font-weight: bold; font-size:14px;">
+                  <span *ngIf="pro.volumeEntity != 'Not'">
+                    {{ pro.volume }}
+                    {{ pro.volumeEntity }}
+                  </span>
+                  <span *ngIf="pro.volumeEntity == 'Not'">
+                    {{ pro.volume }}
+                  </span>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="row" style="margin:0;">
+                <div class="col-md-12" *ngIf="pro.colors.length!=0" style="
+               text-align: center;
+               color: black;
+               padding-top: 10px;
+               padding-bottom: 10px;
+               margin-bottom: 10px;
+               font-size: 20px;
+             ">
+                  <div class="col-md-12"
+                    style="margin-top:5px; text-align:center;background-color:#eee;  padding:0;  font-size:22px;">
+
+                    {{pro.colors[0].color}}
+
+                  </div>
+                  <div>
+
+
+                    <label *ngIf="pro.colors[0].listPrice != pro.colors[0].salePrice && pro.colors[0].listPrice != 0"
+                      style=" text-decoration: line-through">
+                      {{ pro.colors[0].listPrice }}</label>
+                    <label style="text-decoration: line-through; margin-right: 10px;"
+                      *ngIf="pro.colors[0].listPrice != pro.colors[0].salePrice && pro.colors[0].listPrice != 0">
+                      {{ pro.colors[0].listPriceCurrency }}</label>
+                    <label> {{ pro.colors[0].salePrice }}</label>
+                    <label> {{ pro.colors[0].salePriceCurrency }}</label>
+                  </div>
+
+
+                </div>
+              </div>
+              <div class="row" style="margin:0;">
+                <div class="col-md-12" *ngIf="pro.sizes.length!=0" style="
+           text-align: center;
+           color: black;
+           padding-top: 10px;
+           padding-bottom: 10px;
+           margin-bottom: 10px;
+           font-size: 20px;
+         ">
+                  <div>
+                    <div class="col-md-12"
+                      style="margin-top:5px; text-align:center; color:orange;  padding:0;  font-size:22px;">
+
+                      {{pro.sizes[0].volume}} {{pro.sizes[0].volumeEntity}}
+
+                    </div>
+
+                    <label *ngIf="pro.sizes[0].listPrice != pro.sizes[0].salePrice && pro.sizes[0].listPrice != 0"
+                      style=" text-decoration: line-through">
+                      {{ pro.sizes[0].listPrice }}</label>
+                    <label style="text-decoration: line-through; margin-right: 10px;"
+                      *ngIf="pro.sizes[0].listPrice != pro.sizes[0].salePrice && pro.sizes[0].listPrice != 0">
+                      {{ pro.sizes[0].listPriceCurrency }}</label>
+                    <label> {{ pro.sizes[0].salePrice }}</label>
+                    <label> {{ pro.sizes[0].salePriceCurrency }}</label>
+                  </div>
+
+
+
+                </div>
+              </div>
+
+              <div class="row" style="padding: 0; margin: 0; border-radius: 0">
+                <div class="col-md-12 col-12" *ngIf="pro.sizes.length!=1">
+
+                  There are different selections
+  
+  
+  
+  
+                </div>
+
+
+                <div *ngIf="pro.sizes.length==1" class="col-12 col-md-5" style="padding-left: 0; margin: 0">
+                  <input type="number" placeholder="1" name="orderQuantity" min="1" [disabled]="hide[pro._id]"
+                    #orderQuantity="ngModel" [(ngModel)]="pro.orderQuantity" style="
+                 margin: 0;
+                 border-radius: 0;
+                 border: none;
+                 border: 1px solid #eee;
+               " class="form-control" />
+                </div>
+
+                <div *ngIf="pro.sizes.length==1" class="col-12 col-md-7" style="padding: 0; margin: 0">
+                  <button [disabled]="hide[pro._id]" *ngIf="pro.colors.length!=0" class="btn btn-dark btn-block"
+                    (click)="
+                    addToCart(
+                      pro._id,
+                      pro.title,
+                      pro.orderQuantity,
+                      pro.colors[0].stockCode,
+                      pro.colors[0].salePrice,
+                      pro.colors[0].salePriceCurrency,
+                      pro.colors[0].color,
+                      pro.colors[0].volume,
+                      pro.colors[0].volumeEntity
+                    )
+                  " type="button">
+                    Add to Cart
+                  </button>
+                  <button [disabled]="hide[pro._id]" *ngIf="pro.sizes.length!=0" class="btn btn-dark btn-block" (click)="
+                  addToCart(
+                    pro._id,
+                    pro.title,
+                    pro.orderQuantity,
+                    pro.sizes[0].stockCode,
+                    pro.sizes[0].salePrice,
+                    pro.sizes[0].salePriceCurrency,
+                    pro.sizes[0].size,
+                    pro.sizes[0].volume,
+                    pro.sizes[0].volumeEntity
+                  )
+                " type="button">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class="container">
+  <div class="row" style="padding:0; margin:0;">
+    <div class="col-md-4" style="margin: 0; padding: 5px;" *ngFor="let article of articles">
+      <a class="articleTitle" [routerLink]="['./blog', article.titleLower + '&' + article._id]">
+        <div class="card-default" style="
+            color: black;
+            text-align: center;
+            min-height: 420px;
+            border: 1px solid #ddd;
+            background-color: white;
+          ">
+          <div class="card-body" style="text-decoration: center">
+            <div>
+              <img src="{{ nodejsApi }}/{{ article.imageUrl }}" alt="Random first slide" class="img-fluid" />
+            </div>
+          </div>
+          <!-- <h6 style="color: black; margin-top: 5px">
+              {{ article.createdAt | date: "short" }}
+            </h6> -->
+          <h6 style="color: black; margin-top: 5px; font-weight: bold; min-height: 40px;">
+            {{ article.title }}
+          </h6>
+          <p style="color: black">{{ article.description }}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class="container">
+  <br />
+
+  <div class="row" style="padding:0; margin:0;">
+    <div class="col-md-4" *ngFor="let video of videos" style="padding: 2px; width: 100%; height: auto">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" [src]="video.videoUrl" allowfullscreen></iframe>
+      </div>
+
+      <!-- <iframe  [src]="video.videoUrl" frameborder="0" allowfullscreen></iframe> -->
+    </div>
+  </div>
+</div>
+<br />
+
+<div class="container-fluid" style="
+    height: 60px;
+    background-color: orange;
+    text-align: center;
+    padding-top: 15px;
+  ">
+  <h5 style="text-align: center"> For more information +90 212 552 00 39 </h5>
+</div>
+
+<!-- <script>
+    $(document).ready(function () {
+
+
+        var name = 'a.jpg';
+        var index = 0;
+        var image_address, list, loop, last_index;
+        var scroll_position = 0;
+        var temp = 0;
+        var status = 'on';
+
+
+        $('.thumbs_style img').first().css('border', '3px solid #fff');
+        $('#image').html("<img class='gallery_img_style' src='http://localhost:5500/images/" + name + "'>");
+
+
+    })
+
+
+</script> -->

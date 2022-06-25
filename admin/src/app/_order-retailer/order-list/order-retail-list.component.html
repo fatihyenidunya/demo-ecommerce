@@ -1,0 +1,231 @@
+<!-- <div class="row">
+  <div class="col-md-2">
+    <button type="button" form='shipmentDetailForm' (click)="changePage(true)"
+      class="btn btn-default btn-block">Orders</button>
+  </div>
+  <div class="col-md-2">
+    <button type="button" form='shipmentDetailForm' (click)="changePage(false)"
+      class="btn btn-default btn-block">Products</button>
+  </div>
+  <div class="col-md-8">
+
+  </div>
+</div> -->
+<br>
+
+<div id="page1" [hidden]="!show">
+  <div class="card-header" style="border-bottom:none;">
+    <div class="row">
+      <div class="col-md-3">
+
+        <div class="row">
+          <div class="fa fa-search" aria-hidden="true" style="margin-right:-3px;
+          padding:8px;border:1px solid lightgray;background-color: white;"></div>
+          <div>
+            <input type="text" [(ngModel)]="textforsearch" (ngModelChange)="onChange($event)" class="form-control"
+              style="border-left:none; margin-left:0; border-radius: 0;
+            padding-left:2px;">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+        <select class="custom-select" [ngModel]="selectedStatus" (ngModelChange)="selectStatus($event)">
+          <option *ngFor="let status of statuses" [value]="status.status">
+            {{status.status}}
+          </option>
+        </select>
+
+      </div>
+
+      <div class="col-md-3">
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dps" [(ngModel)]="startDate" ngbDatepicker
+                #d="ngbDatepicker" (ngModelChange)="selectStartDate($event)">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-3">
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDate" ngbDatepicker
+                #d1="ngbDatepicker" (ngModelChange)="selectEndDate($event)">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d1.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+
+        <th scope="col-1">Kodu</th>
+        <th scope="col-1">Ülke</th>
+        <th scope="col-1">Ödeme</th>
+        <th scope="col-3">Müşteri</th>
+        <th scope="col-2">Toplam Tutar</th>
+        <th scope="col-2">Durumu</th>
+        <th scope="col-2">Sipariş T.</th>
+        <th scope="col-1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orderModel">
+        <td> {{order.referanceCode}}</td>
+        <td> {{order.billing[0].countryCode}}</td>
+        <td>
+          <p
+         
+          class="stock-size"
+          [style.color]="order.paymentStatus =='Paid' ? '#007F00' : '#e13030'
+          "
+        >
+        {{order.paymentStatus}}
+        
+        </p>
+          
+         </td>
+        <td> {{order.customer}}</td>
+        <td>{{order.grandTotal}} {{order.currency}}</td>
+        <td>{{order.status}}</td>
+        <td> {{order.createdAt | date :'short'}}</td>
+        <td>
+          <a class=" btn btn-primary"  style="font-size:12px;" [routerLink]="['./',order._id]">  Detay
+          </a>
+
+        </td>
+
+
+      </tr>
+    </tbody>
+  </table>
+  <br>
+
+  <div class="row">
+    <div class="col-md-8">
+
+      <ngb-pagination class="d-flex justify-content-left" style="margin-left: 15px;" size="sm"
+        [(collectionSize)]="totalItems" (pageChange)="nowPage($event)" [(page)]="pageNumber" [(pageSize)]="pageSize"
+        [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right" style="margin-right: 15px;">
+        <b>Bulundu :</b> {{totalItems}}
+      </div>
+
+    </div>
+  </div>
+  <br>
+
+</div>
+
+<div id="page2" [hidden]="show">
+  <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+  <div class="card bg-light" *ngFor="let product of groupForProducts" style="margin-bottom:10px;">
+    <div class="card-header" [style.border-color]=" product.stock < product.unit ? '#cc0000': ''">
+
+
+      <div class="row">
+        <div class="col-md-1">
+          <img src="{{nodejsApi}}/{{product.image[0]}}" class="card-img-top" style="width:50px;" height="50">
+        </div>
+
+        <div class="col-md-7">
+          <div class="row" style="font-weight: bold; ">
+            {{product.title}}
+          </div>
+          <div class="row">
+            Stock : <span > {{product.stock}}</span>
+          </div>
+
+        </div>
+        <div class="col-md-1" style="font-weight: bold; padding-left:30px; text-align:center;">
+          {{product.unit}}
+        </div>
+      
+        <div class="col-md-2" style="font-weight: bold; padding-left:20px;" >
+          {{product.grandTotal |
+            currency: '' :'':'2.2-2' }}
+
+          {{product.currency}}
+        </div>
+        <div class="col-md-1" style="font-weight: bold;">
+       
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card-body">
+
+      <div *ngIf="product.orders !== 'undefined'">
+        <div class="row">
+          <table class="table table-hover" style="background-color:white;">
+            <!-- <thead class="thead" >
+              <tr>
+
+
+                <th scope="col-2">Country</th>
+                <th scope="col-5">Customer</th>
+                <th scope="col-2"> Order Date</th>
+                <th scope="col-1">Unit</th>
+                <th scope="col-1">Box</th>
+                <th scope="col-1">Grand Total</th>
+
+              </tr>
+            </thead> -->
+            <tbody>
+
+              <tr *ngFor="let order of product.orders">
+               
+                <td scope="col-2" style=" border-color:white;"> 
+               {{order.country }}
+                </td>
+                <td scope="col-5" style=" border-color:white;"> {{order.customer}}</td>
+                <td scope="col-2" style=" border-color:white;  "> {{order.createdAt | date :'short'}}</td>
+                <td scope="col-1" style=" border-color:white; text-align:center; ">{{order.unit}}</td>               
+
+                <td scope="col-2" style=" border-color:white;">
+                  {{order.totalPrice |
+                    currency: '' :'':'2.2-2' }}
+
+                  {{order.currency}}
+                  <a class="pull-right" style="color:black; font-size:10px;"
+                    [routerLink]="['./',order.orderId]"> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                  </a>
+
+                </td>
+
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+
+
+</div>

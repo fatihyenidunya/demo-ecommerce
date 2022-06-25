@@ -1,0 +1,284 @@
+<br />
+<div class="row" style="margin:0;padding:0;">
+
+  <div class="col-sm-12" style="margin-left:0; margin-right:0; font-weight: bold; padding: 3px; background-color:#eee;">
+    <h2 style="font-weight: bold; text-align: center;">Adreslerim</h2>
+  </div>
+
+</div>
+<br />
+
+<div class="container">
+  <div class="col-md-12">
+
+
+    <br>
+    <div class="col-md-12">
+      <div class="row">
+
+        <button class="col-md-2 btn btn-secondary" [disabled]="!newPage" (click)="click()"> Adreslerim
+        </button>
+        <button class="col-md-2 btn btn-secondary" [disabled]="newPage" (click)="click()"> Yeni Adres
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="col-md-12" [hidden]="newPage">
+      <br>
+
+
+
+      <div class="row header-layout" [hidden]="hideForMobile">
+
+        <div class="col-md-1">
+          <h5 style="font-size: 15px; font-weight: bold">Adı</h5>
+        </div>
+
+        <div class="col-md-3">
+          <h5 style="font-size: 15px; font-weight: bold">Adres</h5>
+        </div>
+        <div class="col-md-2">
+          <h5 style="font-size: 15px; font-weight: bold">Şehir</h5>
+        </div>
+        <div class="col-md-2">
+          <h5 style="font-size: 15px; font-weight: bold">İlçe</h5>
+        </div>
+        <div class="col-md-2">
+          <h5 style="font-size: 15px; font-weight: bold">Telefon</h5>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12" style="margin:0; padding:0;">
+          <div class="col-sm-12" *ngFor="let contact of contacts">
+            <div class="row address-layout">
+
+              <div class="col-sm-12 col-md-1">
+                <div class="row">
+                  <span class="col-4" [hidden]="!hideForMobile" style="font-weight: bold; margin-top: 15px"> Adı
+                  </span>
+                  <div class="title col-8 col-md-12" style="margin-top: 15px">
+                    {{ contact.addressName}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-3">
+                <div class="row">
+                  <span class="col-4" [hidden]="!hideForMobile" style="font-weight: bold; margin-top: 15px">
+                    Adress
+                  </span>
+                  <div class="col-7 col-md-12" style="margin-top: 15px">
+                    {{contact.addressOne}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-2">
+                <div class="row">
+                  <span class="col-4" [hidden]="!hideForMobile" style="font-weight: bold; margin-top: 15px">
+                    City
+                  </span>
+                  <div class="col-7 col-md-12" style="margin-top: 15px">
+                    {{ contact.city}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-2">
+                <div class="row">
+                  <span class="col-4" [hidden]="!hideForMobile" style="font-weight: bold; margin-top: 15px">
+                    İlçe
+                  </span>
+
+                  <div class="col-8 col-md-12" style="margin-top: 15px">
+                    {{ contact.state }}
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-2">
+                <div class="row">
+                  <span class="col-4" [hidden]="!hideForMobile" style="font-weight: bold; margin-top: 15px">
+                    Telefon
+                  </span>
+                  <div class="col-8 col-md-12" style="margin-top: 15px">
+                    {{ contact.phone }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2" style="padding-top:10px;">
+                <button class="btn btn-light" (click)="editContact(contact._id)"> Düzenle
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <br>
+
+    <div class="col-md-12" [hidden]="!newPage">
+
+      <div class="row">
+
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+          <br>
+          <form class="white" #contactForm="ngForm" (ngSubmit)="OnSubmitContact(contactForm)">
+            <div class="card align-self-center">
+
+
+              <div class="card-body">
+
+
+
+                <br>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Adres Adı :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="addressName" #addressName="ngModel" [(ngModel)]="contact.addressName"
+                      [disabled]="disable" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Ad :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="name" #name="ngModel" [(ngModel)]="contact.name" [disabled]="disable"
+                      class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Soyad :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="lastName" #lastName="ngModel" [(ngModel)]="contact.lastName"
+                      [disabled]="disable" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">TC No :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="identityNumber" #identityNumber="ngModel"
+                      [(ngModel)]="contact.identityNumber" [disabled]="disable" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Email :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="email" #email="ngModel" [(ngModel)]="contact.email" [disabled]="disable"
+                      class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Telefon :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="phone" #phone="ngModel" [(ngModel)]="contact.phone" [disabled]="disable"
+                      class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Berber Unvanı :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="company" #company="ngModel" [(ngModel)]="contact.company"
+                      [disabled]="disable" class="form-control">
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Vergi Dairesi :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="taxPlace" #taxPlace="ngModel" [(ngModel)]="contact.taxPlace"
+                      [disabled]="disable" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Vergi No :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="taxNo" #taxNo="ngModel" [(ngModel)]="contact.taxNo" [disabled]="disable"
+                      class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Posta kodu :</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="zipCode" #zipCode="ngModel" [(ngModel)]="contact.zipCode"
+                      [disabled]="disable" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Şehir :</label>
+                  <div class="col-sm-9">
+                    <select class="custom-select" [(ngModel)]="selectedCity" [disabled]="disable"
+                      [ngModelOptions]="{standalone: true}" (ngModelChange)="selectCity($event)">
+                      <option *ngFor="let city of cities" [ngValue]="city">
+                        {{city.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">İlçe :</label>
+                  <div class="col-sm-9">
+                    <select class="custom-select" [(ngModel)]="selectedState" [disabled]="disable"
+                      [ngModelOptions]="{standalone: true}" (ngModelChange)="selectState($event)">
+                      <option *ngFor="let state of states" [ngValue]="state">
+                        {{state.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Adres :</label>
+                  <div class="col-sm-9">
+
+
+                    <textarea class="form-control" [disabled]="disable" [(ngModel)]="contact.addressOne"
+                      [ngModelOptions]="{standalone: true}">
+
+                      </textarea>
+                  </div>
+                </div>
+
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-light" [disabled]="deleteDisable"
+                  (click)="deleteContact(contact._id)"><i class="fa fa-eraser"></i> Sil</button>
+
+                <button type="button" class="btn btn-dark pull-right" type="submit" [disabled]="disable"><i
+                    class="fa fa-save"></i> Kaydet</button>
+                <button type="button" class="btn btn-info pull-right" style="margin-right:5px;" (click)="edit()"
+                  [disabled]="!disable"><i class="fa fa-edit"></i> Düzenle</button>
+
+
+
+              </div>
+
+
+            </div>
+          </form>
+        </div>
+
+        <div class="col-md-2">
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</div>
+
+<br>

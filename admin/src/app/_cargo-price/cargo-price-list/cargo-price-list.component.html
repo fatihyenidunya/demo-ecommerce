@@ -1,0 +1,53 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-9">
+        <h4 class="card-title"> Kargo Fiyat Listesi</h4>
+
+      </div>
+      <div class="col-sm-3">
+        <h4 class="card-text pull-right">
+
+          <a class="btn btn-dark" [routerLink]="['./',0,'edit']"> Yeni </a>
+        </h4>
+      </div>
+    </div>
+
+  </div>
+
+
+  <br>
+
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+
+        <th scope="col-3">Kargo Firması</th>
+        <th scope="col-2">Tip</th>
+        <th scope="col-2">Alt Limit</th>
+        <th scope="col-2">Limit</th>
+        <th scope="col-2">Price</th>
+        <th scope="col-1"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cargoPrice of cargoPrices">
+
+
+        <td>{{ cargoPrice.company}}</td>
+        <td>{{ cargoPrice.type}}</td>
+        <td>{{ cargoPrice.subLimit}}</td>
+        <td>{{ cargoPrice.limit}}</td>
+        <td>{{ cargoPrice.price}} {{ cargoPrice.currency}} </td>
+        <td>
+          <a class="btn btn-primary" [routerLink]="['./',cargoPrice._id ,'edit']"> Detay </a>
+
+        </td>
+
+
+      </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,397 @@
+<div class="row" style="margin-top:2rem; height: 40px;">
+  <div class="col-sm-2 align-self-start">
+  </div>
+  <div class="col-sm-8 align-self-center">
+    <div *ngFor="let alert of alerts">
+      <ngb-alert [type]="alert.type" (close)="alertClose(alert)">{{ alert.message }} - you will redirect to the list in
+        {{counter}}</ngb-alert>
+    </div>
+  </div>
+  <div class="col-sm-2 align-self-end">
+  </div>
+</div>
+
+
+<div class="row" style="margin-top:2rem">
+  <div class="col-sm-1 align-self-start">
+  </div>
+  <div class="col-sm-10 align-self-center">
+    <div class="card-header" style="padding-bottom: 20px; border-bottom:none;">
+
+      # <span style="font-weight: bold">{{generalId}} </span>
+      <a class="btn btn-dark pull-right" [routerLink]="['../../']"> x</a>
+    </div>
+    <br>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+          aria-selected="false">General</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+          aria-selected="false">Image</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <br>
+
+      <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <form class="col s12 white" #customForm="ngForm" (ngSubmit)="OnSubmit(customForm)">
+          <div class="card align-self-center">
+
+
+            <div class="card-body text-right">
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Logo :</label>
+                <div class="col-sm-3">
+                  <img src="{{nodejsApi}}/{{general.imageUrl}}" class="card-img-top" style="width:100;" height="100">
+                  <input class="validate form-control input-underline input-sm" type="file" name="image"
+                    (change)="handleFileInput($event)">
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label"> Meta Title :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="title" #title="ngModel" [(ngModel)]="general.title" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label"> Meta Description :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="metaDescription" #metaDescription="ngModel" [(ngModel)]="general.metaDescription" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Phone :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="phone" #phone="ngModel" [(ngModel)]="general.phone" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Email :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="mail" #mail="ngModel" [(ngModel)]="general.mail" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">RegisterBtn :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="registerBtn" #registerBtn="ngModel" [(ngModel)]="general.registerBtn"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">LoginBtn :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="loginBtn" #loginBtn="ngModel" [(ngModel)]="general.loginBtn"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">aboutUs :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="aboutUs" #aboutUs="ngModel" [(ngModel)]="general.aboutUs"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Contact :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="contact" #contact="ngModel" [(ngModel)]="general.contact"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">ProductsBtn :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="productsBtn" #productsBtn="ngModel" [(ngModel)]="general.productsBtn"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Catalog :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="catalog" #catalog="ngModel" [(ngModel)]="general.catalog"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Language :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="language" #language="ngModel" [(ngModel)]="general.language"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <!-- <div class="form-group row">
+              <label class="col-sm-3 col-form-label">ImageUrlTwo :</label>
+              <div class="col-sm-9">
+                <img src="{{nodejsApi}}/{{general.imageUrlTwo}}" class="card-img-top" style="width:100;" height="60">
+                <input class="validate form-control input-underline input-sm" type="file" name="imageUrlTwo"
+                  (change)="handleFileInputTwo($event)">
+              </div>
+            </div> -->
+              <!-- <div class="form-group row">
+              <label class="col-sm-3 col-form-label">ImageUrlThree :</label>
+              <div class="col-sm-9">
+                <img src="{{nodejsApi}}/{{general.imageUrlThree}}" class="card-img-top" style="width:100;" height="60">
+                <input class="validate form-control input-underline input-sm" type="file" name="imageUrlThree"
+                  (change)="handleFileInputThree($event)">
+              </div>
+            </div> -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Summary :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="summary" #summary="ngModel" [(ngModel)]="general.summary"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">LatestProducts :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="latestProducts" #latestProducts="ngModel"
+                    [(ngModel)]="general.latestProducts" [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Info :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="info" #info="ngModel" [(ngModel)]="general.info" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">AboutUs Text :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="aboutUsText" #aboutUsText="ngModel" [(ngModel)]="general.aboutUsText"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Cargo :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="cargo" #cargo="ngModel" [(ngModel)]="general.cargo" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">CargoText :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="cargoText" #cargoText="ngModel" [(ngModel)]="general.cargoText"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">PrivacyPolicy :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="privacyPolicy" #privacyPolicy="ngModel" [(ngModel)]="general.privacyPolicy"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">privacyPolicyText :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="privacyPolicyText" #privacyPolicyText="ngModel"
+                    [(ngModel)]="general.privacyPolicyText" [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">newsletterHeader :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="newsletterHeader" #newsletterHeader="ngModel"
+                    [(ngModel)]="general.newsletterHeader" [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">instagram :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="instagram" #instagram="ngModel" [(ngModel)]="general.instagram"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">facebook :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="facebook" #facebook="ngModel" [(ngModel)]="general.facebook"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">youtube :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="youtube" #youtube="ngModel" [(ngModel)]="general.youtube"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">linkedin :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="linkedin" #linkedin="ngModel" [(ngModel)]="general.linkedin"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">tweeter :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="tweeter" #tweeter="ngModel" [(ngModel)]="general.tweeter"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Copyright :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="copyright" #copyright="ngModel" [(ngModel)]="general.copyright"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">MessageText :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="messageText" #messageText="ngModel" [(ngModel)]="general.messageText"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">namePlaceholder :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="namePlaceholder" #namePlaceholder="ngModel"
+                    [(ngModel)]="general.namePlaceholder" [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">lastNamePlaceholder :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="lastNamePlaceholder" #lastNamePlaceholder="ngModel"
+                    [(ngModel)]="general.lastNamePlaceholder" [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">phonePlaceholder :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="phonePlaceholder" #phonePlaceholder="ngModel"
+                    [(ngModel)]="general.phonePlaceholder" [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">messagePlaceholder :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="messagePlaceholder" #messagePlaceholder="ngModel"
+                    [(ngModel)]="general.messagePlaceholder" [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">contactText :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="contactText" #contactText="ngModel" [(ngModel)]="general.contactText"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">phoneText :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="phoneText" #phoneText="ngModel" [(ngModel)]="general.phoneText"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">mailText :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="mailText" #mailText="ngModel" [(ngModel)]="general.mailText"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">webAdress :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="webAdress" #webAdress="ngModel" [(ngModel)]="general.webAdress"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">address :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="address" #address="ngModel" [(ngModel)]="general.address"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">addressText :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="addressText" #addressText="ngModel" [(ngModel)]="general.addressText"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">workingHours :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="workingHours" #workingHours="ngModel" [(ngModel)]="general.workingHours"
+                    [disabled]="disable" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">workingHoursText :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="workingHoursText" #workingHoursText="ngModel"
+                    [(ngModel)]="general.workingHoursText" [disabled]="disable" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-danger" [disabled]="!disable" (click)="confirmToDelete()"><i
+                  class="fa fa-eraser"></i></button>
+
+              <button type="button" class="btn btn-success pull-right" type="submit" [disabled]="disable"><i
+                  class="fa fa-save"></i></button>
+              <button type="button" class="btn btn-info pull-right" style="margin-right:5px;" (click)="edit()"
+                [disabled]="!disable"><i class="fa fa-edit"></i></button>
+
+
+
+            </div>
+
+
+          </div>
+        </form>
+
+      </div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+
+        <br>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Image :</label>
+          <div class="col-sm-3">
+            <form class="col s12 white" #secondImageForm="ngForm" (ngSubmit)="OnSubmitSecondImage(secondImageForm)">
+            <img src="{{nodejsApi}}/{{general.imageUrlTwo}}" class="card-img-top" style="width:100;" height="100">
+            <input class="validate form-control input-underline input-sm" type="file" name="image"
+              (change)="handleFileInputTwo($event)">
+
+              
+              <button type="button" class="btn btn-success" type="submit">Send</button>
+            </form>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="col-sm-1 align-self-end">
+  </div>
+</div>

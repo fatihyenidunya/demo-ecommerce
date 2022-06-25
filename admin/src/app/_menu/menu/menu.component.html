@@ -1,0 +1,58 @@
+<div class="card-header">
+  <div class="row">
+    <div class="col-sm-9">
+      <h4 class="card-title"> Menu Yetkileri</h4>
+
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="row">
+  <div class="col-sm-2">
+
+  </div>
+  <div class="col-sm-2">
+    <h5 class="card-title"> Menu</h5>
+
+  </div>
+
+  <div class="col-sm-4">
+    <select class="custom-select" [ngModel]="selectedRole" (ngModelChange)="selectRole($event)"
+      [ngModelOptions]="{standalone: true}">
+      <option *ngFor="let role of roles" [value]="role.userRole">
+        {{role.userRole}}
+      </option>
+    </select>
+
+  </div>
+</div>
+<br>
+<div *ngFor="let menu of menus">
+  <div class="row">
+    <div class="col-sm-2">
+
+    </div>
+    <div class="col-sm-3">
+  
+      {{menu.name}} 
+    </div>
+    <div class="col-md-2">
+      <input type="number" [disabled]='disable' style="font-size:12px;" id="quantity" [(ngModel)]="menu.order"
+        name="quantity" min="1" max="50">
+    </div>
+    <div class="col-sm-4">
+
+      <input type="checkbox" [disabled]='disable' name="hide" #hide="ngModel" style="width:20px; height:20px;"
+        [(ngModel)]="menu.hide" (change)="saveMenu(menu.order,menu.name,menu._id,menu.link,menu.icon)"
+        class="form-control">
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<br>

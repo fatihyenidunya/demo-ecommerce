@@ -1,0 +1,43 @@
+<div class="signup-page" [@routerTransition]>
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+      <!-- <img class="user-avatar" src="assets/images/logo.png" width="150px" /> -->
+      <h1>Yeni Rol</h1>
+      <form class="col s12" style="background-color:#eee;" #roleRegistrationForm="ngForm"
+        (ngSubmit)="OnSubmit(roleRegistrationForm)">
+        <div class="form-content">
+          <div class="form-group">
+
+            <input class="validate form-control  input-sm" type="text" placeholder="Role" name="userRole"
+              #userRole="ngModel" [(ngModel)]="role.userRole" required>
+
+          </div>
+
+        </div>
+
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+              <button [disabled]="!roleRegistrationForm.valid" [hidden]="hide" class="btn btn-large btn-success pull-left"
+                type="submit"> Kaydet</button>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-danger" [hidden]="hide"  [disabled]="!disable" (click)="userDelete()"><i
+                  class="fa fa-eraser"> Sil</i></button>
+            </div>
+
+          </div>
+
+          <br>
+        </div>
+
+
+
+
+      </form>
+    </div>
+  </div>
+</div>

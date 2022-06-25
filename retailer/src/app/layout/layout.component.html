@@ -1,0 +1,450 @@
+<div class="container-fluid" [hidden]="hideForMobile"
+  style="background-color: #fff; padding-top: 10px; border-bottom:1px solid #eee; padding-bottom: 10px">
+  <div class="container">
+    <div class="col-md-12" style="padding-left:0; padding-right:0;">
+      <div class="row" style="padding: 0; margin: 0">
+        <div class="col-6 offset-3 col-md-4 offset-md-0"
+          style="padding:0; padding-top: 10px; font-family:Arial, Helvetica, sans-serif; color: black">
+          <i class="fa fa-phone"> &nbsp; +90 212 552 00 39 </i>
+        </div>
+        <div class="col-0 offset-0 col-md-4 offset-md-0" style="padding-top: 5px; color: black">
+          <div class="form-inline col-9 col-md-5">
+            <!-- <div class="ng-autocomplete">
+              <ng-autocomplete #auto [data]="searchProducts" [searchKeyword]="keyword" (selected)="selectEvent($event)"
+                (inputChanged)="onChangeSearch($event)" (inputFocused)="onFocused($event)" placeHolder="Search"
+                minQueryLength="3" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+              </ng-autocomplete>
+
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.title"></a>
+              </ng-template>
+
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+            </div> -->
+          </div>
+        </div>
+        <div class="col-6 offset-2 col-md-4 offset-md-0" style="padding-right: 0;">
+          <div class="pull-right" style="padding-top:10px; font-family:Arial, Helvetica, sans-serif; color: black">
+            <i class="fa fa-envelope "> &nbsp; destek@nishman.com.tr</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" [hidden]="hideForMobile" style="background-color: white;  padding-top: 10px; padding-bottom: 10px">
+  <div class="container">
+    <div class="row" style="padding: 0; margin: 0">
+      <div class="col-md-4" [hidden]="hideForMobile">
+        <div class="row left-vertical-align" style=" padding:0;margin:0;">
+
+          <a [href]="general.facebook">
+            <i class="fa fa-facebook-square" style="font-size: 32px; color: #1877f2" aria-hidden="true">
+            </i>
+          </a>
+
+          <a [href]="general.instagram">
+            <i class="fa fa-instagram" style="font-size: 32px; color: #c32aa3; margin-left: 11px" aria-hidden="true">
+            </i>
+          </a>
+          <a [href]="general.twitter">
+            <i class="fa fa-twitter-square" style="font-size: 32px; color: #1da1f2; margin-left: 11px"
+              aria-hidden="true">
+            </i>
+          </a>
+
+          <a [href]="general.linkedin">
+            <i class="fa fa-linkedin-square" style="font-size: 32px; color: #0a66c2; margin-left: 11px"
+              aria-hidden="true">
+            </i>
+          </a>
+
+          <a [href]="general.youtube">
+            <i class="fa fa-youtube-square" style="font-size: 32px; color: #ff0000; margin-left: 11px"
+              aria-hidden="true">
+            </i>
+          </a>
+
+          <a [href]="general.youtube">
+            <i class="fa fa-pinterest-square" style="font-size: 32px; color: #bd081c; margin-left: 11px"
+              aria-hidden="true">
+            </i>
+          </a>
+        </div>
+
+
+      </div>
+      <div class="col-md-4">
+
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-10">
+          <a class="nav-link" [routerLink]="['']">
+            <img src="{{ nodejsApi }}/{{ general.imageUrl }}" class="img-fluid" />
+          </a>
+        </div>
+        <div class="col-md-0">
+
+        </div>
+
+
+      </div>
+
+      <div class="col-md-4 " style="padding:0; ">
+        <div class="row pull-right vertical-align" style="list-style-type: none; padding:0;margin:0;">
+          <div>
+            <div class="notification" (click)="openSearchLayout()">
+              <i class="fa fa-search" aria-hidden="true"></i>
+
+            </div>
+          </div>
+          <div>
+            <div class="dropdown">
+              <button class="profileBtn" style="margin-right: 10px; margin-left:10px;" id="dropdownMenu2"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+                {{ customerName }}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <a class="dropdown-item" [routerLink]="['/profile', customerId]">
+                  Profile</a>
+                <a class="dropdown-item" [routerLink]="['/order', customerId]">
+                  My Orders
+                </a>
+
+                <a class="dropdown-item" [routerLink]="['/address', customerId]">
+                  My Address
+                </a>
+
+                <a class="dropdown-item" [routerLink]="['/chat', customerId]">
+                  Contact</a>
+
+                <div class="dropdown-divider"></div>
+                <button class="btn" style="border-radius: 0; background-color: white" (click)="signOut()">
+                  SignOut
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <a [routerLink]="['/cart']">
+              <div class="notification">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span *ngIf="cartProductCount != 0" class="badge">{{
+                  cartProductCount
+                  }}</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+      <!-- 
+      <div class="col-md-1" style="background-color:red;">
+
+      </div>
+      <div class="col-md-2" style="background-color:gray;">
+
+
+      </div>
+      <div class="col-md-1" style="background-color:orange;">
+
+      </div> -->
+    </div>
+  </div>
+</div>
+<div class=" row" [hidden]="!hideForMobile" style=" padding:0; margin:0; padding-bottom: 10px">
+
+
+      <div class="col-md-3 col-sm-4 col-4" style="padding-top:0.4rem; padding-right:0;padding-left:2rem;  " >
+ 
+        <a class="nav-link" [routerLink]="['']">
+          <img src="{{ nodejsApi }}/{{ general.imageUrl }}" class="img-fluid" />
+        </a>
+
+      </div>
+  
+
+      <div class="col-md-8 col-sm-7 col-8" style="padding:0; margin:0; ">
+       
+        <div class="row pull-right vertical-align" style="list-style-type: none; padding:0; padding-right:1rem; margin:0;">
+          <div>
+            <div class="notification" (click)="openSearchLayout()">
+              <i class="fa fa-search" aria-hidden="true"></i>
+
+            </div>
+          </div>
+          <div>
+            <div class="dropdown">
+              <button class="profileBtn" style="margin-right: 5px; margin-left:5px;" id="dropdownMenu2"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+                {{ customerName }}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <a class="dropdown-item" [routerLink]="['/profile', customerId]">
+                  Profile</a>
+                <a class="dropdown-item" [routerLink]="['/order', customerId]">
+                  My Orders
+                </a>
+
+                <a class="dropdown-item" [routerLink]="['/address', customerId]">
+                  My Address
+                </a>
+
+                <a class="dropdown-item" [routerLink]="['/chat', customerId]">
+                  Contact</a>
+
+                <div class="dropdown-divider"></div>
+                <button class="btn" style="border-radius: 0; background-color: white" (click)="signOut()">
+                  SignOut
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <a [routerLink]="['/cart']">
+              <div class="notification">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span *ngIf="cartProductCount != 0" class="badge">{{
+                  cartProductCount
+                  }}</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+
+</div>
+
+<div class="container-fluid" [hidden]="hideForMobile" style="background-color: white; border-top:1px solid #eee;">
+  <div class="container" style="padding-left: 0; padding-right: 0">
+    <nav class="navbar navbar-expand-lg">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" style="color:red;"
+        data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor02">
+
+        <ul class="navbar-nav mr-auto" style="font-size: 20px;" *ngFor="let category of categories">
+
+          <li class="nav-item" *ngIf="category.subCategories[0].length===0" style="background-color:white; ">
+
+            <a href="#" role="button" [routerLink]="['/category', category.nameLower]"
+              style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Helvetica, sans-serif; text-decoration: none; cursor: pointer"
+              aria-haspopup="true" aria-expanded="false"><span class="changeColor"> {{ category.name }}</span> </a>
+
+          </li>
+          <li class="nav-item" *ngIf="category.subCategories[0].length!=0" style="background-color:white;">
+            <div class="dropdown">
+              <div class="dropdown-toggle"
+                style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Helvetica, sans-serif; text-decoration: none; cursor: pointer"
+                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="changeColor"> {{ category.name }}</span>
+              </div>
+              <div class="dropdown-menu " aria-labelledby="dropdownMenuButton" style="padding:10px;">
+                <span class="dropdown-item" *ngFor="let _category of category.subCategories[0]">
+                  <a href="#" role="button" [routerLink]="['/category', _category.nameLower]"
+                    style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Helvetica, sans-serif; text-decoration: none; cursor: pointer"
+                    aria-haspopup="true" aria-expanded="false">{{ _category.name }}</a>
+                  <br>
+                </span>
+              </div>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <a href="#" role="button" [routerLink]="['/contact']"
+          style="color: black; font-size: 20px;  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Helvetica, sans-serif; text-decoration: none; cursor: pointer"
+          aria-haspopup="true" aria-expanded="false"> <span class="changeColor"> CONTACT</span> </a>
+
+      </div>
+    </nav>
+  </div>
+</div>
+
+
+
+<div style="background-color: #fff; border-top:1px solid #eee;">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="col-2 offset-9 col-md-1 offset-md-11 offset-lg-11 col-lg-1 pull-right" style="
+    position: fixed;
+    bottom: 0px;
+    z-index: 9999;
+
+    padding-bottom: 10px;
+    margin-bottom: 60px;
+    margin-right: 10px;
+    font-size: 12px;
+  ">
+  <button (click)="goTop()" [hidden]="hideGoTopBtn" class="btn btn-dark">
+    ^
+  </button>
+</div>
+
+<div class="container-fluid" style="background-color: black">
+  <div class="container">
+    <div class="row" style="
+        border-bottom: 1px solid #333;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      ">
+      <div class="col-12 col-md-4">
+        <img src="../../../assets/asilgroup_logo.png" alt="Random first slide" class="img-fluid"
+          style="border: none; outline: none" />
+        <h5 style="
+            color:white;
+            margin-top: 5px;
+            font-weight: bold;
+            font-size: 32px;
+          ">
+          Life Is Dynamic
+        </h5>
+      </div>
+      <div class="col-3 col-md-1"></div>
+      <div class="col-9 col-md-3">
+        <a class="nav-link" style="color: gray" [routerLink]="['/about']">Hakkımızda</a>
+        <a class="nav-link" style="color: gray" [routerLink]="['/contact']">İletişim</a>
+        <a class="nav-link" style="color: gray"
+          href="https://www.nishman.com.tr/assets/document/NishmanKatalog_EN_2019%20FINAL.pdf">Katalog</a>
+        <a class="nav-link" style="color: gray" [routerLink]="['/blog']">Blog</a>
+        <a class="nav-link" style="color: gray" [routerLink]="['/media']">Media</a>
+        <a class="nav-link" style="color: gray" [routerLink]="['/privacy']">Gizlilik Sözleşmesi</a>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="form-group row" style="padding:0; margin:0;">
+          <div class="col-0 col-sm-2" style="padding: 0; margin: 0"></div>
+          <label class="col-12 col-sm-10" style="color:gray; padding:0; margin:0; margin-bottom:3px;">E-Bulten</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-9 col-sm-2" style="padding: 0; margin: 0"></div>
+          <div class="col-9 col-sm-7" style="padding: 0; margin: 0">
+            <input type="text" name="mail" placeholder="Email" #mail="ngModel" [(ngModel)]="newsletter.mail"
+              class="form-control" />
+          </div>
+          <button type="button" class="col-3 btn btn-warning" (click)="OnSubmitNewsletter()">
+            Ekle
+          </button>
+        </div>
+        <div class="form-group row" [hidden]="hideForMobile">
+          <div class="col-2 col-sm-2 col-md-3" style="padding: 0; margin: 0"></div>
+
+          <div class="col-10 col-sm-10 col-md-9" style="padding: 0; margin: 0">
+            <a [href]="general.facebook">
+              <i class="fa fa-facebook-square" style="font-size: 40px; color: white" aria-hidden="true">
+              </i>
+            </a>
+
+            <a [href]="general.instagram">
+              <i class="fa fa-instagram" style="font-size: 40px; color: white; margin-left: 11px" aria-hidden="true">
+              </i>
+            </a>
+            <a [href]="general.twitter">
+              <i class="fa fa-twitter-square" style="font-size: 40px; color: white; margin-left: 11px"
+                aria-hidden="true">
+              </i>
+            </a>
+
+            <a [href]="general.linkedin">
+              <i class="fa fa-linkedin-square" style="font-size: 40px; color: white; margin-left: 11px"
+                aria-hidden="true">
+              </i>
+            </a>
+
+            <a [href]="general.youtube">
+              <i class="fa fa-youtube-square" style="font-size: 40px; color: white; margin-left: 11px"
+                aria-hidden="true">
+              </i>
+            </a>
+
+            <a [href]="general.youtube">
+              <i class="fa fa-pinterest-square" style="font-size: 40px; color: white; margin-left: 11px"
+                aria-hidden="true">
+              </i>
+            </a>
+          </div>
+        </div>
+        <br />
+      </div>
+      <div class="offset-1 col-11 col-md-4" [hidden]="!hideForMobile">
+        <div class="form-group row">
+          <a [href]="general.facebook">
+            <i class="fa fa-facebook-square" style="font-size: 36px; color: white" aria-hidden="true">
+            </i>
+          </a>
+
+          <a [href]="general.instagram">
+            <i class="fa fa-instagram" style="font-size: 36px; color: white; margin-left: 11px" aria-hidden="true">
+            </i>
+          </a>
+          <a [href]="general.twitter">
+            <i class="fa fa-twitter-square" style="font-size: 36px; color: white; margin-left: 11px" aria-hidden="true">
+            </i>
+          </a>
+
+          <a [href]="general.linkedin">
+            <i class="fa fa-linkedin-square" style="font-size: 36px; color: white; margin-left: 11px"
+              aria-hidden="true">
+            </i>
+          </a>
+
+          <a [href]="general.youtube">
+            <i class="fa fa-youtube-square" style="font-size: 36px; color: white; margin-left: 11px" aria-hidden="true">
+            </i>
+          </a>
+
+          <a [href]="general.youtube">
+            <i class="fa fa-pinterest-square" style="font-size: 36px; color: white; margin-left: 11px"
+              aria-hidden="true">
+            </i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="padding-top: 10px; padding-bottom: 20px; color:gray; padding-right: 0">
+      <div class="col-md-6" style="font-size: 14px">
+        Copyright <i class="fa fa-copyright"></i> 2018 ASİL GROUP - Tüm hakları
+        saklıdır.
+      </div>
+      <div class="col-md-2 col-9">
+
+        <img class="img-fluid pull-right" style="margin-top: 5px"
+          src="../assets/positivessl_trust_seal_lg_222x54.png" />
+
+
+
+        <script type="text/javascript"> //<![CDATA[
+          var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
+          document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+        //]]></script>
+        <script language="JavaScript" type="text/javascript">
+          TrustLogo("https://www.positivessl.com/images/seals/positivessl_trust_seal_lg_222x54.png", "POSDV", "none");
+        </script>
+      </div>
+      <div class="col-12 col-md-4">
+        <img class="img-fluid pull-right" style="margin-top: 12px" src="../assets/logo-band@1X.png" />
+
+        <!-- <i class=" btn fa fa-phone"> &nbsp; {{general.phone}}</i>
+
+        <i class="btn fa fa-envelope" style="position:absolute; right:0"> &nbsp; {{general.mail}}</i> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<br />
+<br />
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      
+      <div class="col">
+        <br />
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Name :</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              name="name"
+              #name="ngModel"
+              [(ngModel)]="profile.name"
+              [disabled]="disable"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Surname :</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              name="surname"
+              #surname="ngModel"
+              [(ngModel)]="profile.surname"
+              [disabled]="disable"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Company :</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              name="company"
+              #company="ngModel"
+              [(ngModel)]="profile.company"
+              [disabled]="disable"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Phone :</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              name="phone"
+              #phone="ngModel"
+              [(ngModel)]="profile.phone"
+              [disabled]="disable"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Email :</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              name="email"
+              #email="ngModel"
+              [(ngModel)]="profile.email"
+              [disabled]="disable"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-8"></div>
+          <div class="col-md-4">
+            <button
+              type="button"
+              class="btn btn-success pull-right"
+              type="button"
+              (click)="update()"
+              [disabled]="disable"
+            >
+              <i class="fa fa-save"></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-info pull-right"
+              style="margin-right: 5px"
+              (click)="edit()"
+              [disabled]="!disable"
+            >
+              <i class="fa fa-edit"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img class="img-fluid" [src]="nodejsApi + '/' + profile.document" />
+    </div>
+  </div>
+</div>
+
+<br />

@@ -1,0 +1,46 @@
+
+.title {
+  text-decoration: none;
+  color:black;
+}
+
+
+.title:hover {
+  text-decoration: none;
+  color:black;
+  cursor: pointer;
+}
+
+.image-size{
+    width: 98%;
+  }
+
+  
+.header-layout {
+  padding-top:20px;
+  padding-bottom:20px;
+  background-color:white;
+ border: 1px solid #E1E1E1;
+  margin-top:20px;
+  padding-left:0;
+  padding-right: 0;
+  margin-left:0;
+  margin-right:0;
+}
+.product-layout {
+
+  background-color:white;
+  border:1px solid #E1E1E1;
+
+  padding-top:0px;
+  padding-bottom:0px;
+}
+
+.image-size{
+  width: 98%;
+}
+
+.image-size-small{
+  width: 100%;
+
+}

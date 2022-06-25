@@ -1,0 +1,382 @@
+<br>
+<div class="container">
+  <div class="row" style="border:1px solid #e5e5e5; padding-bottom:5px; padding-top:5px; margin-bottom:10px;">
+    <div class="col-md-3">
+
+      <select class="custom-select" [(ngModel)]="selectedStatus" (ngModelChange)="selectStatus($event)">
+        <option *ngFor="let status of statuses" [value]="status.status">
+          {{status.status}}
+        </option>
+      </select>
+
+
+    </div>
+    <div class="col-md-2">
+
+      <button type="button" form='shipmentDetailForm' (click)="approveThis(selectedStatus)"
+        [disabled]="approvedButtonDisabled" class="btn btn-success pull-left">Onayla</button>
+
+    </div>
+
+    <div class="col-md-2">
+
+    </div>
+
+    <div class="col-md-2">
+
+
+    </div>
+    <div class="col-md-3">
+
+
+      <!-- <button class="btn btn-secondary pull-right" [disabled]="cargoBtnDisable" [routerLink]="['../../cargo',orderId]">
+        <i class="fa fa-truck" aria-hidden="true"> Kargo Bilgisi</i> </button> -->
+        <button class="btn btn-secondary pull-right"  [routerLink]="['../../payment',orderRetail.paymentId]">
+          <i class="fa fa-usd" aria-hidden="true"> Ödeme Bilgisi </i> </button>
+
+    </div>
+
+  </div>
+  <div class="row" style="border:1px solid #e5e5e5; border-bottom:none; background-color: #eee; padding-top:10px;">
+    <div class="col-md-3">
+      <p> <span class="bold-head"> Müşteri : </span> {{orderRetail.customer}} </p>
+    </div>
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-3">
+      <p> <span class="bold-head"> Toplam Tutar : </span> {{orderRetail.grandTotal | currency:' ':' ':'.2-2'}}
+        {{orderRetail.currency}} </p>
+    </div>
+
+    <div class="col-md-1">
+
+    </div>
+
+    <div class="col-md-4">
+      <p> <span class="bold-head"> Sipariş Tarihi : </span> {{orderRetail.createdAt | date: 'short' }}</p>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-12" style="padding-left:0; padding-right: 0;">
+      <div class="card card-bottom" style="border-top:none;">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-10">
+
+              <p> <span class="bold-head"> Müşteri Notu : </span>
+               <span *ngIf="orderRetail.note !='undefined'"> {{orderRetail.note}}  </span>
+              </p>
+
+
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-default" (click)="isCollapsed=
+              !isCollapsed"> Teslimat Bilgileri
+                <i class="fa fa-chevron-down" aria-hidden="true" [hidden]="isCollapsed"></i>
+                <i class="fa fa-chevron-up" aria-hidden="true" [hidden]="!isCollapsed"></i>
+              </button>
+            </div>
+
+
+          </div>
+
+          <br>
+
+          <div [ngbCollapse]="!isCollapsed">
+            <div class="row" style="margin:0; padding:0;">
+              <div class="col-md-6" style=" border:1px solid #ddd; padding-top:10px; background-color:white;">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-4 col-3">
+
+                      </div>
+                      <div class="col-md-4 col-4" style="padding-top:7px;">
+                        <span style="font-weight: bold;"> Teslimat Bilgileri </span>
+                      </div>
+
+                      <div class="col-md-4 col-4">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-3">
+                    <p> <span style="font-weight: bold;"> Adı: </span></p>
+                    <p> <span style="font-weight: bold;"> Soyadı: </span></p>
+                    <p> <span style="font-weight: bold;"> Telefon: </span></p>
+                    <p> <span style="font-weight: bold;"> Email: </span></p>
+                    <p> <span style="font-weight: bold;"> Adres 1: </span></p>                
+                    <p> <span style="font-weight: bold;"> İlçe: </span></p>
+                    <p> <span style="font-weight: bold;"> Şehir: </span></p>
+                    <p> <span style="font-weight: bold;"> Posta Kodu: </span></p>
+                  </div>
+
+                  <div class="col-md-9">
+                    <p> <span class="bold-head"> </span> {{ selectedDeliveryFname}} </p>
+                    <p> <span class="bold-head"> </span> {{ selectedDeliveryLname}} </p>
+                    <p> <span class="bold-head"> </span> {{ selectedDeliveryPhone}} </p>
+                    <p> <span class="bold-head"> </span> {{ selectedDeliveryEmail}} </p>
+                    <p> <span class="bold-head"> </span> {{ selectedDeliveryAddress1}}</p>                  
+                    <p> <span class="bold-head"> </span> {{ selectedDeliveryState}}</p>
+                    <p> <span class="bold-head"> </span> {{ selectedDeliveryCity}}</p>
+                    <p> <span class="bold-head"> </span> {{ selectedDeliveryZipCode}}</p>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-md-6" style="border:1px solid #ddd; padding-top:10px; background-color: white;">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-4">
+
+                      </div>
+                      <div class="col-md-4" style="padding-top:7px;">
+                        <span style="font-weight: bold;"> Fatura Bilgileri </span>
+                      </div>
+
+                      <div class="col-md-4">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-3">
+                    <p> <span style="font-weight: bold;"> Adı: </span></p>
+                    <p> <span style="font-weight: bold;"> Soyadı: </span></p>
+                    <p> <span style="font-weight: bold;"> Telefon: </span></p>
+                    <p> <span style="font-weight: bold;"> Email: </span></p>
+                    <p> <span style="font-weight: bold;"> Adres 1: </span></p>                   
+                    <p> <span style="font-weight: bold;"> İlçe: </span></p>
+                    <p> <span style="font-weight: bold;"> Şehir: </span></p>
+                    <p> <span style="font-weight: bold;"> Posta Kodu: </span></p>
+                  </div>
+
+                  <div class="col-md-9">
+                    <p> {{ selectedBillFname}} </p>
+                    <p> {{ selectedBillLname}} </p>
+                    <p> {{ selectedBillPhone}} </p>
+                    <p> {{ selectedBillEmail}} </p>
+                    <p> {{ selectedBillAddress1}} </p>                   
+                    <p> {{ selectedBillState}} </p>
+                    <p> {{ selectedBillCity}} </p>
+                    <p> {{ selectedBillZipCode}} </p>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6">
+
+
+            </div>
+            <div class="col-md-3">
+              <!-- <button type="button" [disabled]="orderCanceledBtnDisable" (click)="orderCanceled()"
+                class="btn btn-default pull-right">Order Canceled</button> -->
+
+            </div>
+
+
+          </div>
+
+
+          <br>
+
+          <div class="row">
+            <div class="col-md-12">
+              <ngb-tabset>
+                <ngb-tab title="Ürünler">
+                  <ng-template ngbTabContent>
+                    <br />
+                    <div class="row header">
+                      <div class="col-md-1">
+
+                      </div>
+                      <div class="col-md-5">
+                        <h6 class="head-1">Ürün</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <h6> Birim Fiyatı</h6>
+                      </div>
+                      <div class="col-md-1">
+                        <h6>Adet</h6>
+                      </div>
+                      <div class="col-md-1">
+                        <h6 class="head-3">Hacmi</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <h6 class="head-4">Toplam Fiyat</h6>
+                      </div>
+                    </div>
+                    <div class="col-sm-12" *ngFor="let product of orderProducts">
+
+                      <div class="row product-layout">
+
+                        <div class="col-md-12">
+                          <div class="row">
+
+                            <div class="col-md-1">
+                              <img src="{{nodejsApi}}/{{product.product.image[0]}}" class="image-size">
+
+                            </div>
+                            <div class="col-md-5">
+                              <p> {{product.productTitle}}</p>
+                              <p stle="font-weightbold;"> Stok : {{product.stock}}</p>
+
+                            </div>
+                            <div class="col-md-2">
+                              <p> {{product.unitPrice}} {{product.currency}}</p>
+
+                            </div>
+                            <div class="col-md-1">
+                              <p> {{product.unit}}</p>
+                            </div>
+
+                            <div class="col-md-1">
+                              <p> {{product.volume}} {{product.volumeEntity}}</p>
+                            </div>
+                            <div class="col-md-2">
+                              <p class="bold-head"> {{product.totalPrice | currency:' ':' ':'.2-2'}}
+                                {{product.currency}}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="row">
+
+
+                            <div class="col-md-1">
+
+
+                            </div>
+                            <div class="col-md-5 order-product-info">
+
+
+                            </div>
+                            <div class="col-md-2 order-product-info" style="font-weight: bold;">
+                              {{product.productStatus}}
+                            </div>
+                            <div class="col-md-2 order-product-info" style="font-weight: bold;">
+                              {{product.readyUnitNumber}}
+
+                            </div>
+                            <div class="col-md-2 order-product-info">
+
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Sipariş İşlemleri">
+                  <ng-template ngbTabContent>
+                    <div class="row header">
+                      <div class="col-md-5">
+                        <h6>Durum</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <p>Kullanıcı</p>
+                      </div>
+                      <div class="col-md-3">
+                        <h6 class="head-4">Tarih</h6>
+                      </div>
+                      <div class="col-md-5">
+                        <h6 class="head-4"></h6>
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-12"
+                      *ngFor="let transaction of orderRetailTransactions"
+                    >
+                      <div class="row product-layout">
+                        <div class="col-md-5">
+                          <p>{{ transaction.status }}</p>
+                        </div>
+                        <div class="col-md-2">
+                          <p>{{ transaction.userName }}</p>
+                        </div>
+                        <div class="col-md-3">
+                          <p>{{ transaction.createdAt | date: "short" }}</p>
+                        </div>
+                        <div class="col-md-5">
+                          <h6 class="head-4"></h6>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Ürün İşlemleri">
+                  <ng-template ngbTabContent>
+                    <div class="row header">
+                      <div class="col-md-5">
+                        <h6>İşlem</h6>
+                      </div>
+                      <div class="col-md-2">
+                        <p>Kullanıcı</p>
+                      </div>
+                      <div class="col-md-3">
+                        <h6 class="head-4">Tarih</h6>
+                      </div>
+                      <div class="col-md-5">
+                        <h6 class="head-4"></h6>
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-12"
+                      *ngFor="let transaction of orderRetailerProductTransactions"
+                    >
+                      <div class="row product-layout">
+                        <div class="col-md-5">
+                          <p>{{ transaction.operation }}</p>
+                        </div>
+                        <div class="col-md-2">
+                          <p>{{ transaction.userName }}</p>
+                        </div>
+                        <div class="col-md-3">
+                          <p>{{ transaction.createdAt | date: "short" }}</p>
+                        </div>
+                        <div class="col-md-5">
+                          <h6 class="head-4"></h6>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+
+              </ngb-tabset>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

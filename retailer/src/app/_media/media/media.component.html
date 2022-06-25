@@ -1,0 +1,27 @@
+<br>
+<br>
+
+<div class="container">
+    <div class="row" style="padding:0;margin:0;">
+       
+            
+                <div class="col-md-4" *ngFor="let video of medias" style="padding:2px; width:100%; height: auto;">
+
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" [src]="video.videoUrl" allowfullscreen></iframe>
+                    </div>
+
+                </div>
+
+
+       
+    
+
+
+
+
+
+    </div>
+</div>
+
+<br>

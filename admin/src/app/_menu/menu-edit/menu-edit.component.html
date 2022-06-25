@@ -1,0 +1,78 @@
+<div class="row" style="margin-top:2rem; height: 40px;">
+  <div class="col-sm-2 align-self-start">
+  </div>
+  <div class="col-sm-8 align-self-center">
+    <div *ngFor="let alert of alerts">
+      <ngb-alert [type]="alert.type" (close)="alertClose(alert)">{{ alert.message }} - you will redirect to the list in
+        {{counter}}</ngb-alert>
+    </div>
+  </div>
+  <div class="col-sm-2 align-self-end">
+  </div>
+</div>
+
+
+
+
+<div class="row" style="margin-top:2rem">
+  <div class="col-sm-2 align-self-start">
+  </div>
+  <div class="col-sm-8 align-self-center">
+    <form class="col s12 white" #menuForm="ngForm" (ngSubmit)="OnSubmit(menuForm)">
+      <div class="card align-self-center">
+        <div class="card-header">
+
+          # <span style="font-weight: bold">{{customId}} </span>
+          <a class="btn btn-dark pull-right" [routerLink]="['../../']"> x</a>
+        </div>
+
+        <div class="card-body text-right">
+          <div class="row">
+
+            <div class="col">
+              <br>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Link :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="link" #link="ngModel" [(ngModel)]="menu.link" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Icon :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="icon" #icon="ngModel" [(ngModel)]="menu.icon" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Name :</label>
+                <div class="col-sm-9">
+                  <input type="text" name="name" #name="ngModel" [(ngModel)]="menu.name" [disabled]="disable"
+                    class="form-control">
+                </div>
+              </div>
+
+        
+            </div>
+
+          </div>
+        </div>
+        <div class="card-footer">
+
+
+          <button type="button" class="btn btn-success pull-right" type="submit"><i class="fa fa-save"></i></button>
+          <button type="button" class="btn btn-info pull-right" style="margin-right:5px;" (click)="edit()"><i
+              class="fa fa-edit"></i></button>
+
+
+
+        </div>
+
+
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-2 align-self-end">
+  </div>
+</div>

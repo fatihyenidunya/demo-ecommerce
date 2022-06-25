@@ -1,0 +1,25 @@
+<div class="container">
+  
+    <div class="row">
+
+        <div class="col-md-6">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h2 [hidden]="hide" style="font-weight: bold;">Your account has been activated !!! </h2>
+            <br>
+            <a [hidden]="hide" class="btn btn-secondary"  [routerLink]="['../../../auth/login']">
+               Login </a>
+
+               <h2 [hidden]="!hide" style="font-weight: bold;">Looks there is a problem  </h2>
+
+        </div>
+        <div class="col-md-6">
+            <img src="http://localhost:5500/rest/images/90ef3de4-ad4f-4ab5-8724-22732856bd2f.png" class="img-fluid"/>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>

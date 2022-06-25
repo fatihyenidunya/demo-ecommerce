@@ -1,0 +1,97 @@
+<div style="background-color: #000">
+  <div class="row" style="margin: 0; padding-top: 10px; padding-bottom:20px; height:12vh;">
+    <div
+      class="col-6 offset-4 col-md-2 offset-md-0"
+      style="padding-top: 5px; color: silver"
+    >
+      <i class="fa fa-phone"> &nbsp; +90 212 552 00 39</i>
+    </div>
+    <div
+      class="col-6 offset-2 col-md-3 offset-md-0"
+      style="padding-top: 5px; color: silver"
+    ></div>
+    <div class="col-md-4">
+      <div class="pull-right"></div>
+    </div>
+
+    <div
+      class="col-6 offset-2 col-md-3 offset-md-0"
+      style="padding-top: 5px; color: silver"
+    >
+      <i class="fa fa-envelope pull-right"> &nbsp;info@asilgroup.com.tr</i>
+    </div>
+  </div>
+
+
+  <!-- <div class="row" style="padding: 0; margin: 0; padding-top:20px; padding-bottom:20px; height:14vh;">
+    <div class="col-5 offset-1 offset-md-2 col-md-2">
+      <button
+        [disabled]="registerBtn"
+        type="button"
+        class="arrowBtn btn-block"
+        style="margin-right: 5px"
+        (click)="onGo()"
+      >
+        Kayıt Ol
+      </button>
+    </div>
+    <div class="col-5 col-md-2">
+      <button
+        [disabled]="documentBtn"
+        type="button"
+        class="straightBtn btn-block"
+        style="margin-right: 5px"
+      >
+        Belge
+      </button>
+    </div>
+  </div> -->
+  <div class="row" style="padding: 0; margin: 0; padding-bottom:10px; height:10vh;">
+    <div   class="col-10 offset-1 col-md-8 offset-md-2">
+      <input
+        class="validate form-control input-underline input-sm"
+        style="background-color: white"
+        type="file"
+      
+        name="image"
+        (change)="handleImageFile($event)"
+      />
+    </div>
+  
+  </div>
+  <div class="row" style="padding: 0; margin: 0; padding-bottom:10px; min-height:68vh;">
+  
+    <div [hidden]="hidden"  class="col-10 offset-1 col-md-8 offset-md-2">
+      <img class="img-fluid" [src]="nodejsApi + '/' + documentUrl" />
+    </div>
+    <div [hidden]="!hidden"  class="col-10 offset-1 col-md-8 offset-md-2">
+      
+        <h2 style="color:white; text-align: center;"> İşletme Belgesi veya Vergi Levhası görüntüsü yükleyiniz...</h2>
+
+    </div>
+  
+  </div>
+  <div
+  class="row"
+
+  style="margin:0; height: 10vh"
+>
+  <div class="col-10 offset-1 col-md-6  offset-md-0">
+    <span class="fa fa-map-marker" style="color: silver">
+      Kavaklı Mah. İstanbul Cad. NO.19/1 Beylikdüzü &nbsp;&nbsp;&nbsp;34520 -
+      ISTANBUL - TURKEY</span
+    >
+  </div>
+
+  <div class="col-8 offset-2 col-md-6  offset-md-0" style="font-size: 14px; color: silver">
+    <span class="pull-right fa fa-copyright">
+      2018 ASİL GROUP - Tüm hakları saklıdır.</span
+    >
+  </div>
+</div>
+
+
+
+</div>
+
+

@@ -1,0 +1,88 @@
+<br>
+<div class="row" style="margin:0;padding:0;">
+
+    <div class="col-sm-12" style="margin-left:0; margin-right:0; margin-bottom:10px; font-weight: bold; padding: 3px; background-color:#eee;">
+      <h2 style="font-weight: bold; text-align: center;">Mesajlarım</h2>
+    </div>
+  </div>
+  <br>
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+
+            <div class="col-md-6" style="border:1px solid #eee; margin-bottom:20px;">
+
+                <div class="row" style="background-color:#eee; padding-top:10px; padding-bottom:10px;">
+                    <div class="col-md-12"
+                  >
+                    
+                    <br>
+                 <span style="font-size:16px; font-weight: bold;"> Mesajlarınız</span>   ( Cevabı Görmek için mesajın üzerine tıklayınız)
+
+                   
+
+                </div>
+                </div>
+
+
+                <div class="row" *ngFor="let message of messages" style="background-color:white; border-bottom:1px solid #eee; margin-bottom:5px;">
+                    <div class="col-md-12"
+                        (click)="showDetail(message.answer,message.userName,message.updatedAt,message.answered)">
+                        <span style="font-size:10px;">{{message.updatedAt | date: 'short'}} </span>
+                        <br>
+                        {{message.message}}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" style="border:1px solid #eee; border-left:none; margin-bottom:20px;">
+                <div class="col-md-12">
+                    <div class="row" style="height: 30px;">
+                        <div class="col-md-6">
+                            {{sendedDate | date:'short'}}
+                        </div>
+                        <div class="col-md-6">
+                            <span class="pull-right"> {{sendedBy}} </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12" style="min-height: 250px;">
+
+                            {{messageDetail}}
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <form class="col s12 white" #messageForm="ngForm" (ngSubmit)="OnSubmit(messageForm)">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+
+                            <textarea type="text" placeholder="Mesajınız" #message="ngModel" name="message" rows="6"
+                                [(ngModel)]="chat.message" class="form-control">
+
+                        </textarea>
+
+
+                            <br>
+
+                            <button type="submit" class="btn btn-warning pull-right"> Gönder</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+</div>
